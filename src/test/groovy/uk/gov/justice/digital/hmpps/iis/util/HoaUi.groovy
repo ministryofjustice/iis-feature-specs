@@ -5,16 +5,16 @@ import groovy.util.logging.Slf4j
 
 @Slf4j
 class HoaUi {
-    String iisUri
+    String indexUri
     String username
     String password
 
     HoaUi() {
-        username = System.getenv('IIS_USERNAME') ?: 'user'
-        password = System.getenv('IIS_PASSWORD') ?: 'password'
+        username = System.getenv('IIS_USERNAME') ?: 'todd'
+        password = System.getenv('IIS_PASSWORD') ?: 'fyuw8086'
 
-        iisUri = (System.getenv('IIS_URI') ?: "http://localhost:3000/")
-        log.info("iisUri: ${iisUri}")
+        indexUri = (System.getenv('IIS_URI') ?: "http://localhost:3000/")
+        log.info("indexUri: ${indexUri}")
     }
 
 }
