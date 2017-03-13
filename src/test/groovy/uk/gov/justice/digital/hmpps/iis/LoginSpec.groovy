@@ -9,7 +9,8 @@ import uk.gov.justice.digital.hmpps.iis.util.HoaUi
 @Slf4j
 class LoginSpec extends GebSpec {
 
-    def disclaimerConfirmation = 'I confirm that I understand'
+    @Shared
+    private final String disclaimerConfirmation = 'I confirm that I understand'
 
     @Shared
     private HoaUi hoaUi = new HoaUi()
@@ -19,7 +20,8 @@ class LoginSpec extends GebSpec {
         when: 'I open the index page'
         go hoaUi.indexUri
 
-        then: 'I see the login page title'
+        then: 'I see the login page'
+        browser.currentUrl.contains('/login')
         title == 'Enter user id and password'
     }
 
@@ -28,7 +30,8 @@ class LoginSpec extends GebSpec {
         when: 'I open the login page'
         go hoaUi.indexUri + 'login'
 
-        then: 'I see the login page title'
+        then: 'I see the login page'
+        browser.currentUrl.contains('/login')
         title == 'Enter user id and password'
 
         and: 'I see the login disclaimer confirmation message'
@@ -49,7 +52,7 @@ class LoginSpec extends GebSpec {
         then: 'I see an error message'
         $("#errors").verifyNotEmpty()
 
-        and: 'A message linked to the user id control'
+        and: 'A message linked to the user id input'
         $(By.xpath('//a[@href="#loginId"]')).isDisplayed()
     }
 
@@ -67,7 +70,7 @@ class LoginSpec extends GebSpec {
         then: 'I see an error message'
         $("#errors").verifyNotEmpty()
 
-        and: 'A message linked to the user id control'
+        and: 'A message linked to the user id input'
         $(By.xpath('//a[@href="#loginId"]')).isDisplayed()
     }
 
@@ -84,7 +87,7 @@ class LoginSpec extends GebSpec {
         then: 'I see an error message'
         $("#errors").verifyNotEmpty()
 
-        and: 'A message linked to the disclaimer control'
+        and: 'A message linked to the disclaimer input'
         $(By.xpath('//a[@href="#disclaimer"]')).text() == 'You must confirm that you understand the disclaimer'
     }
 
