@@ -9,7 +9,7 @@ import uk.gov.justice.digital.hmpps.iis.util.HoaUi
 
 @Slf4j
 @Stepwise
-class SearchSpec extends GebSpec {
+class SearchOptionsSpec extends GebSpec {
 
     @Shared
     private HoaUi hoaUi = new HoaUi()
