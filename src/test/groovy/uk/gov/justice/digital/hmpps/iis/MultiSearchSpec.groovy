@@ -1,13 +1,10 @@
 package uk.gov.justice.digital.hmpps.iis
 
 import geb.spock.GebSpec
-import org.openqa.selenium.By
 import spock.lang.Shared
 import spock.lang.Stepwise
-import spock.lang.Unroll
 import uk.gov.justice.digital.hmpps.iis.util.HoaUi
 
-// @Slf4j - can't use this with Spock/Groovy closures containing asserts
 @Stepwise
 class MultiSearchSpec extends GebSpec {
 
@@ -61,10 +58,9 @@ class MultiSearchSpec extends GebSpec {
     def logIn() {
         go hoaUi.indexUri
         assert browser.currentUrl.contains('/login')
-//        Thread.sleep(1000)
         $('form').loginId = hoaUi.username
         $('form').pwd = hoaUi.password
-        $('#disclaimerlabel').click()
+        $('label', for: 'disclaimer').click()
         $('#signin').click()
     }
 

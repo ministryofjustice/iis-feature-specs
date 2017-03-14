@@ -1,13 +1,11 @@
 package uk.gov.justice.digital.hmpps.iis
 
 import geb.spock.GebSpec
-import org.openqa.selenium.By
 import spock.lang.Shared
 import spock.lang.Stepwise
 import spock.lang.Unroll
 import uk.gov.justice.digital.hmpps.iis.util.HoaUi
 
-// @Slf4j - can't use this with Spock/Groovy closures containing asserts
 @Stepwise
 class DobSearchSpec extends GebSpec {
 
@@ -59,7 +57,7 @@ class DobSearchSpec extends GebSpec {
         }
 
         and: 'I see a new search link'
-        $(By.xpath('//a[@href="/search"]')).isDisplayed()
+        $('a', href: '/search').isDisplayed()
     }
 
     def 'age search requires an age or age range'(){
@@ -68,8 +66,7 @@ class DobSearchSpec extends GebSpec {
         goToSearchFor('dob')
 
         and: 'I choose age search'
-        //$('#optAge').click()
-        $(By.xpath('//label[@for="optAge"]')).click()
+        $('label', for: 'optAge').click()
 
         when: 'I search with no inputs'
         $('form').age = ''
@@ -86,8 +83,7 @@ class DobSearchSpec extends GebSpec {
         goToSearchFor('dob')
 
         and: 'I choose age search'
-        //$('#optAge').click()
-        $(By.xpath('//label[@for="optAge"]')).click()
+        $('label', for: 'optAge').click()
 
         when: 'I search with an invalid age range'
         $('form').age = range
@@ -107,8 +103,7 @@ class DobSearchSpec extends GebSpec {
         goToSearchFor('dob')
 
         and: 'I choose age search'
-        //$('#optAge').click()
-        $(By.xpath('//label[@for="optAge"]')).click()
+        $('label', for: 'optAge').click()
 
         when: 'I search for a valid age'
         $('form').age = 30
@@ -124,7 +119,7 @@ class DobSearchSpec extends GebSpec {
         }
 
         and: 'I see a new search link'
-        $(By.xpath('//a[@href="/search"]')).isDisplayed()
+        $('a', href: '/search').isDisplayed()
     }
 
 
@@ -132,7 +127,7 @@ class DobSearchSpec extends GebSpec {
         // go hoaUi.indexUri + 'search/' + option
         // unable to go directly to page because the code expects search option to be in session from /search
         go hoaUi.indexUri + 'search'
-        $('#' + option + 'label').click()
+        $('label', for: option).click()
         $('#continue').click()
         assert browser.currentUrl.contains(option)
     }
@@ -140,10 +135,9 @@ class DobSearchSpec extends GebSpec {
     def logIn() {
         go hoaUi.indexUri
         assert browser.currentUrl.contains('/login')
-//        Thread.sleep(1000)
         $('form').loginId = hoaUi.username
         $('form').pwd = hoaUi.password
-        $('#disclaimerlabel').click()
+        $('label', for: 'disclaimer').click()
         $('#signin').click()
     }
 

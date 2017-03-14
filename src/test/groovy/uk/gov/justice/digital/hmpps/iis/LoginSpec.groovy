@@ -1,16 +1,13 @@
 package uk.gov.justice.digital.hmpps.iis
 
 import geb.spock.GebSpec
-import groovy.util.logging.Slf4j
-import org.openqa.selenium.By
 import spock.lang.Shared
 import uk.gov.justice.digital.hmpps.iis.util.HoaUi
 
-@Slf4j
 class LoginSpec extends GebSpec {
 
     @Shared
-    private final String disclaimerConfirmation = 'I confirm that I understand'
+    private String disclaimerConfirmation = 'I confirm that I understand'
 
     @Shared
     private HoaUi hoaUi = new HoaUi()
@@ -38,7 +35,7 @@ class LoginSpec extends GebSpec {
         $("#disclaimerConfirmation").text() == disclaimerConfirmation
     }
 
-    def 'Username is mandatory for login' (){
+    def 'Username is mandatory for login'() {
 
         when: 'I open the login page'
         go hoaUi.indexUri + 'login'
@@ -46,17 +43,17 @@ class LoginSpec extends GebSpec {
         and: 'I sign in without supplying a user id'
         $('form').loginId = ''
         $('form').pwd = hoaUi.password
-        $('#disclaimer').click()
+        $('label', for: 'disclaimer').click()
         $('#signin').click()
 
         then: 'I see an error message'
         $("#errors").verifyNotEmpty()
 
         and: 'A message linked to the user id input'
-        $(By.xpath('//a[@href="#loginId"]')).isDisplayed()
+        $('a', href: '#loginId').isDisplayed()
     }
 
-    def 'Password is mandatory for login' (){
+    def 'Password is mandatory for login'() {
 
         when: 'I open the login page'
         go hoaUi.indexUri + 'login'
@@ -64,14 +61,14 @@ class LoginSpec extends GebSpec {
         and: 'I sign in without supplying a user id'
         $('form').loginId = hoaUi.username
         $('form').pwd = 'not-the-right-password'
-        $('#disclaimer').click()
+        $('label', for: 'disclaimer').click()
         $('#signin').click()
 
         then: 'I see an error message'
         $("#errors").verifyNotEmpty()
 
         and: 'A message linked to the user id input'
-        $(By.xpath('//a[@href="#loginId"]')).isDisplayed()
+        $('a', href: '#loginId').isDisplayed()
     }
 
     def 'Mandatory to confirm disclaimer before logging in'() {
@@ -88,10 +85,10 @@ class LoginSpec extends GebSpec {
         $("#errors").verifyNotEmpty()
 
         and: 'A message linked to the disclaimer input'
-        $(By.xpath('//a[@href="#disclaimer"]')).text() == 'You must confirm that you understand the disclaimer'
+        $('a', href: '#disclaimer').text() == 'You must confirm that you understand the disclaimer'
     }
 
-    def 'Successful login leads to search page' (){
+    def 'Successful login leads to search page'() {
 
         when: 'I open the login page'
         go hoaUi.indexUri + 'login'
@@ -99,7 +96,7 @@ class LoginSpec extends GebSpec {
         and: 'I sign in'
         $('form').loginId = hoaUi.username
         $('form').pwd = hoaUi.password
-        $('#disclaimer').click()
+        $('label', for: 'disclaimer').click()
         $('#signin').click()
 
         then: 'I see the search page'

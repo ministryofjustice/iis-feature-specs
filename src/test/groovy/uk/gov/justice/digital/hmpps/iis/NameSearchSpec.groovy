@@ -1,13 +1,10 @@
 package uk.gov.justice.digital.hmpps.iis
 
 import geb.spock.GebSpec
-import org.openqa.selenium.By
 import spock.lang.Shared
 import spock.lang.Stepwise
-import spock.lang.Unroll
 import uk.gov.justice.digital.hmpps.iis.util.HoaUi
 
-// @Slf4j - can't use this with Spock/Groovy closures containing asserts
 @Stepwise
 class NameSearchSpec extends GebSpec {
 
@@ -35,7 +32,6 @@ class NameSearchSpec extends GebSpec {
 
         then: 'I see an error message'
         $("#errors").verifyNotEmpty()
-
     }
 
     def 'valid name leads to search results page'() {
@@ -57,14 +53,14 @@ class NameSearchSpec extends GebSpec {
         }
 
         and: 'I see a new search link'
-        $(By.xpath('//a[@href="/search"]')).isDisplayed()
+        $('a', href: '/search').isDisplayed()
     }
 
     def goToSearchFor(option) {
         // go hoaUi.indexUri + 'search/' + option
         // unable to go directly to page because the code expects search option to be in session from /search
         go hoaUi.indexUri + 'search'
-        $('#' + option + 'label').click()
+        $('label', for: option).click()
         $('#continue').click()
         assert browser.currentUrl.contains(option)
     }
@@ -72,10 +68,9 @@ class NameSearchSpec extends GebSpec {
     def logIn() {
         go hoaUi.indexUri
         assert browser.currentUrl.contains('/login')
-//        Thread.sleep(1000)
         $('form').loginId = hoaUi.username
         $('form').pwd = hoaUi.password
-        $('#disclaimerlabel').click()
+        $('label', for: 'disclaimer').click()
         $('#signin').click()
     }
 

@@ -1,13 +1,11 @@
 package uk.gov.justice.digital.hmpps.iis
 
 import geb.spock.GebSpec
-import groovy.util.logging.Slf4j
 import spock.lang.Shared
 import spock.lang.Stepwise
 import spock.lang.Unroll
 import uk.gov.justice.digital.hmpps.iis.util.HoaUi
 
-@Slf4j
 @Stepwise
 class SearchOptionsSpec extends GebSpec {
 
@@ -50,17 +48,17 @@ class SearchOptionsSpec extends GebSpec {
         goToSearch()
 
         when: 'I choose a search option'
-        $(option).click()
+        $('label', for: option).click()
         $('#continue').click()
 
         then: 'I see the corresponding search page'
         browser.currentUrl.contains('search/' + searchPage)
 
         where:
-        option             | searchPage
-        '#doblabel'        | 'dob'
-        '#nameslabel'      | 'names'
-        '#identifierlabel' | 'identifier'
+        option        | searchPage
+        'dob'        | 'dob'
+        'names'      | 'names'
+        'identifier' | 'identifier'
     }
 
     def goToSearch() {
@@ -71,10 +69,9 @@ class SearchOptionsSpec extends GebSpec {
     def logIn() {
         go hoaUi.indexUri
         assert browser.currentUrl.contains('/login')
-//        Thread.sleep(1000)
         $('form').loginId = hoaUi.username
         $('form').pwd = hoaUi.password
-        $('#disclaimerlabel').click()
+        $('label', for: 'disclaimer').click()
         $('#signin').click()
     }
 
