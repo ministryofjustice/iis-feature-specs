@@ -25,9 +25,9 @@ class MultiSearchSpec extends GebSpec {
         goToSearch()
 
         and: 'I select all search types'
-        $('#identifierlabel').click()
-        $('#nameslabel').click()
-        $('#doblabel').click()
+        $('label', for: 'identifier').click()
+        $('label', for: 'names').click()
+        $('label', for: 'dob').click()
 
         when: 'I continue'
         $('#continue').click()
@@ -65,7 +65,7 @@ class MultiSearchSpec extends GebSpec {
     }
 
     def logOut() {
-        go hoaUi.indexUri + 'logOut'
+        go hoaUi.indexUri + 'logout'
         assert browser.currentUrl.contains('/login')
     }
 }

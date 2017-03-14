@@ -75,7 +75,7 @@ class NameSearchSpec extends GebSpec {
     }
 
     def logOut() {
-        go hoaUi.indexUri + 'logOut'
+        go hoaUi.indexUri + 'logout'
         assert browser.currentUrl.contains('/login')
     }
 }
