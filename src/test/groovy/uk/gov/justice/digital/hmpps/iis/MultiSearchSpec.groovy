@@ -3,6 +3,12 @@ package uk.gov.justice.digital.hmpps.iis
 import geb.spock.GebSpec
 import spock.lang.Shared
 import spock.lang.Stepwise
+import uk.gov.justice.digital.hmpps.iis.pages.DobPage
+import uk.gov.justice.digital.hmpps.iis.pages.IdentifierPage
+import uk.gov.justice.digital.hmpps.iis.pages.LoginPage
+import uk.gov.justice.digital.hmpps.iis.pages.LogoutPage
+import uk.gov.justice.digital.hmpps.iis.pages.NamesPage
+import uk.gov.justice.digital.hmpps.iis.pages.SearchPage
 import uk.gov.justice.digital.hmpps.iis.util.HoaUi
 
 @Stepwise
@@ -12,60 +18,43 @@ class MultiSearchSpec extends GebSpec {
     private HoaUi hoaUi = new HoaUi()
 
     def setupSpec() {
-        logIn()
+        to LoginPage
+        logIn(hoaUi.username, hoaUi.password, true)
     }
 
     def cleanupSpec() {
-        logOut()
+        to LogoutPage
     }
 
     def 'Select all search types shows all search pages in order'() {
 
         given: 'I am on the search page'
-        goToSearch()
+        to SearchPage
 
         and: 'I select all search types'
-        $('label', for: 'identifier').click()
-        $('label', for: 'names').click()
-        $('label', for: 'dob').click()
+        searchOptions(['identifier', 'names', 'dob'])
 
         when: 'I continue'
-        $('#continue').click()
+        proceed()
 
         then: 'I see the ID search page'
-        browser.currentUrl.contains('search/identifier')
+        at IdentifierPage
 
         when: 'when I continue with valid inputs'
-        $('form').prisonNumber = 'AA000000'
-        $('#continue').click()
+        searchForm.using([
+                prisonNumber: 'AA000000'
+        ])
 
         then: 'I see the name search'
-        browser.currentUrl.contains('search/names')
+        at NamesPage
 
         when: 'when I continue with valid inputs'
-        $('form').surname = 'surname'
-        $('#continue').click()
+        searchForm.using([
+                surname: 'surname'
+        ])
 
         then: 'I see the dob search'
-        browser.currentUrl.contains('search/dob')
+        at DobPage
     }
 
-    def goToSearch() {
-        go hoaUi.indexUri + 'search'
-        assert browser.currentUrl.contains('/search')
-    }
-
-    def logIn() {
-        go hoaUi.indexUri
-        assert browser.currentUrl.contains('/login')
-        $('form').loginId = hoaUi.username
-        $('form').pwd = hoaUi.password
-        $('label', for: 'disclaimer').click()
-        $('#signin').click()
-    }
-
-    def logOut() {
-        go hoaUi.indexUri + 'logout'
-        assert browser.currentUrl.contains('/login')
-    }
 }

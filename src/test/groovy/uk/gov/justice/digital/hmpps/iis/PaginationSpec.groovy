@@ -3,9 +3,11 @@ package uk.gov.justice.digital.hmpps.iis
 import geb.spock.GebSpec
 import groovyx.net.http.URIBuilder
 import spock.lang.Shared
-import spock.lang.Unroll
+import uk.gov.justice.digital.hmpps.iis.pages.DobPage
+import uk.gov.justice.digital.hmpps.iis.pages.LoginPage
+import uk.gov.justice.digital.hmpps.iis.pages.LogoutPage
+import uk.gov.justice.digital.hmpps.iis.pages.SearchPage
 import uk.gov.justice.digital.hmpps.iis.util.HoaUi
-
 
 class PaginationSpec extends GebSpec {
 
@@ -13,11 +15,12 @@ class PaginationSpec extends GebSpec {
     private HoaUi hoaUi = new HoaUi()
 
     def setupSpec() {
-        logIn()
+        to LoginPage
+        logIn(hoaUi.username, hoaUi.password, true)
     }
 
     def cleanupSpec() {
-        logOut()
+        to LogoutPage
     }
 
     def 'Search with 2 pages of results shows paging controls'() {
@@ -26,62 +29,47 @@ class PaginationSpec extends GebSpec {
         searchReturningMultipleResults()
 
         then: 'There are #hoaUi.pageSize results listed'
-        $('div.inmate-details').size() == hoaUi.pageSize
+        resultItems.size() == hoaUi.pageSize
 
         and: 'I see a next page link'
-        $('a', text: 'Next').isDisplayed()
+        nextPageLink.isDisplayed()
 
         and: 'the previous page link is disabled'
-        $('span', text: 'Previous').hasClass('inactive')
+        previousPageLabel.hasClass('inactive')
 
         when: 'I click next'
-        $('a', text: 'Next').click()
+        nextPageLink.click()
 
         then: 'I see the second page'
         new URIBuilder(browser.currentUrl).query.page == '2'
-        $('#pageIndicator').text() == '2 of 2'
+        pageIndicator.text() == '2 of 2'
 
         and: 'I see a previous page link'
-        $('a', text: 'Previous').isDisplayed()
+        previousPageLink.isDisplayed()
 
         and: 'the next page link is disabled'
-        $('span', text: 'Next').hasClass('inactive')
+        nextPageLabel.hasClass('inactive')
 
         when: 'I click previous'
-        $('a', text: 'Previous').click()
+        previousPageLink.click()
 
         then: 'I see the first page'
         new URIBuilder(browser.currentUrl).query.page == '1'
-        $('#pageIndicator').text() == '1 of 2'
+        pageIndicator.text() == '1 of 2'
     }
 
     def searchReturningMultipleResults() {
-        goToSearchFor('dob')
-        $('label', for: 'optAge').click()
-        $('form').age = '33-38'
-        $('#continue').click()
+        to SearchPage
+        searchOptions(['dob'])
+        proceed()
+        via DobPage
+        searchType('age')
+        searchForm.using([
+                age: '33-38'
+        ])
     }
 
-    def goToSearchFor(option) {
-        // go hoaUi.indexUri + 'search/' + option
-        // unable to go directly to page because the code expects search option to be in session from /search
-        go hoaUi.indexUri + 'search'
-        $('label', for: option).click()
-        $('#continue').click()
-        assert browser.currentUrl.contains(option)
-    }
 
-    def logIn() {
-        go hoaUi.indexUri
-        assert browser.currentUrl.contains('/login')
-        $('form').loginId = hoaUi.username
-        $('form').pwd = hoaUi.password
-        $('label', for: 'disclaimer').click()
-        $('#signin').click()
-    }
 
-    def logOut() {
-        go hoaUi.indexUri + 'logout'
-        assert browser.currentUrl.contains('/login')
-    }
+
 }

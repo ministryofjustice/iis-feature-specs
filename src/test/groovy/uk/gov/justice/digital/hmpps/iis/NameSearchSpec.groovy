@@ -3,6 +3,11 @@ package uk.gov.justice.digital.hmpps.iis
 import geb.spock.GebSpec
 import spock.lang.Shared
 import spock.lang.Stepwise
+import uk.gov.justice.digital.hmpps.iis.pages.LoginPage
+import uk.gov.justice.digital.hmpps.iis.pages.LogoutPage
+import uk.gov.justice.digital.hmpps.iis.pages.NamesPage
+import uk.gov.justice.digital.hmpps.iis.pages.SearchPage
+import uk.gov.justice.digital.hmpps.iis.pages.SearchResultsPage
 import uk.gov.justice.digital.hmpps.iis.util.HoaUi
 
 @Stepwise
@@ -12,70 +17,56 @@ class NameSearchSpec extends GebSpec {
     private HoaUi hoaUi = new HoaUi()
 
     def setupSpec() {
-        logIn()
+        to LoginPage
+        logIn(hoaUi.username, hoaUi.password, true)
     }
 
     def cleanupSpec() {
-        logOut()
+        to LogoutPage
     }
 
     def 'Name search requires at least one input'() {
 
         given: 'I am on the search by name page'
-        goToSearchFor('names')
+        to SearchPage
+        searchOptions(['names'])
+        proceed()
+        via NamesPage
 
         when: 'I search with no inputs'
-        $('form').forename = ''
-        $('form').forename2 = ''
-        $('form').surname = ''
-        $('#continue').click()
+        searchForm.using([
+                forename : '',
+                forename2: '',
+                surname  : ''
+        ])
 
         then: 'I see an error message'
-        $("#errors").verifyNotEmpty()
+        errors.summaryShown()
     }
 
     def 'valid name leads to search results page'() {
 
         given: 'I am on the search by name page'
-        goToSearchFor('names')
+        to SearchPage
+        searchOptions(['names'])
+        proceed()
+        via NamesPage
 
         when: 'I search for a valid name'
-        $('form').surname = 'validname'
-        $('#continue').click()
+        searchForm.using([
+                surname: 'validname'
+        ])
 
         then: 'I see the search results page'
-        browser.currentUrl.contains('search/results')
+        at SearchResultsPage
 
         and: 'I see the number of results returned'
-        with($('#contentTitle').text()) {
+        with(searchResultHeading.text()) {
             contains('search returned')
             contains('results')
         }
 
         and: 'I see a new search link'
-        $('a', href: '/search').isDisplayed()
-    }
-
-    def goToSearchFor(option) {
-        // go hoaUi.indexUri + 'search/' + option
-        // unable to go directly to page because the code expects search option to be in session from /search
-        go hoaUi.indexUri + 'search'
-        $('label', for: option).click()
-        $('#continue').click()
-        assert browser.currentUrl.contains(option)
-    }
-
-    def logIn() {
-        go hoaUi.indexUri
-        assert browser.currentUrl.contains('/login')
-        $('form').loginId = hoaUi.username
-        $('form').pwd = hoaUi.password
-        $('label', for: 'disclaimer').click()
-        $('#signin').click()
-    }
-
-    def logOut() {
-        go hoaUi.indexUri + 'logout'
-        assert browser.currentUrl.contains('/login')
+        newSearchLink.isDisplayed()
     }
 }

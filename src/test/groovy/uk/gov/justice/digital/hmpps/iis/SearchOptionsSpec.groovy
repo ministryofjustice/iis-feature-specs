@@ -4,6 +4,12 @@ import geb.spock.GebSpec
 import spock.lang.Shared
 import spock.lang.Stepwise
 import spock.lang.Unroll
+import uk.gov.justice.digital.hmpps.iis.pages.DobPage
+import uk.gov.justice.digital.hmpps.iis.pages.IdentifierPage
+import uk.gov.justice.digital.hmpps.iis.pages.LoginPage
+import uk.gov.justice.digital.hmpps.iis.pages.LogoutPage
+import uk.gov.justice.digital.hmpps.iis.pages.NamesPage
+import uk.gov.justice.digital.hmpps.iis.pages.SearchPage
 import uk.gov.justice.digital.hmpps.iis.util.HoaUi
 
 @Stepwise
@@ -13,70 +19,53 @@ class SearchOptionsSpec extends GebSpec {
     private HoaUi hoaUi = new HoaUi()
 
     def setupSpec() {
-        logIn()
+        to LoginPage
+        logIn(hoaUi.username, hoaUi.password, true)
     }
 
     def cleanupSpec() {
-        logOut()
+        to LogoutPage
     }
 
     def 'Must select a search option'() {
 
         given: 'I am on the search page'
-        goToSearch()
+        to SearchPage
 
         when: 'I continue without selecting a search option'
-        $('#continue').click()
+        proceed()
 
         then: 'I see an error message'
-        $("#errors").verifyNotEmpty()
+        errors.summaryShown()
     }
 
     def 'Can search by ID, name or DOB'() {
 
         when: 'I am on the search page'
-        goToSearch()
+        to SearchPage
 
         then: 'I see the 3 search options'
-        $('form').opt.size == 3
+        searchOptions.size == 3
     }
 
     @Unroll
-    def '#option option leads to #searchPage search page'() {
+    def '#option option leads to #option search page'() {
 
         given: 'I am on the search page'
-        goToSearch()
+        to SearchPage
 
         when: 'I choose a search option'
-        $('label', for: option).click()
-        $('#continue').click()
+        searchOptions(option)
+        proceed()
 
         then: 'I see the corresponding search page'
-        browser.currentUrl.contains('search/' + searchPage)
+        at searchOptionPage
 
         where:
-        option        | searchPage
-        'dob'        | 'dob'
-        'names'      | 'names'
-        'identifier' | 'identifier'
+        option       | searchOptionPage
+        'dob'        | DobPage
+        'names'      | NamesPage
+        'identifier' | IdentifierPage
     }
 
-    def goToSearch() {
-        go hoaUi.indexUri + 'search'
-        assert browser.currentUrl.contains('/search')
-    }
-
-    def logIn() {
-        go hoaUi.indexUri
-        assert browser.currentUrl.contains('/login')
-        $('form').loginId = hoaUi.username
-        $('form').pwd = hoaUi.password
-        $('label', for: 'disclaimer').click()
-        $('#signin').click()
-    }
-
-    def logOut() {
-        go hoaUi.indexUri + 'logout'
-        assert browser.currentUrl.contains('/login')
-    }
 }

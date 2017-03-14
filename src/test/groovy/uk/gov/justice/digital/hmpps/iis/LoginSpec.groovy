@@ -2,105 +2,91 @@ package uk.gov.justice.digital.hmpps.iis
 
 import geb.spock.GebSpec
 import spock.lang.Shared
+import uk.gov.justice.digital.hmpps.iis.pages.IndexPage
+import uk.gov.justice.digital.hmpps.iis.pages.LoginPage
+import uk.gov.justice.digital.hmpps.iis.pages.SearchPage
 import uk.gov.justice.digital.hmpps.iis.util.HoaUi
 
 class LoginSpec extends GebSpec {
-
-    @Shared
-    private String disclaimerConfirmation = 'I confirm that I understand'
 
     @Shared
     private HoaUi hoaUi = new HoaUi()
 
     def 'Redirect to login page if not logged in'() {
 
-        when: 'I open the index page'
-        go hoaUi.indexUri
+        when:
+        to IndexPage
 
-        then: 'I see the login page'
-        browser.currentUrl.contains('/login')
-        title == 'Enter user id and password'
+        then:
+        at LoginPage
     }
 
     def 'Show disclaimer on login page'() {
 
         when: 'I open the login page'
-        go hoaUi.indexUri + 'login'
+        to LoginPage
 
         then: 'I see the login page'
-        browser.currentUrl.contains('/login')
-        title == 'Enter user id and password'
+        at LoginPage
 
         and: 'I see the login disclaimer confirmation message'
-        $("#disclaimerConfirmation").text() == disclaimerConfirmation
+        disclaimerConfirmation.isDisplayed()
     }
 
     def 'Username is mandatory for login'() {
 
         when: 'I open the login page'
-        go hoaUi.indexUri + 'login'
+        to LoginPage
 
         and: 'I sign in without supplying a user id'
-        $('form').loginId = ''
-        $('form').pwd = hoaUi.password
-        $('label', for: 'disclaimer').click()
-        $('#signin').click()
+        logIn('', hoaUi.password, true)
 
         then: 'I see an error message'
-        $("#errors").verifyNotEmpty()
+        errors.summaryShown()
 
         and: 'A message linked to the user id input'
-        $('a', href: '#loginId').isDisplayed()
+        errors.hasLink(browser.currentUrl + '#loginId')
     }
 
-    def 'Password is mandatory for login'() {
+    def 'Correct password is mandatory for login'() {
 
         when: 'I open the login page'
-        go hoaUi.indexUri + 'login'
+        to LoginPage
 
-        and: 'I sign in without supplying a user id'
-        $('form').loginId = hoaUi.username
-        $('form').pwd = 'not-the-right-password'
-        $('label', for: 'disclaimer').click()
-        $('#signin').click()
+        and: 'I sign in without supplying the right password'
+        logIn(hoaUi.username, 'not-the-right-password', true)
 
         then: 'I see an error message'
-        $("#errors").verifyNotEmpty()
+        errors.summaryShown()
 
         and: 'A message linked to the user id input'
-        $('a', href: '#loginId').isDisplayed()
+        errors.hasLink(browser.currentUrl + '#loginId')
     }
 
     def 'Mandatory to confirm disclaimer before logging in'() {
 
         when: 'I open the login page'
-        go hoaUi.indexUri + 'login'
+        to LoginPage
 
         and: 'I sign in without confirming the disclaimer'
-        $('form').loginId = hoaUi.username
-        $('form').pwd = hoaUi.password
-        $('#signin').click()
+        logIn(hoaUi.username, hoaUi.password, false)
 
         then: 'I see an error message'
-        $("#errors").verifyNotEmpty()
+        errors.summaryShown()
 
         and: 'A message linked to the disclaimer input'
-        $('a', href: '#disclaimer').text() == 'You must confirm that you understand the disclaimer'
+        errors.hasLink(browser.currentUrl + '#disclaimer', 'You must confirm that you understand the disclaimer')
     }
 
     def 'Successful login leads to search page'() {
 
         when: 'I open the login page'
-        go hoaUi.indexUri + 'login'
+        to LoginPage
 
         and: 'I sign in'
-        $('form').loginId = hoaUi.username
-        $('form').pwd = hoaUi.password
-        $('label', for: 'disclaimer').click()
-        $('#signin').click()
+        logIn(hoaUi.username, hoaUi.password, true)
 
         then: 'I see the search page'
-        title == 'What information do you have on the inmate?'
-        browser.currentUrl.contains('/search')
+        at SearchPage
     }
 }

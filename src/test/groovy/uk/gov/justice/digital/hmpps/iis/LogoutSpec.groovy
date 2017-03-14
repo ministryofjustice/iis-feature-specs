@@ -2,6 +2,9 @@ package uk.gov.justice.digital.hmpps.iis
 
 import geb.spock.GebSpec
 import spock.lang.Shared
+import uk.gov.justice.digital.hmpps.iis.pages.IndexPage
+import uk.gov.justice.digital.hmpps.iis.pages.LoginPage
+import uk.gov.justice.digital.hmpps.iis.pages.LogoutPage
 import uk.gov.justice.digital.hmpps.iis.util.HoaUi
 
 class LogoutSpec extends GebSpec {
@@ -11,44 +14,39 @@ class LogoutSpec extends GebSpec {
 
     def 'No logout link shown if not logged in'() {
 
-        when: 'I open the index page'
-        go hoaUi.indexUri
+        when: 'I open the login page'
+        to LoginPage
 
         then: 'I do not see the logout link'
-        !$('a', href: '/logout').isDisplayed()
+        header.logoutLinkDisplayed == false
     }
 
     def 'Logout link shown when logged in'() {
 
         given:
-        logIn()
+        loggedIn()
 
         when: 'I open the index page'
-        go hoaUi.indexUri
+        to IndexPage
 
         then: 'I see the logout link'
-        $('a', href: '/logout').isDisplayed()
+        header.logoutLink.isDisplayed()
     }
 
     def 'logout returns to login page'(){
 
         given:
-        logIn()
+        loggedIn()
 
         when: 'I log out'
-        go hoaUi.indexUri + 'logout'
+        to LogoutPage
 
         then: 'I see the login page'
-        browser.currentUrl.contains('/login')
-        title == 'Enter user id and password'
+        at LoginPage
     }
 
-    def logIn() {
-        go hoaUi.indexUri
-        assert browser.currentUrl.contains('/login')
-        $('form').loginId = hoaUi.username
-        $('form').pwd = hoaUi.password
-        $('label', for: 'disclaimer').click()
-        $('#signin').click()
+    def loggedIn() {
+        to LoginPage
+        logIn(hoaUi.username, hoaUi.password, true)
     }
 }

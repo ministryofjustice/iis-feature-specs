@@ -1,10 +1,10 @@
 package uk.gov.justice.digital.hmpps.iis
 
 import geb.spock.GebSpec
-import org.openqa.selenium.By
 import spock.lang.Shared
 import spock.lang.Stepwise
 import spock.lang.Unroll
+import uk.gov.justice.digital.hmpps.iis.pages.*
 import uk.gov.justice.digital.hmpps.iis.util.HoaUi
 
 @Stepwise
@@ -20,25 +20,30 @@ class IdentifierSearchSpec extends GebSpec {
     private HoaUi hoaUi = new HoaUi()
 
     def setupSpec() {
-        logIn()
+        to LoginPage
+        logIn(hoaUi.username, hoaUi.password, true)
     }
 
     def cleanupSpec() {
-        logOut()
+        to LogoutPage
     }
 
     @Unroll
     def 'Identifier search rejects invalid input #identifier'() {
 
         given: 'I am on the search by identifier page'
-        goToSearchFor('identifier')
+        to SearchPage
+        searchOptions(['identifier'])
+        proceed()
+        via IdentifierPage
 
         when: 'I search for an identifier'
-        $('form').prisonNumber = identifier
-        $('#continue').click()
+        searchForm.using([
+                prisonNumber: identifier
+        ])
 
         then: 'I see an error message'
-        $("#errors").verifyNotEmpty()
+        errors.summaryShown()
 
         where:
         identifier << invalidIdentifiers
@@ -47,45 +52,28 @@ class IdentifierSearchSpec extends GebSpec {
     def 'valid identifier leads to search results page'() {
 
         given: 'I am on the search by identifier page'
-        goToSearchFor('identifier')
+        to SearchPage
+        searchOptions(['identifier'])
+        proceed()
+        via IdentifierPage
 
         when: 'I search for a valid identifier'
-        $('form').prisonNumber = validIdentifier
-        $('#continue').click()
+        searchForm.using([
+                prisonNumber: validIdentifier
+        ])
 
         then: 'I see the search results page'
-        browser.currentUrl.contains('search/results')
+        at SearchResultsPage
 
         and: 'I see the number of results returned'
-        with($('#contentTitle').text()) {
+        with(searchResultHeading.text()) {
             contains('search returned')
             contains('results')
         }
 
         and: 'I see a new search link'
-        $('a', href: '/search').isDisplayed()
+        newSearchLink.isDisplayed()
     }
 
-    def goToSearchFor(option) {
-        // go hoaUi.indexUri + 'search/' + option
-        // unable to go directly to page because the code expects search option to be in session from /search
-        go hoaUi.indexUri + 'search'
-        $('label', for: option).click()
-        $('#continue').click()
-        assert browser.currentUrl.contains(option)
-    }
 
-    def logIn() {
-        go hoaUi.indexUri
-        assert browser.currentUrl.contains('/login')
-        $('form').loginId = hoaUi.username
-        $('form').pwd = hoaUi.password
-        $('label', for: 'disclaimer').click()
-        $('#signin').click()
-    }
-
-    def logOut() {
-        go hoaUi.indexUri + 'logout'
-        assert browser.currentUrl.contains('/login')
-    }
 }

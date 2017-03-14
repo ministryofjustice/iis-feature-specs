@@ -11,7 +11,7 @@ class HoaUi {
         username = System.getenv('IIS_USERNAME') ?: 'todd'
         password = System.getenv('IIS_PASSWORD') ?: 'fyuw8086'
 
-        indexUri = (System.getenv('IIS_URI') ?: "http://localhost:3000/")
+        indexUri = (System.getenv('IIS_URI') ?: "http://localhost:3000")
     }
 
 }
