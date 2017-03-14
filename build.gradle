@@ -13,6 +13,8 @@ dependencies {
     testCompile 'org.awaitility:awaitility-groovy:2.0.0'
     testCompile('com.codeborne:phantomjsdriver:1.2.1') { transitive = false }
     testCompile 'org.codehaus.groovy:groovy-all:2.4.9'
+    testCompile 'org.codehaus.groovy.modules.http-builder:http-builder:0.7.1'
+
     testCompile 'org.gebish:geb-core:1.1.1'
     testCompile 'org.gebish:geb-spock:1.1.1'
     testCompile 'org.seleniumhq.selenium:selenium-chrome-driver:3.0.1'

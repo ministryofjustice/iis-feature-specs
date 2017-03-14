@@ -99,7 +99,7 @@ class DobSearchSpec extends GebSpec {
 
     def 'valid age leads to search results page'() {
 
-        given: 'I am on the search by name page'
+        given: 'I am on the search by dob page'
         goToSearchFor('dob')
 
         and: 'I choose age search'
