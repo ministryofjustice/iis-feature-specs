@@ -65,6 +65,5 @@ class NameSearchSpec extends GebSpec {
         to SearchPage
         selectSearchOptions(['names'])
         proceed()
-        page NamesPage
     }
 }

@@ -27,11 +27,10 @@ class ViewDetailsSpec extends GebSpec {
         to SearchPage
         selectSearchOptions(['names'])
         proceed()
-        page NamesPage
+
         searchForm.using([
                 surname: 'scott'
         ])
-        page SearchResultsPage
 
         and: 'I click the first result'
         resultItemLinks[0].click()

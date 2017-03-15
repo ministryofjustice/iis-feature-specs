@@ -14,7 +14,7 @@ class SearchPage extends Page {
     }
 
     def proceed() {
-        $('#continue').click()
+        $('#continue').click([SearchPage, DobPage, NamesPage, IdentifierPage])
     }
 
     def selectSearchOptions(options) {

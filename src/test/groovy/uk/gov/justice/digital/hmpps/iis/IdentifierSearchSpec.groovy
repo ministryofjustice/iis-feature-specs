@@ -70,6 +70,5 @@ class IdentifierSearchSpec extends GebSpec {
         to SearchPage
         selectSearchOptions(['identifier'])
         proceed()
-        page IdentifierPage
     }
 }

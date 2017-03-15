@@ -19,7 +19,7 @@ class LoginPage extends Page {
         if (disclaimer) {
             $('label', for: 'disclaimer').click()
         }
-        $('#signin').click()
+        $('#signin').click([LoginPage, SearchPage])
     }
 
     static content = {
