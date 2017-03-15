@@ -75,7 +75,7 @@ class LoginSpec extends GebSpec {
         errors.summaryShown()
 
         and: 'A message linked to the disclaimer input'
-        errors.hasLink(browser.currentUrl + '#disclaimer', 'You must confirm that you understand the disclaimer')
+        errors.hasLinkWithText(browser.currentUrl + '#disclaimer', 'You must confirm that you understand the disclaimer')
     }
 
     def 'Successful login leads to search page'() {

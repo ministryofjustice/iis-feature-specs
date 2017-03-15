@@ -12,8 +12,6 @@ class SubjectDetailsPage extends Page {
         title == 'Subject details'
     }
 
-
-
     static content = {
 
         header { module(HeaderModule) }

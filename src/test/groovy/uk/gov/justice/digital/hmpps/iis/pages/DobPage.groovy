@@ -14,10 +14,6 @@ class DobPage extends Page {
         title == 'Enter inmate\'s date of birth or age/range'
     }
 
-    def searchType(type) {
-        $('label', for: "opt${type.capitalize()}").click()
-    }
-
     static content = {
 
         header { module(HeaderModule) }
@@ -25,5 +21,7 @@ class DobPage extends Page {
         errors { module(ErrorsModule) }
 
         searchForm { module(SearchFormModule) }
+
+        searchType { type -> $('label', for: "opt${type.capitalize()}").click() }
     }
 }

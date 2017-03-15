@@ -13,15 +13,6 @@ class LoginPage extends Page {
         title == 'Enter user id and password'
     }
 
-    def logIn(user, pass, disclaimer) {
-        loginId.value user
-        password.value pass
-        if (disclaimer) {
-            disclaimerControl.click()
-        }
-        signinButton.click()
-    }
-
     static content = {
 
         header { module(HeaderModule) }
@@ -37,5 +28,14 @@ class LoginPage extends Page {
         password { $('input[name=pwd]') }
 
         disclaimerControl { $('label', for: 'disclaimer') }
+
+        logIn { user, pass, disclaimer ->
+            loginId.value user
+            password.value pass
+            if (disclaimer) {
+                disclaimerControl.click()
+            }
+            signinButton.click()
+        }
     }
 }

@@ -13,16 +13,6 @@ class SearchPage extends Page {
         title == 'What information do you have on the inmate?'
     }
 
-    def proceed() {
-        continueButton.click()
-    }
-
-    def selectSearchOptions(options) {
-        options.each {
-            $('label', for: it).click()
-        }
-    }
-
     static content = {
 
         header { module(HeaderModule) }
@@ -32,5 +22,13 @@ class SearchPage extends Page {
         searchOptions { $('form').opt }
 
         continueButton(to: [SearchPage, DobPage, NamesPage, IdentifierPage]) { $('#continue') }
+
+        proceed { continueButton.click() }
+
+        selectSearchOptions { options ->
+            options.each {
+                $('label', for: it).click()
+            }
+        }
     }
 }

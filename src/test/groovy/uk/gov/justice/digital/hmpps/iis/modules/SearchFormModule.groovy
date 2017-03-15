@@ -9,17 +9,15 @@ import uk.gov.justice.digital.hmpps.iis.pages.SearchResultsPage
 
 class SearchFormModule extends Module {
 
-    def using(criteria) {
-
-        criteria.each { key, value ->
-            $('form')[key] = value
-        }
-
-        continueButton.click()
-    }
-
     static content = {
 
         continueButton(to: [SearchResultsPage, DobPage, NamesPage, IdentifierPage]) { $('#continue') }
+
+        using { criteria ->
+            criteria.each { key, value ->
+                $('form')[key] = value
+            }
+            continueButton.click()
+        }
     }
 }
