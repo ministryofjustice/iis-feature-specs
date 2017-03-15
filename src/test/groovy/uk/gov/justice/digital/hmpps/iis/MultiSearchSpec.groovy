@@ -32,7 +32,7 @@ class MultiSearchSpec extends GebSpec {
         to SearchPage
 
         and: 'I select all search types'
-        searchOptions(['identifier', 'names', 'dob'])
+        selectSearchOptions(['identifier', 'names', 'dob'])
 
         when: 'I continue'
         proceed()

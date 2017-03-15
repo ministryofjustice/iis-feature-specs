@@ -9,15 +9,15 @@ class SearchPage extends Page {
     static url = '/search'
 
     static at = {
-        title == 'What information do you have on the inmate?'
         browser.currentUrl.contains('/search')
+        title == 'What information do you have on the inmate?'
     }
 
     def proceed() {
         $('#continue').click()
     }
 
-    def searchOptions(options) {
+    def selectSearchOptions(options) {
         options.each {
             $('label', for: it).click()
         }

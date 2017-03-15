@@ -55,17 +55,17 @@ class SearchOptionsSpec extends GebSpec {
         to SearchPage
 
         when: 'I choose a search option'
-        searchOptions(option)
+        selectSearchOptions(option)
         proceed()
 
         then: 'I see the corresponding search page'
-        at searchOptionPage
+        at ending
 
         where:
-        option       | searchOptionPage
-        'dob'        | DobPage
-        'names'      | NamesPage
-        'identifier' | IdentifierPage
+        option         | ending
+        ['dob']        | DobPage
+        ['names']      | NamesPage
+        ['identifier'] | IdentifierPage
     }
 
 }

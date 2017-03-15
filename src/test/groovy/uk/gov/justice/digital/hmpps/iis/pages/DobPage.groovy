@@ -10,12 +10,12 @@ class DobPage extends Page {
     static url = '/search/dob'
 
     static at = {
-        title == 'Enter inmate\'s date of birth or age/range'
         browser.currentUrl.contains('/search/dob')
+        title == 'Enter inmate\'s date of birth or age/range'
     }
 
     def searchType(type) {
-        $('label', for: 'opt' + type).click()
+        $('label', for: "opt${type.capitalize()}").click()
     }
 
     static content = {

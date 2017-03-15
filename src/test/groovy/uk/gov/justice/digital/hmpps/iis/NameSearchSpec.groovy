@@ -28,10 +28,7 @@ class NameSearchSpec extends GebSpec {
     def 'Name search requires at least one input'() {
 
         given: 'I am on the search by name page'
-        to SearchPage
-        searchOptions(['names'])
-        proceed()
-        via NamesPage
+        toNamesPage()
 
         when: 'I search with no inputs'
         searchForm.using([
@@ -47,10 +44,7 @@ class NameSearchSpec extends GebSpec {
     def 'valid name leads to search results page'() {
 
         given: 'I am on the search by name page'
-        to SearchPage
-        searchOptions(['names'])
-        proceed()
-        via NamesPage
+        toNamesPage()
 
         when: 'I search for a valid name'
         searchForm.using([
@@ -61,12 +55,16 @@ class NameSearchSpec extends GebSpec {
         at SearchResultsPage
 
         and: 'I see the number of results returned'
-        with(searchResultHeading.text()) {
-            contains('search returned')
-            contains('results')
-        }
+        searchResultHeading.verifyNotEmpty() // todo - with predefined data, check actual result count
 
         and: 'I see a new search link'
         newSearchLink.isDisplayed()
+    }
+
+    def toNamesPage() {
+        to SearchPage
+        selectSearchOptions(['names'])
+        proceed()
+        via NamesPage
     }
 }

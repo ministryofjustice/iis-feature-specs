@@ -7,6 +7,7 @@ import uk.gov.justice.digital.hmpps.iis.pages.DobPage
 import uk.gov.justice.digital.hmpps.iis.pages.LoginPage
 import uk.gov.justice.digital.hmpps.iis.pages.LogoutPage
 import uk.gov.justice.digital.hmpps.iis.pages.SearchPage
+import uk.gov.justice.digital.hmpps.iis.pages.SearchResultsPage
 import uk.gov.justice.digital.hmpps.iis.util.HoaUi
 
 class PaginationSpec extends GebSpec {
@@ -60,13 +61,16 @@ class PaginationSpec extends GebSpec {
 
     def searchReturningMultipleResults() {
         to SearchPage
-        searchOptions(['dob'])
+        selectSearchOptions(['dob'])
         proceed()
+
         via DobPage
         searchType('age')
         searchForm.using([
                 age: '33-38'
         ])
+
+        via SearchResultsPage
     }
 
 

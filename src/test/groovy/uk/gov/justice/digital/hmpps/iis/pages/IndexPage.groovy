@@ -8,7 +8,6 @@ class IndexPage extends Page{
     static url = '/'
 
     static content = {
-
         header { module(HeaderModule) }
     }
 

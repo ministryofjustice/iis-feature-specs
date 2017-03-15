@@ -10,8 +10,8 @@ class NamesPage extends Page {
     static url = '/search/names'
 
     static at = {
-        title == 'Enter at least one name'
         browser.currentUrl.contains('/search/names')
+        title == 'Enter at least one name'
     }
 
     static content = {

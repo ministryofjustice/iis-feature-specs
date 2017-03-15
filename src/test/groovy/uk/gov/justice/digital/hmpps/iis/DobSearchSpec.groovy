@@ -16,11 +16,6 @@ class DobSearchSpec extends GebSpec {
     def setupSpec() {
         to LoginPage
         logIn(hoaUi.username, hoaUi.password, true)
-
-        to SearchPage
-        searchOptions(['dob'])
-        proceed()
-        via DobPage
     }
 
     def cleanupSpec() {
@@ -28,6 +23,9 @@ class DobSearchSpec extends GebSpec {
     }
 
     def 'Dob search requires at least one input'() {
+
+        given: 'At dob search page'
+        toDobPage()
 
         when: 'I search with no inputs'
         searchForm.using([
@@ -42,6 +40,9 @@ class DobSearchSpec extends GebSpec {
 
     def 'valid dob leads to search results page'() {
 
+        given: 'At dob search page'
+        toDobPage()
+
         when: 'I search for a valid dob'
         searchForm.using([
                 dobDay  : '1',
@@ -53,16 +54,16 @@ class DobSearchSpec extends GebSpec {
         at SearchResultsPage
 
         and: 'I see the number of results returned'
-        with(searchResultHeading.text()) {
-            contains('search returned')
-            contains('results')
-        }
+        searchResultHeading.verifyNotEmpty()
 
         and: 'I see a new search link'
         newSearchLink.isDisplayed()
     }
 
     def 'age search requires an age or age range'() {
+
+        given: 'At dob search page'
+        toDobPage()
 
         when: 'I choose age search'
         searchType('age')
@@ -78,6 +79,9 @@ class DobSearchSpec extends GebSpec {
 
     @Unroll
     def 'invalid age range #range rejected for age range search'() {
+
+        given: 'At dob search page'
+        toDobPage()
 
         when: 'I choose age search'
         searchType('age')
@@ -97,6 +101,9 @@ class DobSearchSpec extends GebSpec {
 
     def 'valid age leads to search results page'() {
 
+        given: 'At dob search page'
+        toDobPage()
+
         when: 'I choose age search'
         searchType('age')
 
@@ -109,14 +116,16 @@ class DobSearchSpec extends GebSpec {
         at SearchResultsPage
 
         and: 'I see the number of results returned'
-        with(searchResultHeading.text()) {
-            contains('search returned')
-            contains('results')
-        }
+        searchResultHeading.verifyNotEmpty()
 
         and: 'I see a new search link'
         newSearchLink.isDisplayed()
     }
 
-
+    def toDobPage() {
+        to SearchPage
+        selectSearchOptions(['dob'])
+        proceed()
+        via DobPage
+    }
 }

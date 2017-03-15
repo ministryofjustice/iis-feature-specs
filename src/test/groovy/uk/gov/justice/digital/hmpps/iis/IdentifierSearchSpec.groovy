@@ -32,10 +32,7 @@ class IdentifierSearchSpec extends GebSpec {
     def 'Identifier search rejects invalid input #identifier'() {
 
         given: 'I am on the search by identifier page'
-        to SearchPage
-        searchOptions(['identifier'])
-        proceed()
-        via IdentifierPage
+        toIdentifierPage()
 
         when: 'I search for an identifier'
         searchForm.using([
@@ -52,10 +49,7 @@ class IdentifierSearchSpec extends GebSpec {
     def 'valid identifier leads to search results page'() {
 
         given: 'I am on the search by identifier page'
-        to SearchPage
-        searchOptions(['identifier'])
-        proceed()
-        via IdentifierPage
+        toIdentifierPage()
 
         when: 'I search for a valid identifier'
         searchForm.using([
@@ -66,14 +60,16 @@ class IdentifierSearchSpec extends GebSpec {
         at SearchResultsPage
 
         and: 'I see the number of results returned'
-        with(searchResultHeading.text()) {
-            contains('search returned')
-            contains('results')
-        }
+        searchResultHeading.verifyNotEmpty()
 
         and: 'I see a new search link'
         newSearchLink.isDisplayed()
     }
 
-
+    private void toIdentifierPage() {
+        to SearchPage
+        selectSearchOptions(['identifier'])
+        proceed()
+        via IdentifierPage
+    }
 }
