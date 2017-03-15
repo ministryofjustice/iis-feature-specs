@@ -3,12 +3,7 @@ package uk.gov.justice.digital.hmpps.iis
 import geb.spock.GebSpec
 import spock.lang.Shared
 import spock.lang.Stepwise
-import uk.gov.justice.digital.hmpps.iis.pages.LoginPage
-import uk.gov.justice.digital.hmpps.iis.pages.LogoutPage
-import uk.gov.justice.digital.hmpps.iis.pages.NamesPage
-import uk.gov.justice.digital.hmpps.iis.pages.SearchPage
-import uk.gov.justice.digital.hmpps.iis.pages.SearchResultsPage
-import uk.gov.justice.digital.hmpps.iis.pages.SubjectDetailsPage
+import uk.gov.justice.digital.hmpps.iis.pages.*
 import uk.gov.justice.digital.hmpps.iis.util.HoaUi
 
 @Stepwise
@@ -26,17 +21,17 @@ class ViewDetailsSpec extends GebSpec {
         to LogoutPage
     }
 
-    def 'Select search result to view detail' (){
+    def 'Select search result to view detail'() {
 
         when: 'I do a search that gives soem results'
         to SearchPage
         selectSearchOptions(['names'])
         proceed()
-        via NamesPage
+        page NamesPage
         searchForm.using([
                 surname: 'scott'
         ])
-        via SearchResultsPage
+        page SearchResultsPage
 
         and: 'I click the first result'
         resultItemLinks[0].click()

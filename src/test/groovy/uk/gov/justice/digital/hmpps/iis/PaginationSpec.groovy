@@ -64,13 +64,13 @@ class PaginationSpec extends GebSpec {
         selectSearchOptions(['dob'])
         proceed()
 
-        via DobPage
+        page DobPage
         searchType('age')
         searchForm.using([
                 age: '33-38'
         ])
 
-        via SearchResultsPage
+        page SearchResultsPage
     }
 
 

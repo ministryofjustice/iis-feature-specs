@@ -39,7 +39,7 @@ class LogoutSpec extends GebSpec {
         loggedIn()
 
         when: 'I log out'
-        to LogoutPage
+        via LogoutPage
 
         then: 'I see the login page'
         at LoginPage

@@ -126,6 +126,6 @@ class DobSearchSpec extends GebSpec {
         to SearchPage
         selectSearchOptions(['dob'])
         proceed()
-        via DobPage
+        page DobPage
     }
 }

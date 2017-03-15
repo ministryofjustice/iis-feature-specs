@@ -15,7 +15,7 @@ class LoginSpec extends GebSpec {
     def 'Redirect to login page if not logged in'() {
 
         when:
-        to IndexPage
+        via IndexPage
 
         then:
         at LoginPage
