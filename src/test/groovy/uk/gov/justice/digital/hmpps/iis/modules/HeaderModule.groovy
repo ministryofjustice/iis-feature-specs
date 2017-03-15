@@ -10,5 +10,9 @@ class HeaderModule extends Module {
         logoutLinkDisplayed { $('a', href: '/logout').isDisplayed() }
 
         logoutLink { $('a', href: '/logout') }
+
+        feedbackLink { $('a', text: 'feedback') }
+
+        applicationTitle { $('#proposition-name').text() }
     }
 }

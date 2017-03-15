@@ -24,6 +24,8 @@ class SearchResultsPage extends Page {
 
         resultItems { $('div.inmate-details') }
 
+        resultItemLinks { resultItems.find('a') }
+
         nextPageLink { $('a', text: 'Next') }
         previousPageLink { $('a', text: 'Previous')}
 
