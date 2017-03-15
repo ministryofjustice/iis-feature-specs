@@ -43,6 +43,9 @@ class ViewDetailsSpec extends GebSpec {
 
         and: 'I see the prison identifier'
         subjectId.verifyNotEmpty()
+
+        and: 'The page url contains the same prison identifier'
+        browser.currentUrl.endsWith(subjectIdNumber)
     }
 
 }

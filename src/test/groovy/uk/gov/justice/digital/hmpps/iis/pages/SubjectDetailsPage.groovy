@@ -21,5 +21,7 @@ class SubjectDetailsPage extends Page {
         subjectName { $('#subjectName') }
 
         subjectId { $('#subjectId') }
+
+        subjectIdNumber { subjectId.text() - 'PRISON NO. ' }
     }
 }
