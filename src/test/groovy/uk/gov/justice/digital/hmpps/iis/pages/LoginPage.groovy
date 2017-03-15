@@ -14,12 +14,12 @@ class LoginPage extends Page {
     }
 
     def logIn(user, pass, disclaimer) {
-        $('form').loginId = user
-        $('form').pwd = pass
+        loginId.value user
+        password.value pass
         if (disclaimer) {
-            $('label', for: 'disclaimer').click()
+            disclaimerControl.click()
         }
-        $('#signin').click([LoginPage, SearchPage])
+        signinButton.click()
     }
 
     static content = {
@@ -29,5 +29,13 @@ class LoginPage extends Page {
         disclaimerConfirmation { $("#disclaimerConfirmation") }
 
         errors { module(ErrorsModule) }
+
+        signinButton(to: [LoginPage, SearchPage]) { $('#signin') }
+
+        loginId { $('input[name=loginId]') }
+
+        password { $('input[name=pwd]') }
+
+        disclaimerControl { $('label', for: 'disclaimer') }
     }
 }

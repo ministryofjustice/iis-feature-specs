@@ -14,7 +14,7 @@ class SearchPage extends Page {
     }
 
     def proceed() {
-        $('#continue').click([SearchPage, DobPage, NamesPage, IdentifierPage])
+        continueButton.click()
     }
 
     def selectSearchOptions(options) {
@@ -30,5 +30,7 @@ class SearchPage extends Page {
         errors { module(ErrorsModule) }
 
         searchOptions { $('form').opt }
+
+        continueButton(to: [SearchPage, DobPage, NamesPage, IdentifierPage]) { $('#continue') }
     }
 }

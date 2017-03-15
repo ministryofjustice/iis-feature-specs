@@ -18,7 +18,7 @@ class SearchResultsPage extends Page {
 
         errors { module(ErrorsModule) }
 
-        newSearchLink { $('a', href: '/search') }
+        newSearchLink(to: SearchPage) { $('a', href: '/search') }
 
         searchResultHeading { $('#contentTitle') }
 

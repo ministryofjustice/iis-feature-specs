@@ -15,6 +15,11 @@ class SearchFormModule extends Module {
             $('form')[key] = value
         }
 
-        $('#continue').click([SearchResultsPage, DobPage, NamesPage, IdentifierPage])
+        continueButton.click()
+    }
+
+    static content = {
+
+        continueButton(to: [SearchResultsPage, DobPage, NamesPage, IdentifierPage]) { $('#continue') }
     }
 }
