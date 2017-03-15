@@ -14,3 +14,5 @@ driver = {
 }
 
 baseUrl = System.getenv('IIS_URI') ?: "http://localhost:3000/"
+
+reportsDir = "build/geb-reports"

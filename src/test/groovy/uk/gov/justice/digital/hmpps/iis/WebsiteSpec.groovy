@@ -1,11 +1,12 @@
 package uk.gov.justice.digital.hmpps.iis
 
+import geb.spock.GebReportingSpec
 import geb.spock.GebSpec
 import uk.gov.justice.digital.hmpps.iis.pages.IndexPage
 import uk.gov.justice.digital.hmpps.iis.pages.LoginPage
 
 
-class WebsiteSpec extends GebSpec {
+class WebsiteSpec extends GebReportingSpec {
 
     def 'Application title is shown'(){
 

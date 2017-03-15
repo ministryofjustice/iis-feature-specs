@@ -1,5 +1,6 @@
 package uk.gov.justice.digital.hmpps.iis
 
+import geb.spock.GebReportingSpec
 import geb.spock.GebSpec
 import groovyx.net.http.URIBuilder
 import spock.lang.Shared
@@ -10,7 +11,7 @@ import uk.gov.justice.digital.hmpps.iis.pages.SearchPage
 import uk.gov.justice.digital.hmpps.iis.pages.SearchResultsPage
 import uk.gov.justice.digital.hmpps.iis.util.HoaUi
 
-class PaginationSpec extends GebSpec {
+class PaginationSpec extends GebReportingSpec {
 
     @Shared
     private HoaUi hoaUi = new HoaUi()

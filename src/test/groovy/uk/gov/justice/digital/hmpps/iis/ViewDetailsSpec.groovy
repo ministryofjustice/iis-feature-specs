@@ -1,5 +1,6 @@
 package uk.gov.justice.digital.hmpps.iis
 
+import geb.spock.GebReportingSpec
 import geb.spock.GebSpec
 import spock.lang.Shared
 import spock.lang.Stepwise
@@ -7,7 +8,7 @@ import uk.gov.justice.digital.hmpps.iis.pages.*
 import uk.gov.justice.digital.hmpps.iis.util.HoaUi
 
 @Stepwise
-class ViewDetailsSpec extends GebSpec {
+class ViewDetailsSpec extends GebReportingSpec {
 
     @Shared
     private HoaUi hoaUi = new HoaUi()
@@ -23,7 +24,7 @@ class ViewDetailsSpec extends GebSpec {
 
     def 'Select search result to view detail'() {
 
-        when: 'I do a search that gives soem results'
+        when: 'I do a search that gives some results'
         to SearchPage
         selectSearchOptions(['names'])
         proceed()

@@ -1,5 +1,6 @@
 package uk.gov.justice.digital.hmpps.iis
 
+import geb.spock.GebReportingSpec
 import geb.spock.GebSpec
 import spock.lang.Shared
 import spock.lang.Stepwise
@@ -8,7 +9,7 @@ import uk.gov.justice.digital.hmpps.iis.pages.*
 import uk.gov.justice.digital.hmpps.iis.util.HoaUi
 
 @Stepwise
-class DobSearchSpec extends GebSpec {
+class DobSearchSpec extends GebReportingSpec {
 
     @Shared
     private HoaUi hoaUi = new HoaUi()
