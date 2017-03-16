@@ -22,6 +22,6 @@ class DobPage extends Page {
 
         searchForm { module(SearchFormModule) }
 
-        searchType { type -> $('label', for: "opt${type.capitalize()}").click() }
+        searchType{ type -> $('label', for: "opt${type.capitalize()}").click() }
     }
 }

@@ -3,6 +3,7 @@ package uk.gov.justice.digital.hmpps.iis
 import geb.spock.GebReportingSpec
 import geb.spock.GebSpec
 import groovyx.net.http.URIBuilder
+import spock.lang.Ignore
 import spock.lang.Shared
 import uk.gov.justice.digital.hmpps.iis.pages.DobPage
 import uk.gov.justice.digital.hmpps.iis.pages.LoginPage
@@ -25,6 +26,7 @@ class PaginationSpec extends GebReportingSpec {
         to LogoutPage
     }
 
+    @Ignore("Need to make PhantomJS work with the GDS javascript that shows/hides elements when clicking radio button")
     def 'Search with 2 pages of results shows paging controls'() {
 
         when: 'I do a search that returns 2 pages of results'
@@ -70,8 +72,5 @@ class PaginationSpec extends GebReportingSpec {
                 age: '33-38'
         ])
     }
-
-
-
 
 }
