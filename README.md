@@ -6,15 +6,18 @@ End-to-end tests for the IIS Historical Offenders Application
 ### Environment
 The following environment variables must be set
 
-* IIS_USER - username for access to IIS app
-* IIS_PASSWORD - password for the IIS_USER account
 * IIS_URI - root URI for the IIS application. Defaults to `http://localhost:3000`
 
-In addition, the IIS application must be running at IIS_URI
+In addition, the IIS application must be running at IIS_URI, and if you have authentication
+enabled then you need the IIS Mock SSO server running too.
 
 ## Execution
 
 Run using `./gradlew test` or execute a specific test using your IDE
+
+In src.test/resources/GebConfig.groovy you can change from headless mode (Phantom JS)
+to browser mode with ChromeDriver. If not using the bundled Linux ChromeDriver, set the
+webdriver.chrome.driver property with your ChromeDriver path.
 
 
 ## Test organisation
