@@ -1,10 +1,10 @@
 package uk.gov.justice.digital.hmpps.iis
 
 import geb.spock.GebReportingSpec
-import geb.spock.GebSpec
 import spock.lang.Shared
 import uk.gov.justice.digital.hmpps.iis.pages.IndexPage
-import uk.gov.justice.digital.hmpps.iis.pages.LoginPage
+import uk.gov.justice.digital.hmpps.iis.pages.DisclaimerPage
+import uk.gov.justice.digital.hmpps.iis.pages.LogoutPage
 import uk.gov.justice.digital.hmpps.iis.pages.SearchPage
 import uk.gov.justice.digital.hmpps.iis.util.HoaUi
 
@@ -13,79 +13,57 @@ class LoginSpec extends GebReportingSpec {
     @Shared
     private HoaUi hoaUi = new HoaUi()
 
-    def 'Redirect to login page if not logged in'() {
+    def setup() {
+        to LogoutPage
+    }
+
+    def cleanup() {
+        to LogoutPage
+    }
+
+    def 'Redirect via SSO to disclaimer page if not logged in'() {
 
         when:
-        via IndexPage
+        to IndexPage
 
         then:
-        at LoginPage
+        at DisclaimerPage
     }
 
-    def 'Show disclaimer on login page'() {
+    def 'Show disclaimer on disclaimer page'() {
 
-        when: 'I open the login page'
-        to LoginPage
+        when: 'I arrive at the disclaimer page'
+        to DisclaimerPage
 
-        then: 'I see the login page'
-        at LoginPage
-
-        and: 'I see the login disclaimer confirmation message'
+        then: 'I see the login disclaimer confirmation message'
         disclaimerConfirmation.isDisplayed()
-    }
-
-    def 'Username is mandatory for login'() {
-
-        when: 'I open the login page'
-        to LoginPage
-
-        and: 'I sign in without supplying a user id'
-        logIn('', hoaUi.password, true)
-
-        then: 'I see an error message'
-        errors.summaryShown()
-
-        and: 'A message linked to the user id input'
-        errors.hasLink(browser.currentUrl + '#loginId')
-    }
-
-    def 'Correct password is mandatory for login'() {
-
-        when: 'I open the login page'
-        to LoginPage
-
-        and: 'I sign in without supplying the right password'
-        logIn(hoaUi.username, 'not-the-right-password', true)
-
-        then: 'I see an error message'
-        errors.summaryShown()
-
-        and: 'A message linked to the user id input'
-        errors.hasLink(browser.currentUrl + '#loginId')
     }
 
     def 'Mandatory to confirm disclaimer before logging in'() {
 
-        when: 'I open the login page'
-        to LoginPage
+        when: 'I arrive at the disclaimer page'
+        to DisclaimerPage
 
-        and: 'I sign in without confirming the disclaimer'
-        logIn(hoaUi.username, hoaUi.password, false)
+        and: 'I continue without confirming the disclaimer'
+        continueUnconfirmed
 
-        then: 'I see an error message'
+        then: 'I return to the disclaimer page'
+        at DisclaimerPage
+
+        and: 'I see an error message'
         errors.summaryShown()
 
         and: 'A message linked to the disclaimer input'
         errors.hasLinkWithText(browser.currentUrl + '#disclaimer', 'You must confirm that you understand the disclaimer')
     }
 
-    def 'Successful login leads to search page'() {
+    def 'Accepting disclaimer leads to search page'() {
 
-        when: 'I open the login page'
-        to LoginPage
+        when: 'I arrive at the disclaimer page'
+        to DisclaimerPage
 
-        and: 'I sign in'
-        logIn(hoaUi.username, hoaUi.password, true)
+        and: 'I accept the disclaimer and continue'
+        continueConfirmed
 
         then: 'I see the search page'
         at SearchPage

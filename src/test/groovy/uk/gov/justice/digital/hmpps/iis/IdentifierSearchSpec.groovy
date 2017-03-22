@@ -1,7 +1,6 @@
 package uk.gov.justice.digital.hmpps.iis
 
 import geb.spock.GebReportingSpec
-import geb.spock.GebSpec
 import spock.lang.Shared
 import spock.lang.Stepwise
 import spock.lang.Unroll
@@ -17,12 +16,9 @@ class IdentifierSearchSpec extends GebReportingSpec {
     @Shared
     private String validIdentifier = 'AA000000'
 
-    @Shared
-    private HoaUi hoaUi = new HoaUi()
-
     def setupSpec() {
-        to LoginPage
-        logIn(hoaUi.username, hoaUi.password, true)
+        to DisclaimerPage
+        continueConfirmed
     }
 
     def cleanupSpec() {

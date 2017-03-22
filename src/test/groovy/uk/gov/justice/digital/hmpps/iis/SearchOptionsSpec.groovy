@@ -1,13 +1,12 @@
 package uk.gov.justice.digital.hmpps.iis
 
 import geb.spock.GebReportingSpec
-import geb.spock.GebSpec
 import spock.lang.Shared
 import spock.lang.Stepwise
 import spock.lang.Unroll
 import uk.gov.justice.digital.hmpps.iis.pages.DobPage
 import uk.gov.justice.digital.hmpps.iis.pages.IdentifierPage
-import uk.gov.justice.digital.hmpps.iis.pages.LoginPage
+import uk.gov.justice.digital.hmpps.iis.pages.DisclaimerPage
 import uk.gov.justice.digital.hmpps.iis.pages.LogoutPage
 import uk.gov.justice.digital.hmpps.iis.pages.NamesPage
 import uk.gov.justice.digital.hmpps.iis.pages.SearchPage
@@ -16,12 +15,9 @@ import uk.gov.justice.digital.hmpps.iis.util.HoaUi
 @Stepwise
 class SearchOptionsSpec extends GebReportingSpec {
 
-    @Shared
-    private HoaUi hoaUi = new HoaUi()
-
     def setupSpec() {
-        to LoginPage
-        logIn(hoaUi.username, hoaUi.password, true)
+        to DisclaimerPage
+        continueConfirmed
     }
 
     def cleanupSpec() {

@@ -7,7 +7,4 @@ class LogoutPage extends Page {
 
     static url = '/logout'
 
-    static content = {
-        header { module(HeaderModule) }
-    }
 }
