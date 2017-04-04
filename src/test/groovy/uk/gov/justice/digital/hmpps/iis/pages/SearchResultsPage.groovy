@@ -9,7 +9,7 @@ class SearchResultsPage extends Page {
     static url = '/search/results'
 
     static at = {
-        browser.currentUrl.contains('/search/results')
+        browser.currentUrl.contains(url)
     }
 
     static content = {
@@ -18,7 +18,7 @@ class SearchResultsPage extends Page {
 
         errors { module(ErrorsModule) }
 
-        newSearchLink(to: SearchPage) { $('a', href: '/search') }
+        newSearchLink(to: SearchPage) { $('a', href: '/search', text: 'New search') }
 
         searchResultHeading { $('#contentTitle') }
 

@@ -1,22 +1,19 @@
 package uk.gov.justice.digital.hmpps.iis
 
 import geb.spock.GebReportingSpec
-import spock.lang.Shared
-import spock.lang.Stepwise
 import uk.gov.justice.digital.hmpps.iis.pages.DisclaimerPage
+import uk.gov.justice.digital.hmpps.iis.pages.FeedbackPage
 import uk.gov.justice.digital.hmpps.iis.pages.LogoutPage
 import uk.gov.justice.digital.hmpps.iis.pages.SearchPage
-import uk.gov.justice.digital.hmpps.iis.util.HoaUi
 
-@Stepwise
 class WebsiteSpec extends GebReportingSpec {
 
-    def setupSpec() {
+    def setup() {
         to DisclaimerPage
         continueConfirmed
     }
 
-    def cleanupSpec() {
+    def cleanup() {
         to LogoutPage
     }
 
@@ -26,10 +23,10 @@ class WebsiteSpec extends GebReportingSpec {
         to SearchPage
 
         then: 'application title is shown'
-        header.applicationTitle == 'Inmate information system'
+        header.applicationTitle == 'Historical Prisoner Application'
     }
 
-    def 'feedback link does nothing'(){
+    def 'feedback link shows feedback page'(){
 
         given: 'Viewing the website'
         to SearchPage
@@ -37,8 +34,11 @@ class WebsiteSpec extends GebReportingSpec {
         when: 'I click the feedback link'
         header.feedbackLink.click()
 
-        then: 'nothing happens'
-        at SearchPage
+        then: 'I see the feedback page'
+        at FeedbackPage
+
+        and: 'I see an email link'
+        feedbackMailtoLink.isDisplayed()
     }
 
 }

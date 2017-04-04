@@ -1,16 +1,9 @@
 package uk.gov.justice.digital.hmpps.iis
 
 import geb.spock.GebReportingSpec
-import spock.lang.Shared
 import spock.lang.Stepwise
 import spock.lang.Unroll
-import uk.gov.justice.digital.hmpps.iis.pages.DobPage
-import uk.gov.justice.digital.hmpps.iis.pages.IdentifierPage
-import uk.gov.justice.digital.hmpps.iis.pages.DisclaimerPage
-import uk.gov.justice.digital.hmpps.iis.pages.LogoutPage
-import uk.gov.justice.digital.hmpps.iis.pages.NamesPage
-import uk.gov.justice.digital.hmpps.iis.pages.SearchPage
-import uk.gov.justice.digital.hmpps.iis.util.HoaUi
+import uk.gov.justice.digital.hmpps.iis.pages.*
 
 @Stepwise
 class SearchOptionsSpec extends GebReportingSpec {

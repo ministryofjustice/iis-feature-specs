@@ -3,23 +3,20 @@ package uk.gov.justice.digital.hmpps.iis.pages
 import geb.Page
 import uk.gov.justice.digital.hmpps.iis.modules.ErrorsModule
 import uk.gov.justice.digital.hmpps.iis.modules.HeaderModule
-import uk.gov.justice.digital.hmpps.iis.modules.SearchFormModule
 
-class NamesPage extends Page {
+class FeedbackPage extends Page {
 
-    static url = '/search/names'
+    static url = '/feedback'
 
     static at = {
         browser.currentUrl.contains(url)
-        title == 'Enter at least one name'
+        title == 'Feedback'
     }
 
     static content = {
 
         header { module(HeaderModule) }
 
-        errors { module(ErrorsModule) }
-
-        searchForm { module(SearchFormModule)}
+        feedbackMailtoLink {  $('a', href: contains('mailto'))  }
     }
 }

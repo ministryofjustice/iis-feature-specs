@@ -2,11 +2,12 @@ package uk.gov.justice.digital.hmpps.iis
 
 import geb.spock.GebReportingSpec
 import spock.lang.Ignore
-import spock.lang.Shared
 import spock.lang.Stepwise
 import spock.lang.Unroll
-import uk.gov.justice.digital.hmpps.iis.pages.*
-import uk.gov.justice.digital.hmpps.iis.util.HoaUi
+import uk.gov.justice.digital.hmpps.iis.pages.DisclaimerPage
+import uk.gov.justice.digital.hmpps.iis.pages.LogoutPage
+import uk.gov.justice.digital.hmpps.iis.pages.SearchPage
+import uk.gov.justice.digital.hmpps.iis.pages.SearchResultsPage
 
 @Stepwise
 class DobSearchSpec extends GebReportingSpec {
@@ -20,7 +21,7 @@ class DobSearchSpec extends GebReportingSpec {
         to LogoutPage
     }
 
-    @Ignore
+//    @Ignore
     def 'Dob search requires at least one input'() {
 
         given: 'At dob search page'
@@ -37,7 +38,7 @@ class DobSearchSpec extends GebReportingSpec {
         errors.summaryShown()
     }
 
-    @Ignore
+//    @Ignore
     def 'valid dob leads to search results page'() {
 
         given: 'At dob search page'
@@ -60,7 +61,7 @@ class DobSearchSpec extends GebReportingSpec {
         newSearchLink.isDisplayed()
     }
 
-    @Ignore("Need to make PhantomJS work with the GDS javascript that shows/hides elements when clicking radio button")
+//    @Ignore("Need to make PhantomJS work with the GDS javascript that shows/hides elements when clicking radio button")
     def 'age search requires an age or age range'() {
 
         given: 'At dob search page'
@@ -78,7 +79,7 @@ class DobSearchSpec extends GebReportingSpec {
         errors.summaryShown()
     }
 
-    @Ignore("Need to make PhantomJS work with the GDS javascript that shows/hides elements when clicking radio button")
+//    @Ignore("Need to make PhantomJS work with the GDS javascript that shows/hides elements when clicking radio button")
     @Unroll
     def 'invalid age range #range rejected for age range search'() {
 
@@ -100,7 +101,7 @@ class DobSearchSpec extends GebReportingSpec {
         range << ['30-100', '39-38', '31-31', '31--32', '31-', '-31']
     }
 
-    @Ignore("Need to make PhantomJS work with the GDS javascript that shows/hides elements when clicking radio button")
+//    @Ignore("Need to make PhantomJS work with the GDS javascript that shows/hides elements when clicking radio button")
     def 'valid age leads to search results page'() {
 
         given: 'At dob search page'

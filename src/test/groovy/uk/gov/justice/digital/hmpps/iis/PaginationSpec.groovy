@@ -14,16 +14,16 @@ class PaginationSpec extends GebReportingSpec {
     @Shared
     private HoaUi hoaUi = new HoaUi()
 
-    def setupSpec() {
+    def setup() {
         to DisclaimerPage
         continueConfirmed
     }
 
-    def cleanupSpec() {
+    def cleanup() {
         to LogoutPage
     }
 
-    @Ignore("Need to make PhantomJS work with the GDS javascript that shows/hides elements when clicking radio button")
+    //@Ignore("Need to make PhantomJS work with the GDS javascript that shows/hides elements when clicking radio button")
     def 'Search with 2 pages of results shows paging controls'() {
 
         when: 'I do a search that returns 2 pages of results'

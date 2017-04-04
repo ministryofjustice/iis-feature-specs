@@ -1,25 +1,16 @@
 package uk.gov.justice.digital.hmpps.iis
 
 import geb.spock.GebReportingSpec
-import spock.lang.Shared
-import spock.lang.Stepwise
-import uk.gov.justice.digital.hmpps.iis.pages.DobPage
-import uk.gov.justice.digital.hmpps.iis.pages.IdentifierPage
-import uk.gov.justice.digital.hmpps.iis.pages.DisclaimerPage
-import uk.gov.justice.digital.hmpps.iis.pages.LogoutPage
-import uk.gov.justice.digital.hmpps.iis.pages.NamesPage
-import uk.gov.justice.digital.hmpps.iis.pages.SearchPage
-import uk.gov.justice.digital.hmpps.iis.util.HoaUi
+import uk.gov.justice.digital.hmpps.iis.pages.*
 
-@Stepwise
 class MultiSearchSpec extends GebReportingSpec {
 
-    def setupSpec() {
+    def setup() {
         to DisclaimerPage
         continueConfirmed
     }
 
-    def cleanupSpec() {
+    def cleanup() {
         to LogoutPage
     }
 
@@ -39,7 +30,7 @@ class MultiSearchSpec extends GebReportingSpec {
 
         when: 'when I continue with valid inputs'
         searchForm.using([
-                prisonNumber: 'AA000000'
+                prisonNumber: 'AA123456'
         ])
 
         then: 'I see the name search'

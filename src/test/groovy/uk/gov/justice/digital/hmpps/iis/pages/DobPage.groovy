@@ -10,7 +10,7 @@ class DobPage extends Page {
     static url = '/search/dob'
 
     static at = {
-        browser.currentUrl.contains('/search/dob')
+        browser.currentUrl.contains(url)
         title == 'Enter inmate\'s date of birth or age/range'
     }
 

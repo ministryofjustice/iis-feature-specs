@@ -4,17 +4,19 @@ import geb.spock.GebReportingSpec
 import spock.lang.Shared
 import spock.lang.Stepwise
 import spock.lang.Unroll
-import uk.gov.justice.digital.hmpps.iis.pages.*
-import uk.gov.justice.digital.hmpps.iis.util.HoaUi
+import uk.gov.justice.digital.hmpps.iis.pages.DisclaimerPage
+import uk.gov.justice.digital.hmpps.iis.pages.LogoutPage
+import uk.gov.justice.digital.hmpps.iis.pages.SearchPage
+import uk.gov.justice.digital.hmpps.iis.pages.SearchResultsPage
 
 @Stepwise
 class IdentifierSearchSpec extends GebReportingSpec {
 
     @Shared
-    private List<String> invalidIdentifiers = ['', '   ', 'AAA', 'AA00000', 'AA00000A']
+    private List<String> invalidIdentifiers = ['', '   ', '!', '*'] // html limits to 8 chars
 
     @Shared
-    private String validIdentifier = 'AA000000'
+    private String validIdentifier = 'AA123456'
 
     def setupSpec() {
         to DisclaimerPage
@@ -26,7 +28,7 @@ class IdentifierSearchSpec extends GebReportingSpec {
     }
 
     @Unroll
-    def 'Identifier search rejects invalid input #identifier'() {
+    def 'Identifier search rejects invalid input #identifier - must be 1 to 8 alpha-numeric'() {
 
         given: 'I am on the search by identifier page'
         toIdentifierPage()

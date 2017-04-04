@@ -1,18 +1,13 @@
 package uk.gov.justice.digital.hmpps.iis
 
 import geb.spock.GebReportingSpec
-import spock.lang.Shared
-import uk.gov.justice.digital.hmpps.iis.pages.IndexPage
 import uk.gov.justice.digital.hmpps.iis.pages.DisclaimerPage
+import uk.gov.justice.digital.hmpps.iis.pages.IndexPage
 import uk.gov.justice.digital.hmpps.iis.pages.LogoutPage
-import uk.gov.justice.digital.hmpps.iis.util.HoaUi
 
 class LogoutSpec extends GebReportingSpec {
 
-    @Shared
-    private HoaUi hoaUi = new HoaUi()
-
-    def cleanupSpec() {
+    def cleanup() {
         to LogoutPage
     }
 
@@ -37,7 +32,7 @@ class LogoutSpec extends GebReportingSpec {
         header.logoutLink.isDisplayed()
     }
 
-    def 'logout redirects to SSO logout'(){
+    def 'logout redirects to SSO profile'(){
 
         given:
         loggedIn()
@@ -45,8 +40,8 @@ class LogoutSpec extends GebReportingSpec {
         when: 'I log out'
         via LogoutPage
 
-        then: 'I see the SSO logout page'
-        browser.currentUrl.contains('/users/sign_out')
+        then: 'I see the SSO profile page'
+        browser.currentUrl.contains('/profile')
     }
 
     def loggedIn() {

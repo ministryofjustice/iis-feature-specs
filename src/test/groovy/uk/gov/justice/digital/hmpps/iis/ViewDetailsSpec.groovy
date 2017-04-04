@@ -1,20 +1,19 @@
 package uk.gov.justice.digital.hmpps.iis
 
 import geb.spock.GebReportingSpec
-import spock.lang.Shared
-import spock.lang.Stepwise
-import uk.gov.justice.digital.hmpps.iis.pages.*
-import uk.gov.justice.digital.hmpps.iis.util.HoaUi
+import uk.gov.justice.digital.hmpps.iis.pages.DisclaimerPage
+import uk.gov.justice.digital.hmpps.iis.pages.LogoutPage
+import uk.gov.justice.digital.hmpps.iis.pages.SearchPage
+import uk.gov.justice.digital.hmpps.iis.pages.SubjectDetailsPage
 
-@Stepwise
 class ViewDetailsSpec extends GebReportingSpec {
 
-    def setupSpec() {
+    def setup() {
         to DisclaimerPage
         continueConfirmed
     }
 
-    def cleanupSpec() {
+    def cleanup() {
         to LogoutPage
     }
 
@@ -42,7 +41,7 @@ class ViewDetailsSpec extends GebReportingSpec {
         subjectId.verifyNotEmpty()
 
         and: 'The page url contains the same prison identifier'
-        browser.currentUrl.endsWith(subjectIdNumber)
+        browser.currentUrl.contains(subjectIdNumber)
     }
 
 }
