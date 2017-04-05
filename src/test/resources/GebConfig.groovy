@@ -5,8 +5,13 @@ import org.openqa.selenium.remote.DesiredCapabilities
 
 
 driver = {
+
+    // Ensure JS enabled for PhantomJS
+    def capabilities = new DesiredCapabilities()
+    capabilities.setJavascriptEnabled(true)
+
     // Use the following to run tests in headless mode
-    def driverInstance = new PhantomJSDriver(new DesiredCapabilities())
+    def driverInstance = new PhantomJSDriver(capabilities)
 
     // Use the following to set path to chromedriver if not using linux chromedriver
     // System.setProperty('webdriver.chrome.driver', '/usr/local/bin/chromedriver')
