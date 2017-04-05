@@ -25,7 +25,7 @@ class ViewDetailsSpec extends GebReportingSpec {
         proceed()
 
         searchForm.using([
-                surname: 'scott'
+                surname: 'ali'
         ])
 
         and: 'I click the first result'
@@ -35,7 +35,7 @@ class ViewDetailsSpec extends GebReportingSpec {
         at SubjectDetailsPage
 
         and: 'I see the surname I searched for in upper case'
-        subjectName.text().contains('SCOTT')
+        subjectName.text().contains('ALI')
 
         and: 'I see the prison identifier'
         subjectId.verifyNotEmpty()
