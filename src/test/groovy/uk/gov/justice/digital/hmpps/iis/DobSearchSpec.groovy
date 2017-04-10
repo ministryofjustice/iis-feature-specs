@@ -94,7 +94,28 @@ class DobSearchSpec extends GebReportingSpec {
         errors.summaryShown()
 
         where:
-        range << ['30-100', '39-38', '31-31', '31--32', '31-', '-31']
+        range << ['30-36', '39-38', '31-31', '31--32', '31-', '-31'] // max 5 year spread, lowest first, not same
+    }
+
+    @Unroll
+    def 'invalid age #age rejected for age search'() {
+
+        given: 'At dob search page'
+        toDobPage()
+
+        when: 'I choose age search'
+        searchType('age')
+
+        and: 'I search with an invalid age'
+        searchForm.using([
+                age: age
+        ])
+
+        then: 'I see an error message'
+        errors.summaryShown()
+
+        where:
+        range << ['0', '-1', '9', '200'] // min:10 max:199
     }
 
     def 'valid age leads to search results page'() {
