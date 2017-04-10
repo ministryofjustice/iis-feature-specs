@@ -13,7 +13,6 @@ class HeaderModule extends Module {
 
         feedbackLink { $('a', text: 'feedback') }
 
-        // todo why has this stared returning more than 1 element?
         applicationTitle { $('#proposition-name')[0].text() }
     }
 }

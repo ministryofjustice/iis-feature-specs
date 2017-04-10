@@ -1,11 +1,16 @@
 package uk.gov.justice.digital.hmpps.iis
 
 import geb.spock.GebReportingSpec
+import spock.lang.Unroll
 import uk.gov.justice.digital.hmpps.iis.pages.DisclaimerPage
 import uk.gov.justice.digital.hmpps.iis.pages.LogoutPage
 import uk.gov.justice.digital.hmpps.iis.pages.SearchPage
 import uk.gov.justice.digital.hmpps.iis.pages.SearchResultsPage
 import uk.gov.justice.digital.hmpps.iis.pages.SubjectDetailsPage
+import uk.gov.justice.digital.hmpps.iis.pages.subject.HdcInfoPage
+import uk.gov.justice.digital.hmpps.iis.pages.subject.HdcRecallPage
+import uk.gov.justice.digital.hmpps.iis.pages.subject.MovementsPage
+import uk.gov.justice.digital.hmpps.iis.pages.subject.OffencesPage
 
 class ViewSubjectSpec extends GebReportingSpec {
 
@@ -59,7 +64,6 @@ class ViewSubjectSpec extends GebReportingSpec {
 
         then: 'I see the search results page'
         at SearchResultsPage
-
     }
 
     private void performSearch(query) {

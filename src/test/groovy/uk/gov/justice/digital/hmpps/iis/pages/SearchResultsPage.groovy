@@ -6,12 +6,10 @@ import uk.gov.justice.digital.hmpps.iis.modules.HeaderModule
 
 class SearchResultsPage extends Page {
 
-    static url = '/search/results'
+    static url = '/search/results' // has optional query parameter 'page=i' where i is integer
 
     static at = {
-        browser.currentUrl.contains(url)
-
-        browser.currentUrl.
+        browser.currentUrl.toURL().getPath().endsWith(url)
     }
 
     static content = {

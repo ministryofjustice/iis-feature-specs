@@ -25,5 +25,9 @@ class SubjectDetailsPage extends Page {
         subjectIdNumber { subjectId.text() - 'PRISON NO. ' }
 
         backToResults { $('a', text: contains('Back to results'))}
+
+        sectionNames { $('#inmate-nav').find('li') }
+
+        sectionLinks { $('#inmate-nav').find('a') }
     }
 }
