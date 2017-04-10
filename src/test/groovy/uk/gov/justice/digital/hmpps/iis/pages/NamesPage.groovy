@@ -10,7 +10,7 @@ class NamesPage extends Page {
     static url = '/search/names'
 
     static at = {
-        browser.currentUrl.contains(url)
+        browser.currentUrl.endsWith(url)
     }
 
     static content = {

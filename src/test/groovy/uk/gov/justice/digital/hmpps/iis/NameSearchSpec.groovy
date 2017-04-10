@@ -4,6 +4,7 @@ import geb.spock.GebReportingSpec
 import spock.lang.Stepwise
 import uk.gov.justice.digital.hmpps.iis.pages.DisclaimerPage
 import uk.gov.justice.digital.hmpps.iis.pages.LogoutPage
+import uk.gov.justice.digital.hmpps.iis.pages.NamesPage
 import uk.gov.justice.digital.hmpps.iis.pages.SearchPage
 import uk.gov.justice.digital.hmpps.iis.pages.SearchResultsPage
 

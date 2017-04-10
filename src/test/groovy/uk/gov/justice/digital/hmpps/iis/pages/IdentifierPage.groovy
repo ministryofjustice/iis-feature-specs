@@ -10,7 +10,7 @@ class IdentifierPage extends Page {
     static url = '/search/identifier'
 
     static at = {
-        browser.currentUrl.contains(url)
+        browser.currentUrl.endsWith(url)
     }
 
     static content = {

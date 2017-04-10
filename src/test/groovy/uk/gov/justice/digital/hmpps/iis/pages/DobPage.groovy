@@ -11,7 +11,7 @@ class DobPage extends Page {
     static url = '/search/dob'
 
     static at = {
-        browser.currentUrl.contains(url)
+        browser.currentUrl.endsWith(url)
     }
 
     static content = {

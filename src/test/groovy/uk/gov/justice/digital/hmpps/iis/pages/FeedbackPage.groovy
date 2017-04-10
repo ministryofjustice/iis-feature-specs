@@ -9,7 +9,7 @@ class FeedbackPage extends Page {
     static url = '/feedback'
 
     static at = {
-        browser.currentUrl.contains(url)
+        browser.currentUrl.endsWith(url)
     }
 
     static content = {

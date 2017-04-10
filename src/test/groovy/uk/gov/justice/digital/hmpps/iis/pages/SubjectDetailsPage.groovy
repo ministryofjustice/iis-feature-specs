@@ -9,6 +9,7 @@ class SubjectDetailsPage extends Page {
 
     static at = {
         browser.currentUrl.contains('/subject/')
+        browser.currentUrl.endsWith('/summary')
     }
 
     static content = {

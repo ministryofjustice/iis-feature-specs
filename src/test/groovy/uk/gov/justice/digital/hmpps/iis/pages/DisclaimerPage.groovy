@@ -9,7 +9,7 @@ class DisclaimerPage extends Page {
     static url = '/disclaimer'
 
     static at = {
-        browser.currentUrl.contains(url)
+        browser.currentUrl.endsWith(url)
     }
 
     static content = {
