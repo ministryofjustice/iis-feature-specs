@@ -11,7 +11,6 @@ class IdentifierPage extends Page {
 
     static at = {
         browser.currentUrl.contains(url)
-        title == 'Enter at least one unique identifier'
     }
 
     static content = {

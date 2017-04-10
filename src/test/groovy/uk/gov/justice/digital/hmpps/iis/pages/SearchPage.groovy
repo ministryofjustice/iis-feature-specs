@@ -10,7 +10,6 @@ class SearchPage extends Page {
 
     static at = {
         browser.currentUrl.contains(url)
-        title == 'What information do you have on the inmate?'
     }
 
     static content = {

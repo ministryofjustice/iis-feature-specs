@@ -9,7 +9,6 @@ class SubjectDetailsPage extends Page {
 
     static at = {
         browser.currentUrl.contains('/subject/')
-        title == 'Subject details'
     }
 
     static content = {
@@ -23,5 +22,7 @@ class SubjectDetailsPage extends Page {
         subjectId { $('#subjectId') }
 
         subjectIdNumber { subjectId.text() - 'PRISON NO. ' }
+
+        backToResults { $('a', text: contains('Back to results'))}
     }
 }

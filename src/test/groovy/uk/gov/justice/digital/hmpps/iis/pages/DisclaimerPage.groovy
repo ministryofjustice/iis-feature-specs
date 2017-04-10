@@ -10,7 +10,6 @@ class DisclaimerPage extends Page {
 
     static at = {
         browser.currentUrl.contains(url)
-        title == 'Usage'
     }
 
     static content = {

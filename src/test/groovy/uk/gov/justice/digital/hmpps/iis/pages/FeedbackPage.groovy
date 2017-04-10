@@ -10,7 +10,6 @@ class FeedbackPage extends Page {
 
     static at = {
         browser.currentUrl.contains(url)
-        title == 'Feedback'
     }
 
     static content = {

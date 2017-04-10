@@ -11,7 +11,6 @@ class NamesPage extends Page {
 
     static at = {
         browser.currentUrl.contains(url)
-        title == 'Enter at least one name'
     }
 
     static content = {
