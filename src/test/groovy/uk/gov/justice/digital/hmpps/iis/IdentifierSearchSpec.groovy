@@ -1,6 +1,5 @@
 package uk.gov.justice.digital.hmpps.iis
 
-import geb.spock.GebReportingSpec
 import spock.lang.Shared
 import spock.lang.Stepwise
 import spock.lang.Unroll
@@ -10,7 +9,7 @@ import uk.gov.justice.digital.hmpps.iis.pages.SearchPage
 import uk.gov.justice.digital.hmpps.iis.pages.SearchResultsPage
 
 @Stepwise
-class IdentifierSearchSpec extends GebReportingSpec {
+class IdentifierSearchSpec extends SignOnBaseSpec {
 
     @Shared
     private List<String> invalidIdentifiers = ['', '   ', '!', '*'] // html limits to 8 chars
@@ -19,12 +18,11 @@ class IdentifierSearchSpec extends GebReportingSpec {
     private String validIdentifier = 'AA123456'
 
     def setupSpec() {
-        to DisclaimerPage
-        continueConfirmed
+        signIn()
     }
 
     def cleanupSpec() {
-        to LogoutPage
+        signOut()
     }
 
     @Unroll

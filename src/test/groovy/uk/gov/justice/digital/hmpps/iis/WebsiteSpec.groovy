@@ -1,20 +1,21 @@
 package uk.gov.justice.digital.hmpps.iis
 
 import geb.spock.GebReportingSpec
+import spock.lang.Stepwise
 import uk.gov.justice.digital.hmpps.iis.pages.DisclaimerPage
 import uk.gov.justice.digital.hmpps.iis.pages.FeedbackPage
 import uk.gov.justice.digital.hmpps.iis.pages.LogoutPage
 import uk.gov.justice.digital.hmpps.iis.pages.SearchPage
 
-class WebsiteSpec extends GebReportingSpec {
+@Stepwise
+class WebsiteSpec extends SignOnBaseSpec {
 
-    def setup() {
-        to DisclaimerPage
-        continueConfirmed
+    def setupSpec() {
+        signIn()
     }
 
-    def cleanup() {
-        to LogoutPage
+    def cleanupSpec() {
+        signOut()
     }
 
     def 'Application title is shown'(){

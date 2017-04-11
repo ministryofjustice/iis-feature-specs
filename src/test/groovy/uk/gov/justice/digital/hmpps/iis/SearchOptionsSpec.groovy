@@ -6,15 +6,14 @@ import spock.lang.Unroll
 import uk.gov.justice.digital.hmpps.iis.pages.*
 
 @Stepwise
-class SearchOptionsSpec extends GebReportingSpec {
+class SearchOptionsSpec extends SignOnBaseSpec {
 
     def setupSpec() {
-        to DisclaimerPage
-        continueConfirmed
+        signIn()
     }
 
     def cleanupSpec() {
-        to LogoutPage
+        signOut()
     }
 
     def 'Must select a search option'() {

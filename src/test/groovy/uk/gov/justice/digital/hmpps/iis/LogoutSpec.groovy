@@ -4,17 +4,23 @@ import geb.spock.GebReportingSpec
 import uk.gov.justice.digital.hmpps.iis.pages.DisclaimerPage
 import uk.gov.justice.digital.hmpps.iis.pages.IndexPage
 import uk.gov.justice.digital.hmpps.iis.pages.LogoutPage
+import uk.gov.justice.digital.hmpps.iis.pages.SsoLoginPage
 
-class LogoutSpec extends GebReportingSpec {
+class LogoutSpec extends SignOnBaseSpec {
 
-    def cleanup() {
-        to LogoutPage
+    def setupSpec() {
+        signOut()
     }
 
     def 'No logout link shown if not logged in'() {
 
-        when: 'I have not completed logging in'
-        to DisclaimerPage
+        when: 'I have not accepted the disclaimer thus not completed logging in'
+        to IndexPage
+        if (browser.isAt(SsoLoginPage)) {
+            println 'Interactive sign on detected'
+            signIn
+        }
+        at DisclaimerPage
 
         then: 'I do not see the logout link'
         header.logoutLinkDisplayed == false
@@ -45,7 +51,6 @@ class LogoutSpec extends GebReportingSpec {
     }
 
     def loggedIn() {
-        to DisclaimerPage
-        continueConfirmed
+        signIn()
     }
 }

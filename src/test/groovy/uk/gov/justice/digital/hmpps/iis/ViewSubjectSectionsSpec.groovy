@@ -10,16 +10,15 @@ import uk.gov.justice.digital.hmpps.iis.pages.subject.MovementsPage
 import uk.gov.justice.digital.hmpps.iis.pages.subject.OffencesPage
 
 @Stepwise
-class ViewSubjectSectionsSpec extends GebReportingSpec {
+class ViewSubjectSectionsSpec extends SignOnBaseSpec {
 
     def setupSpec() {
-        to DisclaimerPage
-        continueConfirmed
+        signIn()
         gotoSubjectPage()
     }
 
     def cleanupSpec() {
-        to LogoutPage
+        signOut()
     }
 
     def 'Correct list of sections is shown with current section not clickable'() {

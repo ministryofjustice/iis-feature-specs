@@ -16,7 +16,7 @@ class DisclaimerPage extends Page {
 
         header { module(HeaderModule) }
 
-        disclaimerConfirmation { $("#disclaimerConfirmation") }
+        disclaimerConfirmation { $('#disclaimerConfirmation') }
 
         errors { module(ErrorsModule) }
 

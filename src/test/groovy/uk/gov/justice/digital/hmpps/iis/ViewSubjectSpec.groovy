@@ -1,6 +1,7 @@
 package uk.gov.justice.digital.hmpps.iis
 
 import geb.spock.GebReportingSpec
+import spock.lang.Stepwise
 import spock.lang.Unroll
 import uk.gov.justice.digital.hmpps.iis.pages.DisclaimerPage
 import uk.gov.justice.digital.hmpps.iis.pages.LogoutPage
@@ -12,15 +13,15 @@ import uk.gov.justice.digital.hmpps.iis.pages.subject.HdcRecallPage
 import uk.gov.justice.digital.hmpps.iis.pages.subject.MovementsPage
 import uk.gov.justice.digital.hmpps.iis.pages.subject.OffencesPage
 
-class ViewSubjectSpec extends GebReportingSpec {
+@Stepwise
+class ViewSubjectSpec extends SignOnBaseSpec {
 
-    def setup() {
-        to DisclaimerPage
-        continueConfirmed
+    def setupSpec() {
+        signIn()
     }
 
-    def cleanup() {
-        to LogoutPage
+    def cleanupSpec() {
+        signOut()
     }
 
     def 'Select search result to view subject detail'() {

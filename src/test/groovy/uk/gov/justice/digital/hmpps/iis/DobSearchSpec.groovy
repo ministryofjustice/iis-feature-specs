@@ -1,24 +1,19 @@
 package uk.gov.justice.digital.hmpps.iis
 
-import geb.spock.GebReportingSpec
-import spock.lang.Ignore
 import spock.lang.Stepwise
 import spock.lang.Unroll
-import uk.gov.justice.digital.hmpps.iis.pages.DisclaimerPage
-import uk.gov.justice.digital.hmpps.iis.pages.LogoutPage
 import uk.gov.justice.digital.hmpps.iis.pages.SearchPage
 import uk.gov.justice.digital.hmpps.iis.pages.SearchResultsPage
 
 @Stepwise
-class DobSearchSpec extends GebReportingSpec {
+class DobSearchSpec extends SignOnBaseSpec {
 
     def setupSpec() {
-        to DisclaimerPage
-        continueConfirmed
+        signIn()
     }
 
     def cleanupSpec() {
-        to LogoutPage
+        signOut()
     }
 
     def 'Dob search requires at least one input'() {

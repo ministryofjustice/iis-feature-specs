@@ -1,17 +1,18 @@
 package uk.gov.justice.digital.hmpps.iis
 
 import geb.spock.GebReportingSpec
+import spock.lang.Stepwise
 import uk.gov.justice.digital.hmpps.iis.pages.*
 
-class MultiSearchSpec extends GebReportingSpec {
+@Stepwise
+class MultiSearchSpec extends SignOnBaseSpec {
 
-    def setup() {
-        to DisclaimerPage
-        continueConfirmed
+    def setupSpec() {
+        signIn()
     }
 
-    def cleanup() {
-        to LogoutPage
+    def cleanupSpec() {
+        signOut()
     }
 
     def 'Select all search types shows all search pages in order'() {

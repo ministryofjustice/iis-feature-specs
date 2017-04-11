@@ -1,25 +1,35 @@
 package uk.gov.justice.digital.hmpps.iis
 
 import geb.spock.GebReportingSpec
+import spock.lang.Stepwise
 import uk.gov.justice.digital.hmpps.iis.pages.DisclaimerPage
 import uk.gov.justice.digital.hmpps.iis.pages.IndexPage
 import uk.gov.justice.digital.hmpps.iis.pages.LogoutPage
 import uk.gov.justice.digital.hmpps.iis.pages.SearchPage
+import uk.gov.justice.digital.hmpps.iis.pages.SsoLoginPage
+import uk.gov.justice.digital.hmpps.iis.pages.SsoProfilePage
 
+@Stepwise
 class LoginSpec extends GebReportingSpec {
 
-    def setup() {
-        to LogoutPage
+    def setupSpec() {
+        logout()
     }
 
-    def cleanup() {
-        to LogoutPage
+    def cleanupSpec() {
+        logout()
     }
 
-    def 'Redirect via SSO to disclaimer page if not logged in'() {
+    def 'Redirect to disclaimer page if not logged in'() {
 
         when:
         to IndexPage
+
+        then:
+        if (browser.isAt(SsoLoginPage)) {
+            println 'Interactive sign on detected'
+            signIn
+        }
 
         then:
         at DisclaimerPage
@@ -62,5 +72,13 @@ class LoginSpec extends GebReportingSpec {
 
         then: 'I see the search page'
         at SearchPage
+    }
+
+    def logout() {
+        to LogoutPage
+        if (browser.isAt(SsoProfilePage)) {
+            println 'Interactive sign out detected'
+            signOut
+        }
     }
 }

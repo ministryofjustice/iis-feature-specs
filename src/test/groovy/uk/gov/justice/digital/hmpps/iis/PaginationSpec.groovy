@@ -4,23 +4,24 @@ import geb.spock.GebReportingSpec
 import groovyx.net.http.URIBuilder
 import spock.lang.Ignore
 import spock.lang.Shared
+import spock.lang.Stepwise
 import uk.gov.justice.digital.hmpps.iis.pages.DisclaimerPage
 import uk.gov.justice.digital.hmpps.iis.pages.LogoutPage
 import uk.gov.justice.digital.hmpps.iis.pages.SearchPage
 import uk.gov.justice.digital.hmpps.iis.util.HoaUi
 
-class PaginationSpec extends GebReportingSpec {
+@Stepwise
+class PaginationSpec extends SignOnBaseSpec {
 
     @Shared
     private HoaUi hoaUi = new HoaUi()
 
-    def setup() {
-        to DisclaimerPage
-        continueConfirmed
+    def setupSpec() {
+        signIn()
     }
 
-    def cleanup() {
-        to LogoutPage
+    def cleanupSpec() {
+        signOut()
     }
 
     def 'Search with 2 pages of results shows paging controls'() {

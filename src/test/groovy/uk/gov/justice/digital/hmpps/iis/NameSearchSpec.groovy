@@ -9,15 +9,14 @@ import uk.gov.justice.digital.hmpps.iis.pages.SearchPage
 import uk.gov.justice.digital.hmpps.iis.pages.SearchResultsPage
 
 @Stepwise
-class NameSearchSpec extends GebReportingSpec {
+class NameSearchSpec extends SignOnBaseSpec {
 
     def setupSpec() {
-        to DisclaimerPage
-        continueConfirmed
+        signIn()
     }
 
     def cleanupSpec() {
-        to LogoutPage
+        signOut()
     }
 
     def 'Name search requires at least one input'() {
