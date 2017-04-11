@@ -5,3 +5,5 @@ test:
     - cp -r build $CIRCLE_ARTIFACTS
     - mkdir -p $CIRCLE_TEST_REPORTS/junit/
     - find . -type f -regex ".*/build/test-results/.*xml" -exec cp {} $CIRCLE_TEST_REPORTS/junit/ \;
+    - mkdir -p $CIRCLE_TEST_REPORTS/geb/
+    - mv build/geb-reports/** $CIRCLE_TEST_REPORTS/geb/
