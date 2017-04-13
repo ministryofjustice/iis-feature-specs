@@ -5,7 +5,6 @@ import spock.lang.Stepwise
 import spock.lang.Unroll
 import uk.gov.justice.digital.hmpps.iis.pages.*
 import uk.gov.justice.digital.hmpps.iis.pages.subject.HdcInfoPage
-import uk.gov.justice.digital.hmpps.iis.pages.subject.HdcRecallPage
 import uk.gov.justice.digital.hmpps.iis.pages.subject.MovementsPage
 import uk.gov.justice.digital.hmpps.iis.pages.subject.OffencesPage
 
@@ -31,7 +30,6 @@ class ViewSubjectSectionsSpec extends SignOnBaseSpec {
                 'Summary',
                 'Movements',
                 'HDC history',
-                'HDC recall history',
                 'Offences'
         ])
 
@@ -39,7 +37,6 @@ class ViewSubjectSectionsSpec extends SignOnBaseSpec {
         sectionLinks*.text().containsAll([
                 'Summary',
                 'HDC history',
-                'HDC recall history',
                 'Offences'
         ])
     }
@@ -57,7 +54,6 @@ class ViewSubjectSectionsSpec extends SignOnBaseSpec {
         sectionId   | page
         'movements' | MovementsPage
         'hdcinfo'   | HdcInfoPage
-        'hdcrecall' | HdcRecallPage
         'offences'  | OffencesPage
         'summary'   | SubjectDetailsPage // comes last because initially selected anyway
     }
