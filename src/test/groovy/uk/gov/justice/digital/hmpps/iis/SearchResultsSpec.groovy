@@ -29,6 +29,9 @@ class SearchResultsSpec extends SignOnBaseSpec {
 
         and: 'I see the prison number for results'
         firstResultItem.find('.prisonNumber')[0].verifyNotEmpty()
+
+        and: 'I see the date of first reception for results'
+        firstResultItem.find('.firstReceptionDate')[0].verifyNotEmpty()
     }
 
     private void performSearch(query) {
