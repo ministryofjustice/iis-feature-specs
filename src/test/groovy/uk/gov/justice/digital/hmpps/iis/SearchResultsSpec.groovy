@@ -19,10 +19,10 @@ class SearchResultsSpec extends SignOnBaseSpec {
     def 'valid dob leads to search results page'() {
 
         when: 'I have performed a search'
-        performSearch([surname: 'ali'])
+        performSearch([surname: 'surnamea'])
 
         then: 'I see the number of results returned'
-        searchResultHeading.verifyNotEmpty()
+        searchResultHeading.text().contains('1 result')
 
         and: 'I see a new search link'
         newSearchLink.isDisplayed()

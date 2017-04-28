@@ -13,7 +13,7 @@ class IdentifierSearchSpec extends SignOnBaseSpec {
     private List<String> invalidIdentifiers = ['', '   ', '!', '*'] // html limits to 8 chars
 
     @Shared
-    private String validIdentifier = 'AA123456'
+    private String validIdentifier = 'AB111111'
 
     def setupSpec() {
         signIn()
@@ -55,7 +55,7 @@ class IdentifierSearchSpec extends SignOnBaseSpec {
         at SearchResultsPage
 
         and: 'I see the number of results returned'
-        searchResultHeading.verifyNotEmpty()
+        searchResultHeading.text().contains('1 result')
 
         and: 'I see a new search link'
         newSearchLink.isDisplayed()

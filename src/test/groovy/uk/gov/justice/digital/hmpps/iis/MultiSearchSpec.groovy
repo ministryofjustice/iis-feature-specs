@@ -31,7 +31,7 @@ class MultiSearchSpec extends SignOnBaseSpec {
 
         when: 'when I continue with valid inputs'
         searchForm.using([
-                prisonNumber: 'AA123456'
+                prisonNumber: 'AA111111'
         ])
 
         then: 'I see the name search'
@@ -39,7 +39,7 @@ class MultiSearchSpec extends SignOnBaseSpec {
 
         when: 'when I continue with valid inputs'
         searchForm.using([
-                surname: 'surname'
+                surname: 'surnamea'
         ])
 
         then: 'I see the dob search'

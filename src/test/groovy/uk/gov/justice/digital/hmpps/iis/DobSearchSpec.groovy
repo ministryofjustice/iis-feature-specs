@@ -41,7 +41,7 @@ class DobSearchSpec extends SignOnBaseSpec {
         searchForm.using([
                 dobDay  : '1',
                 dobMonth: '1',
-                dobYear : '1970'
+                dobYear : '1980'
         ])
 
         then: 'I see the search results page'
@@ -123,7 +123,7 @@ class DobSearchSpec extends SignOnBaseSpec {
 
         and: 'I search for a valid age'
         searchForm.using([
-                age: '30'
+                age: '37'
         ])
 
         then: 'I see the search results page'

@@ -30,34 +30,34 @@ class PaginationSpec extends SignOnBaseSpec {
         searchReturningMultipleResults()
 
         then: 'There are #hoaUi.pageSize results listed'
-        //resultItems.size() == 3 // hoaUi.pageSize // need to set up data
+        resultItems.size() == 5
+        searchResultHeading.text().contains('9 results')
 
         and: 'I see a next page link'
-        // nextPageLink.isDisplayed()
+        nextPageLink.isDisplayed()
 
         and: 'the previous page link is disabled'
-        // previousPageLabel.hasClass('inactive')
+        previousPageLabel.hasClass('inactive')
 
         when: 'I click next'
-        // nextPageLink.click()
+        nextPageLink.click()
 
         then: 'I see the second page'
-        //   new URIBuilder(browser.currentUrl).query.page == '2'
-        //  pageIndicator.text().startsWith('2 of ')
+        new URIBuilder(browser.currentUrl).query.page == '2'
+        pageIndicator.text().startsWith('2 of ')
 
         and: 'I see a previous page link'
-        //  previousPageLink.isDisplayed()
+        previousPageLink.isDisplayed()
 
         and: 'the next page link is disabled'
-        // todo need predefined data to control exact page count
-        //  nextPageLabel.hasClass('inactive')
+        nextPageLabel.hasClass('inactive')
 
         when: 'I click previous'
-        //   previousPageLink.click()
+        previousPageLink.click()
 
         then: 'I see the first page'
-        //  new URIBuilder(browser.currentUrl).query.page == '1'
-        //  pageIndicator.text().startsWith('1 of ')
+        new URIBuilder(browser.currentUrl).query.page == '1'
+        pageIndicator.text().startsWith('1 of ')
     }
 
     def searchReturningMultipleResults() {
@@ -67,7 +67,7 @@ class PaginationSpec extends SignOnBaseSpec {
 
         searchType('age')
         searchForm.using([
-                age: '33-38'
+                age: '35-40'
         ])
     }
 

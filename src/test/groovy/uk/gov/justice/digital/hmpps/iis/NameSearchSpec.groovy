@@ -42,14 +42,14 @@ class NameSearchSpec extends SignOnBaseSpec {
 
         when: 'I search for a valid name'
         searchForm.using([
-                surname: 'validname'
+                surname: 'surnamea'
         ])
 
         then: 'I see the search results page'
         at SearchResultsPage
 
         and: 'I see the number of results returned'
-        searchResultHeading.verifyNotEmpty() // todo - with predefined data, check actual result count
+        searchResultHeading.text().contains('1 result')
 
         and: 'I see a new search link'
         newSearchLink.isDisplayed()

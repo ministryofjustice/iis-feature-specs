@@ -59,7 +59,7 @@ class ViewSubjectSectionsSpec extends SignOnBaseSpec {
     }
 
     private void gotoSubjectPage() {
-        performSearch([surname: 'ali'])
+        performSearch([surname: 'surnamea'])
         resultItemLinks[0].click()
         at SubjectDetailsPage
     }
