@@ -18,7 +18,7 @@ class SearchPage extends Page {
 
         errors { module(ErrorsModule) }
 
-        searchOptions { $('form').opt }
+        searchOptions { $('form').option }
 
         continueButton(to: [SearchPage, DobPage, NamesPage, IdentifierPage]) { $('#continue') }
 

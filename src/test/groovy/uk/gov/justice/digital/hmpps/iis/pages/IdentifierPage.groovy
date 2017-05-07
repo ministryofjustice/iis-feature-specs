@@ -7,10 +7,12 @@ import uk.gov.justice.digital.hmpps.iis.modules.SearchFormModule
 
 class IdentifierPage extends Page {
 
-    static url = '/search/identifier'
+    static url = '/search/form?'
+    static query = '=identifier'
 
     static at = {
-        browser.currentUrl.endsWith(url)
+        browser.currentUrl.contains(url)
+        browser.currentUrl.contains(query)
     }
 
     static content = {
