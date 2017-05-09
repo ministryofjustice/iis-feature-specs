@@ -8,10 +8,12 @@ import org.openqa.selenium.Keys
 
 class DobPage extends Page {
 
-    static url = '/search/dob'
+    static url = '/search/form?'
+    static query = '=dob'
 
     static at = {
-        browser.currentUrl.endsWith(url)
+        browser.currentUrl.contains(url)
+        browser.currentUrl.contains(query)
     }
 
     static content = {
