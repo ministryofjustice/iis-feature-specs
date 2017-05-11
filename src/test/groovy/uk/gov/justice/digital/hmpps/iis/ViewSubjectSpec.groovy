@@ -27,7 +27,7 @@ class ViewSubjectSpec extends SignOnBaseSpec {
     def 'Select search result to view subject detail'() {
 
         when: 'I do a search that gives some results'
-        performSearch([surname: 'surnamea'])
+        performSearch([surname: 'surnamec'])
 
         and: 'I click the first result'
         resultItemLinks[0].click()
@@ -36,10 +36,16 @@ class ViewSubjectSpec extends SignOnBaseSpec {
         at SubjectDetailsPage
 
         and: 'I see the surname I searched for in upper case'
-        subjectName.text().contains('SURNAMEA')
+        subjectName.text().contains('SURNAMEC')
 
         and: 'I see the prison identifier'
         subjectId.verifyNotEmpty()
+
+        and: 'I see the parole ref'
+        paroleRef.text().contains('AA12331, AA12332')
+
+        and: 'I see the PNC'
+        pnc.text().contains('012345/99G')
 
         and: 'I see the summary view'
         browser.currentUrl.endsWith('/summary')
@@ -51,7 +57,7 @@ class ViewSubjectSpec extends SignOnBaseSpec {
     def 'When viewing a subject I can return to the search results'() {
 
         when: 'I view a subject'
-        performSearch([surname: 'surnamea'])
+        performSearch([surname: 'surnamec'])
         resultItemLinks[0].click()
 
         then: 'I see the subject page'

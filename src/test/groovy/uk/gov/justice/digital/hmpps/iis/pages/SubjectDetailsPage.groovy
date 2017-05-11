@@ -22,6 +22,10 @@ class SubjectDetailsPage extends Page {
 
         subjectId { $('#subjectId') }
 
+        paroleRef { $('#parole-refs') }
+
+        pnc { $('#pnc') }
+
         subjectIdNumber { subjectId.text() - 'PRISON NO. ' }
 
         backToResults { $('a', text: contains('Back to results'))}
