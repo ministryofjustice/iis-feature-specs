@@ -48,9 +48,6 @@ class PaginationSpec extends SignOnBaseSpec {
         and: 'I see a previous page link'
         previousPageLink.isDisplayed()
 
-        and: 'the next page link is disabled'
-        nextPageLabel.hasClass('inactive')
-
         when: 'I click previous'
         previousPageLink.click()
 
