@@ -24,14 +24,13 @@ class PaginationSpec extends SignOnBaseSpec {
         signOut()
     }
 
-    def 'Search with 2 pages of results shows paging controls'() {
+    def 'Search with multiple pages of results shows paging controls'() {
 
-        when: 'I do a search that returns 2 pages of results'
+        when: 'I do a search that returns multiple pages of results'
         searchReturningMultipleResults()
 
         then: 'There are #hoaUi.pageSize results listed'
         resultItems.size() == 5
-        searchResultHeading.text().contains('9 results')
 
         and: 'I see a next page link'
         nextPageLink.isDisplayed()
