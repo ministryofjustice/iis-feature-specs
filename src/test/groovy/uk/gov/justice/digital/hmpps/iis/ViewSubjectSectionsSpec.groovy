@@ -4,6 +4,7 @@ import geb.spock.GebReportingSpec
 import spock.lang.Stepwise
 import spock.lang.Unroll
 import uk.gov.justice.digital.hmpps.iis.pages.*
+import uk.gov.justice.digital.hmpps.iis.pages.subject.AddressesPage
 import uk.gov.justice.digital.hmpps.iis.pages.subject.HdcInfoPage
 import uk.gov.justice.digital.hmpps.iis.pages.subject.MovementsPage
 import uk.gov.justice.digital.hmpps.iis.pages.subject.OffencesPage
@@ -30,14 +31,16 @@ class ViewSubjectSectionsSpec extends SignOnBaseSpec {
                 'Summary',
                 'Movements',
                 'HDC history',
-                'Offences'
+                'Offences',
+                'Addresses'
         ])
 
         and: 'I see the other sections as links in the right order'
         sectionLinks*.text().containsAll([
                 'Summary',
                 'HDC history',
-                'Offences'
+                'Offences',
+                'Addresses'
         ])
     }
 
@@ -55,6 +58,7 @@ class ViewSubjectSectionsSpec extends SignOnBaseSpec {
         'movements' | MovementsPage
         'hdcinfo'   | HdcInfoPage
         'offences'  | OffencesPage
+        'addresses' | AddressesPage
         'summary'   | SubjectDetailsPage // comes last because initially selected anyway
     }
 
