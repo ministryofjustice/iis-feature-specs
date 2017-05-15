@@ -10,10 +10,10 @@ import uk.gov.justice.digital.hmpps.iis.pages.SearchResultsPage
 class IdentifierSearchSpec extends SignOnBaseSpec {
 
     @Shared
-    private List<String> invalidIdentifiers = ['', '   ', '!', '*'] // html limits to 8 chars
+    private List<String> invalidPrisonNumbers = ['', '   ', '!', '*'] // html limits to 8 chars
 
     @Shared
-    private String validIdentifier = 'AB111111'
+    private String validPrisonNumber = 'AB111111'
 
     def setupSpec() {
         signIn()
@@ -24,12 +24,12 @@ class IdentifierSearchSpec extends SignOnBaseSpec {
     }
 
     @Unroll
-    def 'Identifier search rejects invalid input #identifier - must be 1 to 8 alpha-numeric'() {
+    def 'Identifier search rejects invalid prison number #identifier - must be 1 to 8 alpha-numeric'() {
 
         given: 'I am on the search by identifier page'
         toIdentifierPage()
 
-        when: 'I search for an identifier'
+        when: 'I search for a prison number'
         searchForm.using([
                 prisonNumber: identifier
         ])
@@ -38,17 +38,33 @@ class IdentifierSearchSpec extends SignOnBaseSpec {
         errors.summaryShown()
 
         where:
-        identifier << invalidIdentifiers
+        identifier << invalidPrisonNumbers
     }
 
-    def 'valid identifier leads to search results page'() {
+    def 'Identifier search rejects when no type of identifier supplied'() {
 
         given: 'I am on the search by identifier page'
         toIdentifierPage()
 
-        when: 'I search for a valid identifier'
+        when: 'I search without any identifier'
         searchForm.using([
-                prisonNumber: validIdentifier
+                prisonNumber: '',
+                pncNumber: '',
+                croNumber: ''
+        ])
+
+        then: 'I see an error message'
+        errors.summaryShown()
+    }
+
+    def 'valid prison number leads to search results page'() {
+
+        given: 'I am on the search by identifier page'
+        toIdentifierPage()
+
+        when: 'I search for a valid prison number'
+        searchForm.using([
+                prisonNumber: validPrisonNumber
         ])
 
         then: 'I see the search results page'
@@ -59,6 +75,34 @@ class IdentifierSearchSpec extends SignOnBaseSpec {
 
         and: 'I see a new search link'
         newSearchLink.isDisplayed()
+    }
+
+    def 'any PNC is allowed' () {
+
+        given: 'I am on the search by identifier page'
+        toIdentifierPage()
+
+        when: 'I search for a valid pnc number'
+        searchForm.using([
+                pncNumber: 'Anything*^67'
+        ])
+
+        then: 'I see the search results page'
+        at SearchResultsPage
+    }
+
+    def 'any CRO is allowed' () {
+
+        given: 'I am on the search by identifier page'
+        toIdentifierPage()
+
+        when: 'I search for a valid cro number'
+        searchForm.using([
+                croNumber: 'Anything*^67'
+        ])
+
+        then: 'I see the search results page'
+        at SearchResultsPage
     }
 
     private void toIdentifierPage() {
