@@ -55,6 +55,23 @@ class NameSearchSpec extends SignOnBaseSpec {
         newSearchLink.isDisplayed()
     }
 
+    def 'name search allows apostrophe, hyphen, and space' (){
+
+        given: 'I am on the search by name page'
+        toNamesPage()
+
+        when: 'I search for a valid name including allowed special characters'
+        searchForm.using([
+                forename: "first'a",
+                forename2: "mid-dlea",
+                surname: "surname a"
+        ])
+
+        then: 'I see the search results page'
+        at SearchResultsPage
+
+    }
+
     def toNamesPage() {
         to SearchPage
         selectSearchOptions(['names'])
