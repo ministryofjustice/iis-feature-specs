@@ -33,5 +33,9 @@ class SubjectDetailsPage extends Page {
         sectionNames { $('#inmate-nav').find('li') }
 
         sectionLinks { $('#inmate-nav').find('a') }
+
+        section { sectionName ->
+            $('#' + sectionName).click()
+        }
     }
 }

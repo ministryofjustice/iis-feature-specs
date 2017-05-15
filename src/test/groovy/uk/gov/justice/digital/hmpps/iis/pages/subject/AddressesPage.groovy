@@ -9,4 +9,8 @@ class AddressesPage extends SubjectDetailsPage {
         browser.currentUrl.contains('/subject/')
         browser.currentUrl.endsWith('/addresses')
     }
+
+    static content = {
+        addressList { $('div.address') }
+    }
 }
