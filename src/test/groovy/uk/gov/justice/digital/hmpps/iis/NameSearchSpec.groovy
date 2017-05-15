@@ -1,6 +1,7 @@
 package uk.gov.justice.digital.hmpps.iis
 
 import geb.spock.GebReportingSpec
+import spock.lang.Ignore
 import spock.lang.Stepwise
 import uk.gov.justice.digital.hmpps.iis.pages.DisclaimerPage
 import uk.gov.justice.digital.hmpps.iis.pages.LogoutPage
@@ -55,6 +56,7 @@ class NameSearchSpec extends SignOnBaseSpec {
         newSearchLink.isDisplayed()
     }
 
+    @Ignore
     def 'name search allows apostrophe, hyphen, and space' (){
 
         given: 'I am on the search by name page'
