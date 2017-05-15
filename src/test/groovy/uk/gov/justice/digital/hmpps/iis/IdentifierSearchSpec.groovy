@@ -10,9 +10,6 @@ import uk.gov.justice.digital.hmpps.iis.pages.SearchResultsPage
 class IdentifierSearchSpec extends SignOnBaseSpec {
 
     @Shared
-    private List<String> invalidPrisonNumbers = ['', '   ', '!', '*'] // html limits to 8 chars
-
-    @Shared
     private String validPrisonNumber = 'AB111111'
 
     def setupSpec() {
@@ -23,22 +20,18 @@ class IdentifierSearchSpec extends SignOnBaseSpec {
         signOut()
     }
 
-    @Unroll
-    def 'Identifier search rejects invalid prison number #identifier - must be 1 to 8 alpha-numeric'() {
+    def 'Identifier search doe not validate prison number format'() {
 
         given: 'I am on the search by identifier page'
         toIdentifierPage()
 
         when: 'I search for a prison number'
         searchForm.using([
-                prisonNumber: identifier
+                prisonNumber: 'bad-format'
         ])
 
-        then: 'I see an error message'
-        errors.summaryShown()
-
-        where:
-        identifier << invalidPrisonNumbers
+        then: 'I see the search results page'
+        at SearchResultsPage
     }
 
     def 'Identifier search rejects when no type of identifier supplied'() {
