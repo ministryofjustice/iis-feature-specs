@@ -56,7 +56,6 @@ class NameSearchSpec extends SignOnBaseSpec {
         newSearchLink.isDisplayed()
     }
 
-    @Ignore
     def 'name search allows apostrophe, hyphen, and space' (){
 
         given: 'I am on the search by name page'
