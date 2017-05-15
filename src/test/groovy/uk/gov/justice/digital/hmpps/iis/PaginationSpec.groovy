@@ -2,6 +2,7 @@ package uk.gov.justice.digital.hmpps.iis
 
 import geb.spock.GebReportingSpec
 import groovyx.net.http.URIBuilder
+import org.openqa.selenium.Keys
 import spock.lang.Ignore
 import spock.lang.Shared
 import spock.lang.Stepwise
@@ -43,7 +44,7 @@ class PaginationSpec extends SignOnBaseSpec {
 
         then: 'I see the second page'
         new URIBuilder(browser.currentUrl).query.page == '2'
-        pageIndicator.text().startsWith('2 of ')
+        $('#paginationInput').value() == '2'
 
         and: 'I see a previous page link'
         previousPageLink.isDisplayed()
@@ -53,8 +54,35 @@ class PaginationSpec extends SignOnBaseSpec {
 
         then: 'I see the first page'
         new URIBuilder(browser.currentUrl).query.page == '1'
-        pageIndicator.text().startsWith('1 of ')
+        $('#paginationInput').value() == '1'
     }
+
+    def 'Search with multiple pages allows page skipping'() {
+
+        when: 'I do a search that returns multiple pages of results'
+        searchReturningMultipleResults()
+
+        then: 'There are #hoaUi.pageSize results listed'
+        resultItems.size() == 5
+
+        when: 'I input 2 in page box'
+        $('form').pageNumber = 2
+        $('#paginationInput') << Keys.ENTER
+
+        then: 'I see the second page'
+        new URIBuilder(browser.currentUrl).query.page == '2'
+        $('#paginationInput').value() == '2'
+
+        when: 'I input 1 in page box'
+        $('form').pageNumber = 1
+        $('#paginationInput') << Keys.ENTER
+
+        then: 'I see the first page'
+        new URIBuilder(browser.currentUrl).query.page == '1'
+        $('#paginationInput').value() == '1'
+    }
+
+
 
     def searchReturningMultipleResults() {
         to SearchPage

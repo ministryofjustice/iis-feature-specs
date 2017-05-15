@@ -16,6 +16,9 @@ driver = {
     // Use the following to set path to chromedriver if not using linux chromedriver
     // System.setProperty('webdriver.chrome.driver', '/usr/local/bin/chromedriver')
 
+    // Use the following path on mac if chomdriver is in applcations
+    // System.setProperty('webdriver.chrome.driver', '/Applications/chromedriver')
+
     // Use the following to run tests with Chromedriver
     // def driverInstance = new ChromeDriver()
 
