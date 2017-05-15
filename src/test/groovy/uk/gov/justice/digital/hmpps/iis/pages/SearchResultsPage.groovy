@@ -34,6 +34,9 @@ class SearchResultsPage extends Page {
         nextPageLabel { $('span', text: 'Next') }
         previousPageLabel { $('span', text: 'Previous') }
 
+        paginationForm { $('form') }
+        paginationInput { $(paginationForm).pageNumber }
+
         pageIndicator { $('#pageIndicator') }
     }
 }
