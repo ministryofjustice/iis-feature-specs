@@ -21,13 +21,13 @@ class SubjectAddressesSpec extends SignOnBaseSpec {
         signOut()
     }
 
-    def 'List of addresses shown'() {
+    def 'List of addresses shown, excluding ones where no entry in address line 1'() {
 
         when: 'I view the addresses section'
         gotoAddressesPage([surname: 'surnamea'])
 
         then: 'I see the addresses for that subject'
-        addressList.size() == 3
+        addressList.size() == 2
 
         and: 'Addresses have type and name and address correctly capitalized, when present'
         $('#address0-type').text().equals('Other')
