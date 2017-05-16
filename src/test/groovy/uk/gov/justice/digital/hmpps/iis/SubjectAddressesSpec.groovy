@@ -33,9 +33,6 @@ class SubjectAddressesSpec extends SignOnBaseSpec {
         $('#address0-type').text().equals('Other')
         $('#address0-name').text().equals('First Lasta')
         $('#address0-line1').text().equals('1 Street Road')
-
-        and: 'Address elements are ommitted when not present in data'
-        $('#address1-name').text().isEmpty()
     }
 
 
