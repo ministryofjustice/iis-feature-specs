@@ -20,7 +20,7 @@ class IdentifierSearchSpec extends SignOnBaseSpec {
         signOut()
     }
 
-    def 'Identifier search doe not validate prison number format'() {
+    def 'Identifier search does not validate prison number format'() {
 
         given: 'I am on the search by identifier page'
         toIdentifierPage()

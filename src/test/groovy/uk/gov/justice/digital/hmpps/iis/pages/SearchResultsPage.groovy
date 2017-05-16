@@ -22,9 +22,9 @@ class SearchResultsPage extends Page {
 
         searchResultHeading { $('#contentTitle') }
 
-        resultItems { $('div.inmate-details') }
+        resultItems { $('div.inmateDetails') }
 
-        firstResultItem { $('div.inmate-details', 0) }
+        firstResultItem { $('div.inmateDetails', 0) }
 
         resultItemLinks { resultItems.find('a') }
 
