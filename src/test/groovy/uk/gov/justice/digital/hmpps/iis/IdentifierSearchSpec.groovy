@@ -98,6 +98,24 @@ class IdentifierSearchSpec extends SignOnBaseSpec {
         at SearchResultsPage
     }
 
+    def 'PNC/CRO search handles case where multiple person refs with same PNC/CRO'(){
+
+        given: 'I am on the search by identifier page'
+        toIdentifierPage()
+
+        when: 'I search for a CRO that has 2 associated person refs'
+        searchForm.using([
+                croNumber: '012345/CR0'
+        ])
+
+        then: 'I see the search results page'
+        at SearchResultsPage
+
+        and: 'There are two results'
+        resultItems.size() == 2
+
+    }
+
     private void toIdentifierPage() {
         to SearchPage
         selectSearchOptions(['identifier'])
