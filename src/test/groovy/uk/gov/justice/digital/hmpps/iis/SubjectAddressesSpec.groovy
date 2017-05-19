@@ -14,7 +14,6 @@ class SubjectAddressesSpec extends SignOnBaseSpec {
 
     def setupSpec() {
         signIn()
-
     }
 
     def cleanupSpec() {
