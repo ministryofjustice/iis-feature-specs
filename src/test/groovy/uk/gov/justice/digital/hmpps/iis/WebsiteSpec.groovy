@@ -1,9 +1,11 @@
 package uk.gov.justice.digital.hmpps.iis
 
 import geb.spock.GebReportingSpec
+import groovy.json.JsonSlurper
 import spock.lang.Stepwise
 import uk.gov.justice.digital.hmpps.iis.pages.DisclaimerPage
 import uk.gov.justice.digital.hmpps.iis.pages.FeedbackPage
+import uk.gov.justice.digital.hmpps.iis.pages.HealthPage
 import uk.gov.justice.digital.hmpps.iis.pages.LogoutPage
 import uk.gov.justice.digital.hmpps.iis.pages.SearchPage
 
@@ -18,7 +20,7 @@ class WebsiteSpec extends SignOnBaseSpec {
         signOut()
     }
 
-    def 'Application title is shown'(){
+    def 'Application title is shown'() {
 
         when: 'Viewing the website'
         to SearchPage
@@ -27,7 +29,7 @@ class WebsiteSpec extends SignOnBaseSpec {
         header.applicationTitle == 'Historical Prisoner Application'
     }
 
-    def 'feedback link shows feedback page'(){
+    def 'feedback link shows feedback page'() {
 
         given: 'Viewing the website'
         to SearchPage
@@ -42,4 +44,17 @@ class WebsiteSpec extends SignOnBaseSpec {
         feedbackMailtoLink.isDisplayed()
     }
 
+    def 'health page shows application status'() {
+
+        when: 'Viewing the health page'
+        to HealthPage
+
+        then: 'I see health status OK'
+
+        def json = driver.pageSource - '<html><head></head><body><pre style="word-wrap: break-word; white-space: pre-wrap;">'
+        def response = new JsonSlurper().parseText(json)
+
+        response.healthy == true
+        response.checks.db == 'ok'
+    }
 }
