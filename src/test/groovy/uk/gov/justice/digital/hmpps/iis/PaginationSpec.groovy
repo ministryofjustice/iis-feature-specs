@@ -31,7 +31,7 @@ class PaginationSpec extends SignOnBaseSpec {
         searchReturningMultipleResults()
 
         then: 'There are #hoaUi.pageSize results listed'
-        resultItems.size() == 5
+        resultItems.size() == 10
 
         and: 'I see a next page link'
         nextPageLink.isDisplayed()
@@ -63,7 +63,7 @@ class PaginationSpec extends SignOnBaseSpec {
         searchReturningMultipleResults()
 
         then: 'There are #hoaUi.pageSize results listed'
-        resultItems.size() == 5
+        resultItems.size() == 10
 
         when: 'I input 2 in page box'
         $('form').pageNumber = 2
