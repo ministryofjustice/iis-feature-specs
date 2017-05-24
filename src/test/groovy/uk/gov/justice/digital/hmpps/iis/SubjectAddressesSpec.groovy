@@ -31,7 +31,7 @@ class SubjectAddressesSpec extends SignOnBaseSpec {
         and: 'Addresses have type and name and address correctly capitalized, when present'
         $('#address0-type').text().equals('Other')
         $('#address0-name').text().equals('First Lasta')
-        $('#address0-line1').text().equals('1 Street Road')
+        $('#address0-line1').text().equals('1, Street Road')
     }
 
 
