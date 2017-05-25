@@ -5,6 +5,8 @@ import spock.lang.Stepwise
 import spock.lang.Unroll
 import uk.gov.justice.digital.hmpps.iis.pages.*
 import uk.gov.justice.digital.hmpps.iis.pages.subject.AddressesPage
+import uk.gov.justice.digital.hmpps.iis.pages.subject.AdjudicationsPage
+import uk.gov.justice.digital.hmpps.iis.pages.subject.AliasesPage
 import uk.gov.justice.digital.hmpps.iis.pages.subject.HdcInfoPage
 import uk.gov.justice.digital.hmpps.iis.pages.subject.MovementsPage
 import uk.gov.justice.digital.hmpps.iis.pages.subject.OffencesPage
@@ -32,6 +34,8 @@ class ViewSubjectSectionsSpec extends SignOnBaseSpec {
                 'Movements',
                 'HDC history',
                 'Offences',
+                'Offences in custody',
+                'Aliases',
                 'Addresses'
         ])
 
@@ -40,6 +44,8 @@ class ViewSubjectSectionsSpec extends SignOnBaseSpec {
                 'Summary',
                 'HDC history',
                 'Offences',
+                'Offences in custody',
+                'Aliases',
                 'Addresses'
         ])
     }
@@ -54,12 +60,14 @@ class ViewSubjectSectionsSpec extends SignOnBaseSpec {
         at page
 
         where:
-        sectionId   | page
-        'movements' | MovementsPage
-        'hdcinfo'   | HdcInfoPage
-        'offences'  | OffencesPage
-        'addresses' | AddressesPage
-        'summary'   | SubjectDetailsPage // comes last because initially selected anyway
+        sectionId       | page
+        'movements'     | MovementsPage
+        'hdcinfo'       | HdcInfoPage
+        'offences'      | OffencesPage
+        'adjudications' | AdjudicationsPage
+        'addresses'     | AddressesPage
+        'aliases'       | AliasesPage
+        'summary'       | SubjectDetailsPage // comes last because initially selected anyway
     }
 
     private void gotoSubjectPage() {
