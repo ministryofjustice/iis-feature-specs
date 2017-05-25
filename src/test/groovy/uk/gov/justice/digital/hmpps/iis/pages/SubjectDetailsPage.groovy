@@ -26,7 +26,7 @@ class SubjectDetailsPage extends Page {
 
         pnc { $('#pnc') }
 
-        subjectIdNumber { subjectId.text() - 'PRISON NO. ' }
+        subjectIdNumber { (subjectId.text() - 'Prison number').trim() }
 
         backToResults { $('a', text: contains('Back to results'))}
 
