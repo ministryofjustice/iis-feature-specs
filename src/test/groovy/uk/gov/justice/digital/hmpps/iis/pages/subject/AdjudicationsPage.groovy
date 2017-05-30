@@ -7,6 +7,6 @@ class AdjudicationsPage extends SubjectDetailsPage {
 
     static at = {
         browser.currentUrl.contains('/subject/')
-        browser.currentUrl.endsWith('/adjudications')
+        browser.currentUrl.endsWith('/offencesincustody')
     }
 }
