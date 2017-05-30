@@ -62,7 +62,7 @@ class ViewSubjectSectionsSpec extends SignOnBaseSpec {
         where:
         sectionId           | page
         'movements'         | MovementsPage
-        'hdcinfo'           | HdcInfoPage
+    //    'hdcinfo'           | HdcInfoPage
         'offences'          | OffencesPage
         'offencesincustody' | AdjudicationsPage
         'addresses'         | AddressesPage
