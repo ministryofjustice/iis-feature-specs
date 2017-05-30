@@ -60,14 +60,14 @@ class ViewSubjectSectionsSpec extends SignOnBaseSpec {
         at page
 
         where:
-        sectionId       | page
-        'movements'     | MovementsPage
-        'hdcinfo'       | HdcInfoPage
-        'offences'      | OffencesPage
-        'adjudications' | AdjudicationsPage
-        'addresses'     | AddressesPage
-        'aliases'       | AliasesPage
-        'summary'       | SubjectDetailsPage // comes last because initially selected anyway
+        sectionId           | page
+        'movements'         | MovementsPage
+        'hdcinfo'           | HdcInfoPage
+        'offences'          | OffencesPage
+        'offencesincustody' | AdjudicationsPage
+        'addresses'         | AddressesPage
+        'aliases'           | AliasesPage
+        'summary'           | SubjectDetailsPage // comes last because initially selected anyway
     }
 
     private void gotoSubjectPage() {
