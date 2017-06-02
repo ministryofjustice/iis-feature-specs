@@ -73,6 +73,19 @@ class ViewSubjectSpec extends SignOnBaseSpec {
         at SearchResultsPage
     }
 
+    def 'When viewing a subject with no other identifiers, I still see th prison number' () {
+
+        when: 'I view a subject with no additional identifiers'
+        performSearch([surname: 'surnameg'])
+        resultItemLinks[0].click()
+
+        then: 'I see the subject page'
+        at SubjectDetailsPage
+
+        and: 'I see the prison identifier'
+        subjectId.verifyNotEmpty()
+    }
+
     private void performSearch(query) {
         to SearchPage
         selectSearchOptions(['names'])
