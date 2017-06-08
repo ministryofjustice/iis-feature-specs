@@ -8,6 +8,7 @@ import uk.gov.justice.digital.hmpps.iis.pages.LogoutPage
 import uk.gov.justice.digital.hmpps.iis.pages.SearchPage
 import uk.gov.justice.digital.hmpps.iis.pages.SearchResultsPage
 import uk.gov.justice.digital.hmpps.iis.pages.SubjectDetailsPage
+import uk.gov.justice.digital.hmpps.iis.pages.PrintPage
 import uk.gov.justice.digital.hmpps.iis.pages.subject.HdcInfoPage
 import uk.gov.justice.digital.hmpps.iis.pages.subject.HdcRecallPage
 import uk.gov.justice.digital.hmpps.iis.pages.subject.MovementsPage
@@ -73,7 +74,7 @@ class ViewSubjectSpec extends SignOnBaseSpec {
         at SearchResultsPage
     }
 
-    def 'When viewing a subject with no other identifiers, I still see th prison number' () {
+    def 'When viewing a subject with no other identifiers, I still see the prison number' () {
 
         when: 'I view a subject with no additional identifiers'
         performSearch([surname: 'surnameg'])
@@ -84,6 +85,24 @@ class ViewSubjectSpec extends SignOnBaseSpec {
 
         and: 'I see the prison identifier'
         subjectId.verifyNotEmpty()
+    }
+
+    def 'When viewing a subject I can navigate to the print page' () {
+        when: 'I view a subject with no additional identifiers'
+        performSearch([surname: 'surnameg'])
+        resultItemLinks[0].click()
+
+        then: 'I see the subject page'
+        at SubjectDetailsPage
+
+        and: 'I see the save to pdf link'
+        saveToPdf.verifyNotEmpty()
+
+        when: 'I click the save to pdf link'
+        saveToPdf.click()
+
+        then: 'I see the print page'
+        at PrintPage
     }
 
     private void performSearch(query) {

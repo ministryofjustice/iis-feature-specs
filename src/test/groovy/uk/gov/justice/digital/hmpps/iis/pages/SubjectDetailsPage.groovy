@@ -37,5 +37,7 @@ class SubjectDetailsPage extends Page {
         section { sectionName ->
             $('#' + sectionName).click()
         }
+
+        saveToPdf { $('#saveLink a', text: contains('Save as PDF')) }
     }
 }
