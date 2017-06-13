@@ -42,8 +42,8 @@ class PrintSpec extends SignOnBaseSpec {
         then: 'I see the print page'
         at PrintPage
 
-        and: 'I see the 6 search options'
-        printOptions.size == 6
+        and: 'I see the 8 print options'
+        printOptions.size == 8
     }
 
     def 'I can return to subject page with back button'() {
@@ -74,7 +74,7 @@ class PrintSpec extends SignOnBaseSpec {
         at PrintPage
 
         when: 'I choose a print option'
-        selectPrintOptions(['summary'])
+        selectPrintOptions(['subject'])
         proceed()
 
         then: 'I remain on the print page'
