@@ -2,6 +2,7 @@ package uk.gov.justice.digital.hmpps.iis
 
 import spock.lang.Stepwise
 import uk.gov.justice.digital.hmpps.iis.pages.SearchPage
+import uk.gov.justice.digital.hmpps.iis.pages.SearchResultsPage
 import uk.gov.justice.digital.hmpps.iis.pages.SubjectDetailsPage
 import uk.gov.justice.digital.hmpps.iis.pages.subject.AddressesPage
 import uk.gov.justice.digital.hmpps.iis.pages.subject.AliasesPage
@@ -32,6 +33,17 @@ class SubjectAliasesSpec extends SignOnBaseSpec {
         $('#alias1-dob').text().contains('02/01/1980')
     }
 
+    def 'Alias is clickable to perform search for alias name + dob' () {
+
+        when: 'I view the aliases section'
+        gotoAliasesPage([surname: 'surnamea'])
+
+        and: 'I click the first alias'
+        $('#aliasSearch0').click()
+
+        then: 'I see the search results for that alias'
+        at SearchResultsPage
+    }
 
 
     private void gotoAliasesPage(query) {
