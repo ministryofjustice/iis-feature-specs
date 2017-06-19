@@ -10,6 +10,7 @@ import uk.gov.justice.digital.hmpps.iis.pages.subject.AliasesPage
 import uk.gov.justice.digital.hmpps.iis.pages.subject.HdcInfoPage
 import uk.gov.justice.digital.hmpps.iis.pages.subject.MovementsPage
 import uk.gov.justice.digital.hmpps.iis.pages.subject.OffencesPage
+import uk.gov.justice.digital.hmpps.iis.pages.subject.SentencesPage
 
 @Stepwise
 class ViewSubjectSectionsSpec extends SignOnBaseSpec {
@@ -30,7 +31,8 @@ class ViewSubjectSectionsSpec extends SignOnBaseSpec {
 
         then: 'I see the right section names in the right order'
         sectionNames*.text().containsAll([
-                'Summary',
+                'Sentence Summary',
+                'Sentence History',
                 'Movements',
                 'HDC history',
                 'Offences',
@@ -41,7 +43,8 @@ class ViewSubjectSectionsSpec extends SignOnBaseSpec {
 
         and: 'I see the other sections as links in the right order'
         sectionLinks*.text().containsAll([
-                'Summary',
+                'Sentence Summary',
+                'Sentence History',
                 'HDC history',
                 'Offences',
                 'Offences in custody',
@@ -61,6 +64,7 @@ class ViewSubjectSectionsSpec extends SignOnBaseSpec {
 
         where:
         sectionId           | page
+        'sentences'         | SentencesPage
         'movements'         | MovementsPage
         'hdcinfo'           | HdcInfoPage
         'offences'          | OffencesPage
