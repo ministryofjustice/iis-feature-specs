@@ -64,7 +64,7 @@ class IdentifierSearchSpec extends SignOnBaseSpec {
         at SearchResultsPage
 
         and: 'I see the number of results returned'
-        searchResultHeading.text().contains('3 results')
+        searchResultHeading.text().contains('3')
 
         and: 'I see a new search link'
         newSearchLink.isDisplayed()

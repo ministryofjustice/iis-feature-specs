@@ -89,7 +89,7 @@ class DobSearchSpec extends SignOnBaseSpec {
         errors.summaryShown()
 
         where:
-        range << ['30-36', '39-38', '31-31', '31--32', '31-', '-31'] // max 5 year spread, lowest first, not same
+        range << ['30-41', '39-38', '31-31', '31--32', '31-', '-31'] // max 5 year spread, lowest first, not same
     }
 
     @Unroll

@@ -50,7 +50,7 @@ class NameSearchSpec extends SignOnBaseSpec {
         at SearchResultsPage
 
         and: 'I see the number of results returned'
-        searchResultHeading.text().contains('1 result')
+        searchResultHeading.text().contains('1')
 
         and: 'I see a new search link'
         newSearchLink.isDisplayed()

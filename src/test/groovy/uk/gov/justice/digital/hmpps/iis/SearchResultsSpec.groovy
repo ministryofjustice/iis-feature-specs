@@ -22,7 +22,7 @@ class SearchResultsSpec extends SignOnBaseSpec {
         performSearch([surname: 'surnamea'])
 
         then: 'I see the number of results returned'
-        searchResultHeading.text().contains('1 result')
+        searchResultHeading.text().contains('1')
 
         and: 'There are the right number of results'
         resultItems.size() == 1
