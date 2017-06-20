@@ -88,8 +88,9 @@ class ViewSubjectSpec extends SignOnBaseSpec {
     }
 
     def 'When viewing a subject I can navigate to the print page' () {
+
         when: 'I view a subject with no additional identifiers'
-        performSearch([surname: 'surnameg'])
+        performSearch([surname: 'surnamem'])
         resultItemLinks[0].click()
 
         then: 'I see the subject page'
