@@ -38,5 +38,12 @@ class SearchResultsPage extends Page {
         paginationInput { $(paginationForm).pageNumber }
 
         pageIndicator { $('#pageIndicator') }
+
+        filterValues { $('form')['filter'] }
+
+        filterControls { $('form').find('input', name: 'filter') }
+
+        activeFilters { $('input').filter('.filtering-option-active') }
+        inactiveFilters { $('input').filter('.filtering-option') }
     }
 }

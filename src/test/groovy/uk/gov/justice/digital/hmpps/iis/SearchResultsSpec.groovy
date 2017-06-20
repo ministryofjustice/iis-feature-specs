@@ -24,6 +24,9 @@ class SearchResultsSpec extends SignOnBaseSpec {
         then: 'I see the number of results returned'
         searchResultHeading.text().contains('1 result')
 
+        and: 'There are the right number of results'
+        resultItems.size() == 1
+
         and: 'I see a new search link'
         newSearchLink.isDisplayed()
 
