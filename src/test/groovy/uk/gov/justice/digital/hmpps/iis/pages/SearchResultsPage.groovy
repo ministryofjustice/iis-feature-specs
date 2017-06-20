@@ -39,8 +39,8 @@ class SearchResultsPage extends Page {
 
         pageIndicator { $('#pageIndicator') }
 
-        filters { $('form')['filter'] }
-        
+        filterValues { $('form')['filter'] }
+
         filterControls { $('form').find('input', name: 'filter') }
 
         activeFilters { $('input').filter('.filtering-option-active') }
