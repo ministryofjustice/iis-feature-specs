@@ -31,8 +31,8 @@ class ViewSubjectSectionsSpec extends SignOnBaseSpec {
 
         then: 'I see the right section names in the right order'
         sectionNames*.text().containsAll([
-                'Sentence Summary',
-                'Sentence History',
+                'Sentence summary',
+                'Sentence history',
                 'Movements',
                 'HDC history',
                 'Offences',
@@ -43,8 +43,8 @@ class ViewSubjectSectionsSpec extends SignOnBaseSpec {
 
         and: 'I see the other sections as links in the right order'
         sectionLinks*.text().containsAll([
-                'Sentence Summary',
-                'Sentence History',
+                'Sentence summary',
+                'Sentence history',
                 'HDC history',
                 'Offences',
                 'Offences in custody',
