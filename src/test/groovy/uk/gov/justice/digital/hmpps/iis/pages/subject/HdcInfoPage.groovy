@@ -9,4 +9,9 @@ class HdcInfoPage extends SubjectDetailsPage {
         browser.currentUrl.contains('/subject/')
         browser.currentUrl.endsWith('/hdcinfo')
     }
+
+    static content = {
+        recallsList { $('div.recall') }
+        historyList { $('div.history') }
+    }
 }

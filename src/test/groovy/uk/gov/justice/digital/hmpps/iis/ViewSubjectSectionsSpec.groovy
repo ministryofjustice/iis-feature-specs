@@ -34,7 +34,7 @@ class ViewSubjectSectionsSpec extends SignOnBaseSpec {
                 'Sentence summary',
                 'Sentence history',
                 'Movements',
-                'HDC history',
+                'HDC recalls and history',
                 'Offences',
                 'Offences in custody',
                 'Aliases',
@@ -45,7 +45,7 @@ class ViewSubjectSectionsSpec extends SignOnBaseSpec {
         sectionLinks*.text().containsAll([
                 'Sentence summary',
                 'Sentence history',
-                'HDC history',
+                'HDC recalls and history',
                 'Offences',
                 'Offences in custody',
                 'Aliases',
