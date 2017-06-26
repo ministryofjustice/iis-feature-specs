@@ -31,18 +31,17 @@ class FilteringSpec extends SignOnBaseSpec {
         performSearch([surname: 'sur%'])
 
         then: 'I see three filtering options'
-        filterControls.size() == 4
+        filterControls.size() == 3
 
         and: 'I see the right filter option names'
         filterValues.containsAll([
                 'Male',
                 'Female',
-                'HDC',
-                'Lifer'
+                'HDC'
         ])
 
         and: 'No filters are active'
-        inactiveFilters.size() == 4
+        inactiveFilters.size() == 3
     }
 
     def 'Enabling a filter reduces the number of results and active filters are indicated' (){
@@ -68,6 +67,9 @@ class FilteringSpec extends SignOnBaseSpec {
 
         then: 'I see all the results again'
         resultItems.size() == 10
+
+        and: 'No filters are active'
+        inactiveFilters.size() == 3
     }
 
     def 'If filters lead to fewer than 2 results, filter controls are still shown' () {
