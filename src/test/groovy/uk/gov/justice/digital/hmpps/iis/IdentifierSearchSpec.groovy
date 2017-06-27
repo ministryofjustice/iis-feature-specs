@@ -64,7 +64,7 @@ class IdentifierSearchSpec extends SignOnBaseSpec {
         at SearchResultsPage
 
         and: 'I see the number of results returned'
-        searchResultHeading.text().contains('3')
+        searchResultHeading.text().contains('1')
 
         and: 'I see a new search link'
         newSearchLink.isDisplayed()
@@ -111,8 +111,8 @@ class IdentifierSearchSpec extends SignOnBaseSpec {
         then: 'I see the search results page'
         at SearchResultsPage
 
-        and: 'There are four results (2 aliases also shown)'
-        resultItems.size() == 4
+        and: 'There are 2 results'
+        resultItems.size() == 2
 
     }
 
