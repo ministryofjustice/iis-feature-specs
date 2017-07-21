@@ -34,7 +34,7 @@ class PrintSpec extends SignOnBaseSpec {
         errors.summaryShown()
     }
 
-    def 'Can choose summary, movements, hdc, offences, custody offences and addresses'() {
+    def 'Can choose summary, movements, hdc, offences, custody offences, aliases and addresses'() {
 
         when: 'I am perform a search and click save'
         performSearchAndSave()
@@ -42,8 +42,8 @@ class PrintSpec extends SignOnBaseSpec {
         then: 'I see the print page'
         at PrintPage
 
-        and: 'I see the 8 print options'
-        printOptions.size == 8
+        and: 'I see the 9 print options'
+        printOptions.size == 9
     }
 
     def 'I can return to subject page with back button'() {
