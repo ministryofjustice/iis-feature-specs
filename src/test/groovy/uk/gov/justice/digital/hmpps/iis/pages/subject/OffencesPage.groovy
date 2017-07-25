@@ -9,4 +9,8 @@ class OffencesPage extends SubjectDetailsPage {
         browser.currentUrl.contains('/subject/')
         browser.currentUrl.endsWith('/offences')
     }
+
+    static content = {
+        offencesList { $('div.offence') }
+    }
 }

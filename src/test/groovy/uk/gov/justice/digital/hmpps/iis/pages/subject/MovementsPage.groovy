@@ -9,4 +9,8 @@ class MovementsPage extends SubjectDetailsPage {
         browser.currentUrl.contains('/subject/')
         browser.currentUrl.endsWith('/movements')
     }
+
+    static content = {
+        movementsList { $('div.movement') }
+    }
 }

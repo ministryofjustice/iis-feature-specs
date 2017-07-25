@@ -17,7 +17,7 @@ class SubjectHdcSpec extends SignOnBaseSpec {
         signOut()
     }
 
-    def 'List of hdc recalls shown'() {
+    def 'List of HDC recalls and HDC history shown'() {
 
         when: 'I view the hdc section'
         gotoHdcPage([surname: 'surnamea'])
@@ -25,14 +25,7 @@ class SubjectHdcSpec extends SignOnBaseSpec {
         then: 'I see the hdc recalls for that subject'
         recallsList.size() == 2
 
-    }
-
-    def 'List of hdc history items shown'() {
-
-        when: 'I view the hdc section'
-        gotoHdcPage([surname: 'surnamea'])
-
-        then: 'I see the hdc recalls for that subject'
+        and: 'I see the hdc recalls for that subject'
         historyList.size() == 4
 
     }
