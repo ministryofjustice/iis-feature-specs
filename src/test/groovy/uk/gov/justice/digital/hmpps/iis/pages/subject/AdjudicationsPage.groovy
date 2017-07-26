@@ -9,4 +9,8 @@ class AdjudicationsPage extends SubjectDetailsPage {
         browser.currentUrl.contains('/subject/')
         browser.currentUrl.endsWith('/offencesincustody')
     }
+
+    static content = {
+        offencesInCustodyList { $('div.offenceInCustody') }
+    }
 }

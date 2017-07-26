@@ -39,5 +39,10 @@ class SubjectDetailsPage extends Page {
         }
 
         saveToPdf { $('#saveLink a', text: contains('Save as PDF')) }
+
+        category { $('#category') }
+        establishment { $('#establishment') }
+        courtName { $('#courtName') }
+        sentenceLength { $('#sentenceLength') }
     }
 }
