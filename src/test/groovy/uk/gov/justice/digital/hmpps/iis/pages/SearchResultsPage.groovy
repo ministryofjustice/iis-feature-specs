@@ -45,5 +45,9 @@ class SearchResultsPage extends Page {
 
         activeFilters { $('input').filter('.filtering-option-active') }
         inactiveFilters { $('input').filter('.filtering-option') }
+
+        searchTerms { $('.searchedTerm') }
+        firstSearchTerm { $('.searchedTerm', 0) }
+        firstSearchTermLink(to: [EditNamesPage, EditDobPage, EditIdentifierPage]) { firstSearchTerm.find('div a') }
     }
 }
