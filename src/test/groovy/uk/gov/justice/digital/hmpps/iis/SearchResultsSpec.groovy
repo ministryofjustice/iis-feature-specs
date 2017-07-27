@@ -36,7 +36,7 @@ class SearchResultsSpec extends SignOnBaseSpec {
 
     def 'edit form can be accessed for search inputs'() {
 
-        when: 'I performed a search'
+        when: 'I have performed a search'
         performSearch([surname: 'surnamea'])
 
         then: 'I see the inputs for each item that I have searched'

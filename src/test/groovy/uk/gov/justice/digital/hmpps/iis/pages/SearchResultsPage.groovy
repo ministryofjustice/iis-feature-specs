@@ -29,7 +29,7 @@ class SearchResultsPage extends Page {
         resultItemLinks { resultItems.find('a') }
 
         nextPageLink { $('a', text: 'Next') }
-        previousPageLink { $('a', text: 'Previous')}
+        previousPageLink { $('a', text: 'Previous') }
 
         nextPageLabel { $('span', text: 'Next') }
         previousPageLabel { $('span', text: 'Previous') }
@@ -48,6 +48,11 @@ class SearchResultsPage extends Page {
 
         searchTerms { $('.searchedTerm') }
         firstSearchTerm { $('.searchedTerm', 0) }
-        firstSearchTermLink(to: [EditNamesPage, EditDobPage, EditIdentifierPage]) { firstSearchTerm.find('div a') }
+
+        firstSearchTermLink(to: [
+                new NamesPage(mode: 'edit'),
+                new DobPage(mode: 'edit'),
+                new IdentifierPage(mode: 'edit')
+        ]) { firstSearchTerm.find('div a') }
     }
 }

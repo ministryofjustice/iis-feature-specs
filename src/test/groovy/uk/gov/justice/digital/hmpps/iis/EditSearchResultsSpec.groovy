@@ -1,8 +1,7 @@
 package uk.gov.justice.digital.hmpps.iis
 
 import spock.lang.Stepwise
-import uk.gov.justice.digital.hmpps.iis.pages.EditDobPage
-import uk.gov.justice.digital.hmpps.iis.pages.EditNamesPage
+import uk.gov.justice.digital.hmpps.iis.pages.DobPage
 import uk.gov.justice.digital.hmpps.iis.pages.SearchPage
 import uk.gov.justice.digital.hmpps.iis.pages.SearchResultsPage
 
@@ -75,6 +74,7 @@ class EditSearchResultsSpec extends SignOnBaseSpec {
         to SearchPage
         selectSearchOptions(searchOptions)
         proceed()
+
         if (searchOptions == ['dob']) {
             searchType('age')
         }
@@ -82,6 +82,5 @@ class EditSearchResultsSpec extends SignOnBaseSpec {
 
         at SearchResultsPage
         firstSearchTermLink.click()
-
     }
 }
