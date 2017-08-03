@@ -46,7 +46,9 @@ class DobSearchSpec extends SignOnBaseSpec {
         ])
 
         then: 'I see the search results page'
-        at SearchResultsPage
+        waitFor(10) {
+            at SearchResultsPage
+        }
 
         and: 'I see the number of results returned'
         searchResultHeading.verifyNotEmpty()
@@ -128,7 +130,9 @@ class DobSearchSpec extends SignOnBaseSpec {
         ])
 
         then: 'I see the search results page'
-        at SearchResultsPage
+        waitFor(10) {
+            at SearchResultsPage
+        }
 
         and: 'I see the number of results returned'
         searchResultHeading.verifyNotEmpty()

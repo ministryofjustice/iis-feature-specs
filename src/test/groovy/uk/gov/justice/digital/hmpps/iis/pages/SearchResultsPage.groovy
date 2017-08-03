@@ -22,7 +22,7 @@ class SearchResultsPage extends Page {
 
         searchResultHeading { $('#contentTitle') }
 
-        resultItems { $('div.inmateDetails') }
+        resultItems(required: false) { $('div.inmateDetails') }
 
         firstResultItem { $('div.inmateDetails', 0) }
 
@@ -54,5 +54,7 @@ class SearchResultsPage extends Page {
                 new DobPage(mode: 'edit'),
                 new IdentifierPage(mode: 'edit')
         ]) { firstSearchTerm.find('div a') }
+
+        suggestionsLink(required: false) { $('#suggestions') }
     }
 }
