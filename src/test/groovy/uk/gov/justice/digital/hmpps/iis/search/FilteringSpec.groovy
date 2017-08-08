@@ -1,10 +1,9 @@
-package uk.gov.justice.digital.hmpps.iis
+package uk.gov.justice.digital.hmpps.iis.search
 
 import groovyx.net.http.URIBuilder
-import spock.lang.Stepwise
 import uk.gov.justice.digital.hmpps.iis.pages.SearchPage
 import uk.gov.justice.digital.hmpps.iis.pages.SearchResultsPage
-
+import uk.gov.justice.digital.hmpps.iis.util.SignOnBaseSpec
 
 class FilteringSpec extends SignOnBaseSpec {
 
@@ -107,10 +106,7 @@ class FilteringSpec extends SignOnBaseSpec {
 
     private void performSearch(query) {
         to SearchPage
-        selectSearchOptions(['names'])
-        proceed()
-        searchForm.using(query)
-
+        searchForm.nameAge(query)
         at SearchResultsPage
     }
 }

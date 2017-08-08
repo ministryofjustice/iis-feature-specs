@@ -1,13 +1,11 @@
-package uk.gov.justice.digital.hmpps.iis
+package uk.gov.justice.digital.hmpps.iis.site
 
-import geb.spock.GebReportingSpec
 import groovy.json.JsonSlurper
 import spock.lang.Stepwise
-import uk.gov.justice.digital.hmpps.iis.pages.DisclaimerPage
 import uk.gov.justice.digital.hmpps.iis.pages.FeedbackPage
 import uk.gov.justice.digital.hmpps.iis.pages.HealthPage
-import uk.gov.justice.digital.hmpps.iis.pages.LogoutPage
 import uk.gov.justice.digital.hmpps.iis.pages.SearchPage
+import uk.gov.justice.digital.hmpps.iis.util.SignOnBaseSpec
 
 @Stepwise
 class WebsiteSpec extends SignOnBaseSpec {

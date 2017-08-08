@@ -3,13 +3,14 @@ package uk.gov.justice.digital.hmpps.iis.pages
 import geb.Page
 import uk.gov.justice.digital.hmpps.iis.modules.ErrorsModule
 import uk.gov.justice.digital.hmpps.iis.modules.HeaderModule
+import uk.gov.justice.digital.hmpps.iis.modules.SearchFormModule
 
 class SearchResultsPage extends Page {
 
-    static url = '/search/results' // has optional query parameter 'page=i' where i is integer
+    static url = '/search/results'
 
     static at = {
-        browser.currentUrl.toURL().getPath().endsWith(url)
+        browser.currentUrl.endsWith(url)
     }
 
     static content = {
@@ -18,7 +19,7 @@ class SearchResultsPage extends Page {
 
         errors { module(ErrorsModule) }
 
-        newSearchLink(to: SearchPage) { $('a', href: '/search', text: 'New search') }
+        searchForm { module(SearchFormModule)}
 
         searchResultHeading { $('#contentTitle') }
 
@@ -45,15 +46,6 @@ class SearchResultsPage extends Page {
 
         activeFilters { $('input').filter('.filtering-option-active') }
         inactiveFilters { $('input').filter('.filtering-option') }
-
-        searchTerms { $('.searchedTerm') }
-        firstSearchTerm { $('.searchedTerm', 0) }
-
-        firstSearchTermLink(to: [
-                new NamesPage(mode: 'edit'),
-                new DobPage(mode: 'edit'),
-                new IdentifierPage(mode: 'edit')
-        ]) { firstSearchTerm.find('div a') }
 
         suggestionsLink(required: false) { $('#suggestions') }
     }

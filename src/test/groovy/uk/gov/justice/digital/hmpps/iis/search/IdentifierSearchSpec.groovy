@@ -1,10 +1,10 @@
-package uk.gov.justice.digital.hmpps.iis
+package uk.gov.justice.digital.hmpps.iis.search
 
 import spock.lang.Shared
 import spock.lang.Stepwise
-import spock.lang.Unroll
 import uk.gov.justice.digital.hmpps.iis.pages.SearchPage
 import uk.gov.justice.digital.hmpps.iis.pages.SearchResultsPage
+import uk.gov.justice.digital.hmpps.iis.util.SignOnBaseSpec
 
 @Stepwise
 class IdentifierSearchSpec extends SignOnBaseSpec {
@@ -22,11 +22,11 @@ class IdentifierSearchSpec extends SignOnBaseSpec {
 
     def 'Identifier search does not validate prison number format'() {
 
-        given: 'I am on the search by identifier page'
-        toIdentifierPage()
+        given: 'I am on the search page'
+        to SearchPage
 
         when: 'I search for a prison number'
-        searchForm.using([
+        searchForm.identifiers([
                 prisonNumber: 'bad-format'
         ])
 
@@ -36,11 +36,11 @@ class IdentifierSearchSpec extends SignOnBaseSpec {
 
     def 'Identifier search rejects when no type of identifier supplied'() {
 
-        given: 'I am on the search by identifier page'
-        toIdentifierPage()
+        given: 'I am on the search page'
+        to SearchPage
 
         when: 'I search without any identifier'
-        searchForm.using([
+        searchForm.identifiers([
                 prisonNumber: '',
                 pncNumber: '',
                 croNumber: ''
@@ -52,45 +52,39 @@ class IdentifierSearchSpec extends SignOnBaseSpec {
 
     def 'valid prison number leads to search results page'() {
 
-        given: 'I am on the search by identifier page'
-        toIdentifierPage()
+        given: 'I am on the search page'
+        to SearchPage
 
         when: 'I search for a valid prison number'
-        searchForm.using([
+        searchForm.identifiers([
                 prisonNumber: validPrisonNumber
         ])
 
-        then: 'I see the search results page'
-        at SearchResultsPage
-
-        and: 'I see the number of results returned'
+        then: 'I see the number of results returned'
         searchResultHeading.text().contains('1')
-
-        and: 'I see a new search link'
-        newSearchLink.isDisplayed()
     }
 
     def 'any PNC is allowed' () {
 
-        given: 'I am on the search by identifier page'
-        toIdentifierPage()
+        given: 'I am on the search page'
+        to SearchPage
 
         when: 'I search for a valid pnc number'
-        searchForm.using([
+        searchForm.identifiers([
                 pncNumber: 'Anything*^67'
         ])
 
         then: 'I see the search results page'
-        at SearchResultsPage
+        searchResultHeading.verifyNotEmpty()
     }
 
     def 'any CRO is allowed' () {
 
-        given: 'I am on the search by identifier page'
-        toIdentifierPage()
+        given: 'I am on the search page'
+        to SearchPage
 
         when: 'I search for a valid cro number'
-        searchForm.using([
+        searchForm.identifiers([
                 croNumber: 'Anything*^67'
         ])
 
@@ -100,25 +94,18 @@ class IdentifierSearchSpec extends SignOnBaseSpec {
 
     def 'PNC/CRO search handles case where multiple person refs with same PNC/CRO'(){
 
-        given: 'I am on the search by identifier page'
-        toIdentifierPage()
+        given: 'I am on the search page'
+        to SearchPage
 
         when: 'I search for a CRO that has 2 associated person refs'
-        searchForm.using([
+        searchForm.identifiers([
                 croNumber: '012345/CR0'
         ])
 
         then: 'I see the search results page'
-        at SearchResultsPage
+        searchResultHeading.verifyNotEmpty()
 
         and: 'There are 2 results'
         resultItems.size() == 2
-
-    }
-
-    private void toIdentifierPage() {
-        to SearchPage
-        selectSearchOptions(['identifier'])
-        proceed()
     }
 }

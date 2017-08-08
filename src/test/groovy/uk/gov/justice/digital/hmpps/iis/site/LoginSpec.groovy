@@ -1,4 +1,4 @@
-package uk.gov.justice.digital.hmpps.iis
+package uk.gov.justice.digital.hmpps.iis.site
 
 import geb.spock.GebReportingSpec
 import spock.lang.Stepwise

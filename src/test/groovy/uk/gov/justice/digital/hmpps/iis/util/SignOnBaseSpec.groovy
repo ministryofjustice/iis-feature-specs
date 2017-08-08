@@ -1,4 +1,4 @@
-package uk.gov.justice.digital.hmpps.iis
+package uk.gov.justice.digital.hmpps.iis.util
 
 import geb.spock.GebReportingSpec
 import uk.gov.justice.digital.hmpps.iis.pages.DisclaimerPage

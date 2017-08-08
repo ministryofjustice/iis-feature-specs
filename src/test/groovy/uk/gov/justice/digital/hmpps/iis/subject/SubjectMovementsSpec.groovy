@@ -1,9 +1,10 @@
-package uk.gov.justice.digital.hmpps.iis
+package uk.gov.justice.digital.hmpps.iis.subject
 
 import spock.lang.Stepwise
 import uk.gov.justice.digital.hmpps.iis.pages.SearchPage
 import uk.gov.justice.digital.hmpps.iis.pages.SubjectDetailsPage
 import uk.gov.justice.digital.hmpps.iis.pages.subject.MovementsPage
+import uk.gov.justice.digital.hmpps.iis.util.SignOnBaseSpec
 
 @Stepwise
 class SubjectMovementsSpec extends SignOnBaseSpec {
@@ -36,8 +37,6 @@ class SubjectMovementsSpec extends SignOnBaseSpec {
 
     private void performSearch(query) {
         to SearchPage
-        selectSearchOptions(['identifier'])
-        proceed()
-        searchForm.using(query)
+        searchForm.identifiers(query)
     }
 }

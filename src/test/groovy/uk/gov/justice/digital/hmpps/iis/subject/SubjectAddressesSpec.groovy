@@ -1,13 +1,10 @@
-package uk.gov.justice.digital.hmpps.iis
+package uk.gov.justice.digital.hmpps.iis.subject
 
 import spock.lang.Stepwise
-import spock.lang.Unroll
 import uk.gov.justice.digital.hmpps.iis.pages.SearchPage
 import uk.gov.justice.digital.hmpps.iis.pages.SubjectDetailsPage
 import uk.gov.justice.digital.hmpps.iis.pages.subject.AddressesPage
-import uk.gov.justice.digital.hmpps.iis.pages.subject.HdcInfoPage
-import uk.gov.justice.digital.hmpps.iis.pages.subject.MovementsPage
-import uk.gov.justice.digital.hmpps.iis.pages.subject.OffencesPage
+import uk.gov.justice.digital.hmpps.iis.util.SignOnBaseSpec
 
 @Stepwise
 class SubjectAddressesSpec extends SignOnBaseSpec {
@@ -34,8 +31,6 @@ class SubjectAddressesSpec extends SignOnBaseSpec {
         $('#address0-line1').text().equals('1, Street Road')
     }
 
-
-
     private void gotoAddressesPage(query) {
         performSearch(query)
         resultItemLinks[0].click()
@@ -46,8 +41,6 @@ class SubjectAddressesSpec extends SignOnBaseSpec {
 
     private void performSearch(query) {
         to SearchPage
-        selectSearchOptions(['names'])
-        proceed()
-        searchForm.using(query)
+        searchForm.nameAge(query)
     }
 }

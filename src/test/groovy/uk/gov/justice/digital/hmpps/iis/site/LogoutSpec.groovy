@@ -1,10 +1,10 @@
-package uk.gov.justice.digital.hmpps.iis
+package uk.gov.justice.digital.hmpps.iis.site
 
-import geb.spock.GebReportingSpec
 import uk.gov.justice.digital.hmpps.iis.pages.DisclaimerPage
 import uk.gov.justice.digital.hmpps.iis.pages.IndexPage
 import uk.gov.justice.digital.hmpps.iis.pages.LogoutPage
 import uk.gov.justice.digital.hmpps.iis.pages.SsoLoginPage
+import uk.gov.justice.digital.hmpps.iis.util.SignOnBaseSpec
 
 class LogoutSpec extends SignOnBaseSpec {
 
