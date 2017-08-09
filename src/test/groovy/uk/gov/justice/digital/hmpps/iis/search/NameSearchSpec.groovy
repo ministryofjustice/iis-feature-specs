@@ -1,13 +1,9 @@
-package uk.gov.justice.digital.hmpps.iis
+package uk.gov.justice.digital.hmpps.iis.search
 
-import geb.spock.GebReportingSpec
-import spock.lang.Ignore
 import spock.lang.Stepwise
-import uk.gov.justice.digital.hmpps.iis.pages.DisclaimerPage
-import uk.gov.justice.digital.hmpps.iis.pages.LogoutPage
-import uk.gov.justice.digital.hmpps.iis.pages.NamesPage
 import uk.gov.justice.digital.hmpps.iis.pages.SearchPage
 import uk.gov.justice.digital.hmpps.iis.pages.SearchResultsPage
+import uk.gov.justice.digital.hmpps.iis.util.SignOnBaseSpec
 
 @Stepwise
 class NameSearchSpec extends SignOnBaseSpec {
@@ -22,11 +18,11 @@ class NameSearchSpec extends SignOnBaseSpec {
 
     def 'Name search requires at least one input'() {
 
-        given: 'I am on the search by name page'
-        toNamesPage()
+        given: 'I am on the search page'
+        to SearchPage
 
-        when: 'I search with no inputs'
-        searchForm.using([
+        when: 'I search by name with no inputs'
+        searchForm.nameAge([
                 forename : '',
                 forename2: '',
                 surname  : ''
@@ -38,44 +34,31 @@ class NameSearchSpec extends SignOnBaseSpec {
 
     def 'valid name leads to search results page'() {
 
-        given: 'I am on the search by name page'
-        toNamesPage()
+        given: 'I am on the search page'
+        to SearchPage
 
         when: 'I search for a valid name'
-        searchForm.using([
+        searchForm.nameAge([
                 surname: 'surnamea'
         ])
 
-        then: 'I see the search results page'
-        at SearchResultsPage
-
-        and: 'I see the number of results returned'
+        then: 'I see the number of results returned'
         searchResultHeading.text().contains('1')
-
-        and: 'I see a new search link'
-        newSearchLink.isDisplayed()
     }
 
     def 'name search allows apostrophe, hyphen, and space' (){
 
-        given: 'I am on the search by name page'
-        toNamesPage()
+        given: 'I am on the search page'
+        to SearchPage
 
         when: 'I search for a valid name including allowed special characters'
-        searchForm.using([
+        searchForm.nameAge([
                 forename: "first'a",
                 forename2: "mid-dlea",
                 surname: "surname a"
         ])
 
-        then: 'I see the search results page'
+        then: 'I see the results page, not a validation error'
         at SearchResultsPage
-
-    }
-
-    def toNamesPage() {
-        to SearchPage
-        selectSearchOptions(['names'])
-        proceed()
     }
 }

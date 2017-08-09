@@ -3,6 +3,7 @@ package uk.gov.justice.digital.hmpps.iis.pages
 import geb.Page
 import uk.gov.justice.digital.hmpps.iis.modules.ErrorsModule
 import uk.gov.justice.digital.hmpps.iis.modules.HeaderModule
+import uk.gov.justice.digital.hmpps.iis.modules.SearchFormModule
 
 class SearchPage extends Page {
 
@@ -18,16 +19,6 @@ class SearchPage extends Page {
 
         errors { module(ErrorsModule) }
 
-        searchOptions { $('form').option }
-
-        continueButton(to: [SearchPage, DobPage, NamesPage, IdentifierPage]) { $('#continue') }
-
-        proceed { continueButton.click() }
-
-        selectSearchOptions { options ->
-            options.each {
-                $('label', for: it).click()
-            }
-        }
+        searchForm { module(SearchFormModule)}
     }
 }

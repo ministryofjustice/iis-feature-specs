@@ -1,23 +1,35 @@
 package uk.gov.justice.digital.hmpps.iis.modules
 
 import geb.Module
-import uk.gov.justice.digital.hmpps.iis.pages.DobPage
-import uk.gov.justice.digital.hmpps.iis.pages.IdentifierPage
-import uk.gov.justice.digital.hmpps.iis.pages.NamesPage
+import uk.gov.justice.digital.hmpps.iis.pages.SearchPage
 import uk.gov.justice.digital.hmpps.iis.pages.SearchResultsPage
-
 
 class SearchFormModule extends Module {
 
     static content = {
 
-        continueButton(to: [SearchResultsPage, DobPage, NamesPage, IdentifierPage]) { $('#continue') }
+        idSearch { $('#idFormLink') }
+
+        nameAgeSearch{ $('#otherFormLink') }
+
+        identifiers { criteria ->
+            using(criteria)
+            searchByIdButton.click()
+        }
+
+        nameAge { criteria ->
+            nameAgeSearch.click()
+            using(criteria)
+            searchByNameAgeButton.click()
+        }
 
         using { criteria ->
             criteria.each { key, value ->
                 $('form')[key] = value
             }
-            continueButton.click()
         }
+
+        searchByIdButton(to: [SearchResultsPage, SearchPage]) { $('#submitId') }
+        searchByNameAgeButton(to: [SearchResultsPage, SearchPage]) { $('#submitNonId') }
     }
 }

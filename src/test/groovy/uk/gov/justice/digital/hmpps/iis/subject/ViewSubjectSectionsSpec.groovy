@@ -1,16 +1,11 @@
-package uk.gov.justice.digital.hmpps.iis
+package uk.gov.justice.digital.hmpps.iis.subject
 
-import geb.spock.GebReportingSpec
 import spock.lang.Stepwise
 import spock.lang.Unroll
-import uk.gov.justice.digital.hmpps.iis.pages.*
-import uk.gov.justice.digital.hmpps.iis.pages.subject.AddressesPage
-import uk.gov.justice.digital.hmpps.iis.pages.subject.AdjudicationsPage
-import uk.gov.justice.digital.hmpps.iis.pages.subject.AliasesPage
-import uk.gov.justice.digital.hmpps.iis.pages.subject.HdcInfoPage
-import uk.gov.justice.digital.hmpps.iis.pages.subject.MovementsPage
-import uk.gov.justice.digital.hmpps.iis.pages.subject.OffencesPage
-import uk.gov.justice.digital.hmpps.iis.pages.subject.SentencesPage
+import uk.gov.justice.digital.hmpps.iis.pages.SearchPage
+import uk.gov.justice.digital.hmpps.iis.pages.SubjectDetailsPage
+import uk.gov.justice.digital.hmpps.iis.pages.subject.*
+import uk.gov.justice.digital.hmpps.iis.util.SignOnBaseSpec
 
 @Stepwise
 class ViewSubjectSectionsSpec extends SignOnBaseSpec {
@@ -82,9 +77,7 @@ class ViewSubjectSectionsSpec extends SignOnBaseSpec {
 
     private void performSearch(query) {
         to SearchPage
-        selectSearchOptions(['names'])
-        proceed()
-        searchForm.using(query)
+        searchForm.nameAge(query)
     }
 
 }

@@ -1,12 +1,11 @@
-package uk.gov.justice.digital.hmpps.iis
+package uk.gov.justice.digital.hmpps.iis.site
 
 import spock.lang.Stepwise
 import spock.lang.Unroll
-import uk.gov.justice.digital.hmpps.iis.pages.SearchPage
-import uk.gov.justice.digital.hmpps.iis.pages.NamesPage
-import uk.gov.justice.digital.hmpps.iis.pages.SearchResultsPage
 import uk.gov.justice.digital.hmpps.iis.pages.PrintPage
+import uk.gov.justice.digital.hmpps.iis.pages.SearchPage
 import uk.gov.justice.digital.hmpps.iis.pages.SubjectDetailsPage
+import uk.gov.justice.digital.hmpps.iis.util.SignOnBaseSpec
 
 @Stepwise
 class PrintSpec extends SignOnBaseSpec {
@@ -83,9 +82,7 @@ class PrintSpec extends SignOnBaseSpec {
 
     private void performSearchAndSave() {
         to SearchPage
-        selectSearchOptions(['names'])
-        proceed()
-        searchForm.using([surname: 'surnamec'])
+        searchForm.nameAge([surname: 'surnamec'])
         resultItemLinks[0].click()
         at SubjectDetailsPage
         saveToPdf.click()

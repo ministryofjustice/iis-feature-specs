@@ -1,15 +1,13 @@
-package uk.gov.justice.digital.hmpps.iis
+package uk.gov.justice.digital.hmpps.iis.search
 
-import geb.spock.GebReportingSpec
 import groovyx.net.http.URIBuilder
 import org.openqa.selenium.Keys
-import spock.lang.Ignore
 import spock.lang.Shared
 import spock.lang.Stepwise
-import uk.gov.justice.digital.hmpps.iis.pages.DisclaimerPage
-import uk.gov.justice.digital.hmpps.iis.pages.LogoutPage
 import uk.gov.justice.digital.hmpps.iis.pages.SearchPage
+import uk.gov.justice.digital.hmpps.iis.pages.SearchResultsPage
 import uk.gov.justice.digital.hmpps.iis.util.HoaUi
+import uk.gov.justice.digital.hmpps.iis.util.SignOnBaseSpec
 
 @Stepwise
 class PaginationSpec extends SignOnBaseSpec {
@@ -86,13 +84,10 @@ class PaginationSpec extends SignOnBaseSpec {
 
     def searchReturningMultipleResults() {
         to SearchPage
-        selectSearchOptions(['dob'])
-        proceed()
-
-        searchType('age')
-        searchForm.using([
+        searchForm.nameAge([
                 age: '35-40'
         ])
+        at SearchResultsPage
     }
 
 }

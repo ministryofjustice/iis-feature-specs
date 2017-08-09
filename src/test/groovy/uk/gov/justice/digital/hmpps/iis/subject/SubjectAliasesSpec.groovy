@@ -1,11 +1,10 @@
-package uk.gov.justice.digital.hmpps.iis
+package uk.gov.justice.digital.hmpps.iis.subject
 
 import spock.lang.Stepwise
 import uk.gov.justice.digital.hmpps.iis.pages.SearchPage
-import uk.gov.justice.digital.hmpps.iis.pages.SearchResultsPage
 import uk.gov.justice.digital.hmpps.iis.pages.SubjectDetailsPage
-import uk.gov.justice.digital.hmpps.iis.pages.subject.AddressesPage
 import uk.gov.justice.digital.hmpps.iis.pages.subject.AliasesPage
+import uk.gov.justice.digital.hmpps.iis.util.SignOnBaseSpec
 
 @Stepwise
 class SubjectAliasesSpec extends SignOnBaseSpec {
@@ -43,8 +42,6 @@ class SubjectAliasesSpec extends SignOnBaseSpec {
 
     private void performSearch(query) {
         to SearchPage
-        selectSearchOptions(['names'])
-        proceed()
-        searchForm.using(query)
+        searchForm.nameAge(query)
     }
 }
