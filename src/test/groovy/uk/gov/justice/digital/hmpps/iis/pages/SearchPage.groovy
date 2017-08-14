@@ -10,7 +10,9 @@ class SearchPage extends Page {
     static url = '/search'
 
     static at = {
-        browser.currentUrl.endsWith(url)
+        waitFor(5) {
+            browser.currentUrl.endsWith(url)
+        }
     }
 
     static content = {
