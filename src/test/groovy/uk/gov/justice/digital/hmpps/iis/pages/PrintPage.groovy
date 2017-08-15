@@ -6,7 +6,7 @@ import uk.gov.justice.digital.hmpps.iis.modules.HeaderModule
 
 class PrintPage extends Page {
 
-    static url = '/print?prisonNo='
+    static url = '/print/'
 
     static at = {
         browser.currentUrl.contains(url)
