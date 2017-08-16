@@ -85,7 +85,7 @@ class PaginationSpec extends SignOnBaseSpec {
     def searchReturningMultipleResults() {
         to SearchPage
         searchForm.nameAge([
-                age: '35-40'
+                surname: 'sur%'
         ])
         at SearchResultsPage
     }
