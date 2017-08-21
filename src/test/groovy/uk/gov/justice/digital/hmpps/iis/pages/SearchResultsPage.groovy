@@ -48,5 +48,8 @@ class SearchResultsPage extends Page {
         inactiveFilters { $('input').filter('.filtering-option') }
 
         suggestionsLink(required: false) { $('#suggestions') }
+
+        nomisTab(required: false) { $('#nomisTab') }
+        hpaTab { $('#hpaTab') }
     }
 }

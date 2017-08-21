@@ -22,5 +22,8 @@ class SearchPage extends Page {
         errors { module(ErrorsModule) }
 
         searchForm { module(SearchFormModule)}
+
+        nomisTab(required: false) { $('#nomisTab') }
+        hpaTab { $('#hpaTab') }
     }
 }
