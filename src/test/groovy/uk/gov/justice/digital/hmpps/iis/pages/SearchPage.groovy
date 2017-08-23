@@ -11,7 +11,7 @@ class SearchPage extends Page {
 
     static at = {
         waitFor(5) {
-            browser.currentUrl.endsWith(url)
+            browser.currentUrl.endsWith(url) || browser.currentUrl.endsWith(url + '#')
         }
     }
 
