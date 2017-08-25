@@ -13,12 +13,12 @@ class SearchFormModule extends Module {
         nameAgeSearch{ $('#otherFormLink') }
 
         identifiers { criteria ->
+            idSearch.click()
             using(criteria)
             searchByIdButton.click()
         }
 
         nameAge { criteria ->
-            nameAgeSearch.click()
             using(criteria)
             searchByNameAgeButton.click()
         }
