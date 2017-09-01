@@ -4,6 +4,7 @@ import geb.Page
 import uk.gov.justice.digital.hmpps.iis.modules.ErrorsModule
 import uk.gov.justice.digital.hmpps.iis.modules.HeaderModule
 import uk.gov.justice.digital.hmpps.iis.modules.SearchFormModule
+import uk.gov.justice.digital.hmpps.iis.modules.TabsModule
 
 class SearchResultsPage extends Page {
 
@@ -19,7 +20,9 @@ class SearchResultsPage extends Page {
 
         errors { module(ErrorsModule) }
 
-        searchForm { module(SearchFormModule)}
+        searchForm { module(SearchFormModule) }
+
+        tabs { module(TabsModule) }
 
         searchResultHeading { $('#contentTitle') }
 
@@ -48,5 +51,9 @@ class SearchResultsPage extends Page {
         inactiveFilters { $('input').filter('.filtering-option') }
 
         suggestionsLink(required: false) { $('#suggestions') }
+
+        addToShortlistLinks(required: false) { $('#addToShortlist') }
+
+        shortlistNotice(required: false) { $('#notice') }
     }
 }

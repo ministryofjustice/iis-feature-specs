@@ -16,9 +16,9 @@ class SearchResultsSpec extends SignOnBaseSpec {
         signOut()
     }
 
-    def 'valid dob leads to search results page'() {
+    def 'valid search leads to search results page'() {
 
-        when: 'I performed a search'
+        when: 'I perform a search'
         performSearch([surname: 'surnamea'])
 
         then: 'I see the number of results returned'
