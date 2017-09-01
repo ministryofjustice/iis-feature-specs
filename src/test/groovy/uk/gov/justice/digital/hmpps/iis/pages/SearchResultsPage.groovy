@@ -11,7 +11,7 @@ class SearchResultsPage extends Page {
     static url = '/search/results'
 
     static at = {
-        browser.currentUrl.endsWith(url)
+        browser.currentUrl.contains(url)
     }
 
     static content = {

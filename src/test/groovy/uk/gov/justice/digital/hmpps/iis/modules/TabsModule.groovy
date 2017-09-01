@@ -8,7 +8,9 @@ class TabsModule extends Module {
     static content = {
 
         comparisonTab(required: false) { $('#comparisonTab') }
-        hpaTab(required: false) { $('#hpaTab') }
+        comparisonTabLink(required: false) { comparisonTab.find('a') }
 
+        hpaTab(required: false) { $('#hpaTab') }
+        hpaTabLink(required: false) { hpaTab.find('a') }
     }
 }

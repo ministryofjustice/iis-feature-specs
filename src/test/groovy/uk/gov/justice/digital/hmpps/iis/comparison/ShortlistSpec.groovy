@@ -44,7 +44,7 @@ class ShortlistSpec extends SignOnBaseSpec {
         fillShortlist()
 
         when: 'I view the comparison'
-        tabs.comparisonTab.find('a').click()
+        tabs.comparisonTabLink.click()
 
         then: 'I see the comparison page'
         at ComparisonPage
@@ -53,12 +53,11 @@ class ShortlistSpec extends SignOnBaseSpec {
         removeFromShortlistLinks[0].click()
 
         and: 'I return to the search results'
-        tabs.hpaTab.click();
+        tabs.hpaTabLink.click();
 
         then: 'I see an updated notice'
-        waitFor(10) {
-            shortlistNotice.text().contains('Prisoner added to the shortlist')
-        }
+        at SearchResultsPage
+        shortlistNotice.text().contains('Prisoner added to the shortlist')
 
         and: 'I see the reduced shortlist size'
         tabs.comparisonTab.text().contains('Comparison (2)')
@@ -70,7 +69,7 @@ class ShortlistSpec extends SignOnBaseSpec {
         fillShortlist()
 
         when: 'I view the comparison'
-        comparisonTab.find('a').click()
+        tabs.comparisonTabLink.click()
 
         then: 'I see the comparison page'
         at ComparisonPage
