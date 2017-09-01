@@ -56,7 +56,9 @@ class ShortlistSpec extends SignOnBaseSpec {
         tabs.hpaTab.click();
 
         then: 'I see an updated notice'
-        shortlistNotice.text().contains('Prisoner added to the shortlist')
+        waitFor(10) {
+            shortlistNotice.text().contains('Prisoner added to the shortlist')
+        }
 
         and: 'I see the reduced shortlist size'
         tabs.comparisonTab.text().contains('Comparison (2)')
