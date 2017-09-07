@@ -70,7 +70,7 @@ class SearchResultsShortlistSpec extends SignOnBaseSpec {
         tabs.comparisonTab.text().contains('Comparison (2)')
     }
 
-    def 'When shortlist is full, hide add to shortlist links'() {
+    def 'When shortlist is full, hide add to shortlist links and show shortlist full links'() {
 
         given: 'multiple search results'
         performSearch([surname: 'sur%']);
@@ -80,10 +80,10 @@ class SearchResultsShortlistSpec extends SignOnBaseSpec {
         addToShortlistLinks[1].click()
         addToShortlistLinks[2].click()
 
-        then: 'I see the remove from shortlist links but no add to shortlist links'
-        addToShortlistLinks.size() == 3
+        then: 'I see the remove from shortlist / shortlist full links, but no add to shortlist links'
         addToShortlistLinks.filter(value: 'Add to shortlist').size() == 0
         addToShortlistLinks.filter(value: 'Remove from shortlist').size() == 3
+        addToShortlistLinks.filter(value: 'Shortlist full - compare 3 prisoners').size() == 7
     }
 
     def 'When I remove from shortlist the notice message updates or clears'() {
