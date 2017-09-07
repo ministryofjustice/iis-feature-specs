@@ -54,7 +54,7 @@ class SearchResultsShortlistSpec extends SignOnBaseSpec {
         addToShortlistLinks[0].value().contains('Remove from shortlist')
     }
 
-    def 'when 2 or more in the shortlist, notice shows link to comparison view and tab shows count'(){
+    def 'when 2 or more in the shortlist, notice shows link (with count) to comparison view and tab shows count'(){
 
         given: 'multiple search results'
         performSearch([surname: 'sur%']);
@@ -64,7 +64,7 @@ class SearchResultsShortlistSpec extends SignOnBaseSpec {
         addToShortlistLinks[1].click()
 
         then: 'The notice shows the link to compare'
-        shortlistNotice.find('a', text: 'Compare prisoners')[0].verifyNotEmpty()
+        shortlistNotice.find('a', text: 'Compare 2 prisoners')[0].verifyNotEmpty()
 
         and:
         tabs.comparisonTab.text().contains('Comparison (2)')
