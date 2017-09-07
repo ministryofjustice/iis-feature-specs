@@ -17,10 +17,10 @@ class ShortlistSpec extends SignOnBaseSpec {
         signOut()
     }
 
-    def 'I see details for each prisoner in the shortlist'(){
+    def 'I see details for each prisoner in the shortlist in the order added'(){
 
-        given: 'I fill the shortlist'
-        fillShortlist()
+        given: 'I have filled the shortlist in a certain order'
+        fillShortlist([5,3,4])
 
         when: 'I view the comparison'
         tabs.comparisonTab.find('a').click()
@@ -36,6 +36,18 @@ class ShortlistSpec extends SignOnBaseSpec {
 
         and: 'I see 3 remove from shortlist links'
         removeFromShortlistLinks.size() == 3
+
+        and: 'I see the prisoners in the same order they were added'
+        comparisonSections[0].text().contains('SURNAMEC')
+        comparisonSections[1].text().contains('SURNAMEA')
+        comparisonSections[2].text().contains('SURNAMEB')
+
+        when: 'I remove a prisoner'
+        removeFromShortlistLinks[1].click()
+
+        then: 'The remaining list is still in the added order'
+        comparisonSections[0].text().contains('SURNAMEC')
+        comparisonSections[1].text().contains('SURNAMEB')
     }
 
     def 'When I remove a prisoner from the shortlist and return to search results the shortlist is still correct'() {
@@ -88,11 +100,11 @@ class ShortlistSpec extends SignOnBaseSpec {
         at SearchResultsPage
     }
 
-    private void fillShortlist(){
+    private void fillShortlist(resultItems = [0,1,2]){
         performSearch([surname: 'sur%']);
-        addToShortlistLinks[0].click()
-        addToShortlistLinks[1].click()
-        addToShortlistLinks[2].click()
+        addToShortlistLinks[resultItems[0]].click()
+        addToShortlistLinks[resultItems[1]].click()
+        addToShortlistLinks[resultItems[2]].click()
     }
 
     private void performSearch(query) {
