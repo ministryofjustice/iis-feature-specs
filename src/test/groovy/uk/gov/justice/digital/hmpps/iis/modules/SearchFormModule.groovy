@@ -8,19 +8,28 @@ class SearchFormModule extends Module {
 
     static content = {
 
-        idSearch { $('#idFormLink') }
+        idSearch { $('label', for: 'identifier') }
 
-        nameAgeSearch{ $('#otherFormLink') }
+        nameAgeSearch{ $('label', for: 'nameAge') }
+
+        otherSearch{ $('label', for: 'other') }
 
         identifiers { criteria ->
             idSearch.click()
             using(criteria)
-            searchByIdButton.click()
+            searchButton.click()
         }
 
         nameAge { criteria ->
+            nameAgeSearch.click()
             using(criteria)
-            searchByNameAgeButton.click()
+            searchButton.click()
+        }
+
+        address { criteria ->
+            otherSearch.click()
+            using(criteria)
+            searchButton.click()
         }
 
         using { criteria ->
@@ -29,7 +38,6 @@ class SearchFormModule extends Module {
             }
         }
 
-        searchByIdButton(to: [SearchResultsPage, SearchPage]) { $('#submitId') }
-        searchByNameAgeButton(to: [SearchResultsPage, SearchPage]) { $('#submitNonId') }
+        searchButton(to: [SearchResultsPage, SearchPage]) { $('#submit') }
     }
 }
