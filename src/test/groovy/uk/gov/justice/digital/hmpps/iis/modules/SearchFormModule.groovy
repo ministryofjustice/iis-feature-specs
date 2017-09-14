@@ -17,25 +17,29 @@ class SearchFormModule extends Module {
         identifiers { criteria ->
             idSearch.click()
             using(criteria)
-            searchButton.click()
+            submit
         }
 
         nameAge { criteria ->
             nameAgeSearch.click()
             using(criteria)
-            searchButton.click()
+            submit
         }
 
         address { criteria ->
             otherSearch.click()
             using(criteria)
-            searchButton.click()
+            submit
         }
 
         using { criteria ->
             criteria.each { key, value ->
                 $('form')[key] = value
             }
+        }
+
+        submit {
+            searchButton.click()
         }
 
         searchButton(to: [SearchResultsPage, SearchPage]) { $('#submit') }
