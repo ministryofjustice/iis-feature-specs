@@ -101,7 +101,7 @@ class ShortlistSpec extends SignOnBaseSpec {
     }
 
     private void fillShortlist(resultItems = [0,1,2]){
-        performSearch([surname: 'sur%']);
+        performSearch([surname: 'sur%'])
         addToShortlistLinks[resultItems[0]].click()
         addToShortlistLinks[resultItems[1]].click()
         addToShortlistLinks[resultItems[2]].click()
