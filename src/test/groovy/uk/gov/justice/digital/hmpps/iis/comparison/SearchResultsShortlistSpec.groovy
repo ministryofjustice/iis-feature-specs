@@ -16,13 +16,13 @@ class SearchResultsShortlistSpec extends SignOnBaseSpec {
         signOut()
     }
 
-    def 'Hide add to shortlist option when only one result'() {
+    def 'Show add to shortlist option even when only one result'() {
 
         when: 'one search result'
         performSearch([surname: 'surnamea'])
 
-        then: 'I do not see the add to shortlist link'
-        !addToShortlistLinks.isPresent()
+        then: 'I see the add to shortlist link'
+        addToShortlistLinks.isPresent()
     }
 
     def 'Show add to shortlist option when 2 or more results'() {
