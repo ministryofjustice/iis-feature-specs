@@ -45,5 +45,7 @@ class SearchFormModule extends Module {
         }
 
         searchButton(to: [SearchResultsPage, SearchPage]) { $('#submit') }
+
+        newSearch { clearSearch.click()  }
     }
 }

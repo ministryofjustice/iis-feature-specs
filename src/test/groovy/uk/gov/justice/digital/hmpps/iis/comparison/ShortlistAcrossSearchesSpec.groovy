@@ -1,5 +1,6 @@
 package uk.gov.justice.digital.hmpps.iis.comparison
 
+import spock.lang.Ignore
 import spock.lang.Stepwise
 import uk.gov.justice.digital.hmpps.iis.pages.ComparisonPage
 import uk.gov.justice.digital.hmpps.iis.pages.SearchPage
@@ -17,6 +18,7 @@ class ShortlistAcrossSearchesSpec extends SignOnBaseSpec {
         signOut()
     }
 
+@Ignore
     def 'I can add a prisoner to the shortlist, do a new search, add another, and compare them'(){
 
         when: 'I perform a search'
