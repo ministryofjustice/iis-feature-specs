@@ -24,7 +24,6 @@ class NameSearchSpec extends SignOnBaseSpec {
         when: 'I search by name with no inputs'
         searchForm.nameAge([
                 forename : '',
-                forename2: '',
                 surname  : ''
         ])
 
@@ -54,7 +53,6 @@ class NameSearchSpec extends SignOnBaseSpec {
         when: 'I search for a valid name including allowed special characters'
         searchForm.nameAge([
                 forename: "first'a",
-                forename2: "mid-dlea",
                 surname: "surname a"
         ])
 

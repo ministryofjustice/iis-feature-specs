@@ -10,19 +10,28 @@ class SearchFormModule extends Module {
 
         clearSearch { $('#clearSearch') }
 
-        idSearch { $('#idFormLink') }
+        idSearch { $('label', for: 'identifier') }
 
-        nameAgeSearch{ $('#otherFormLink') }
+        nameAgeSearch{ $('label', for: 'nameAge') }
+
+        otherSearch{ $('label', for: 'other') }
 
         identifiers { criteria ->
             idSearch.click()
             using(criteria)
-            searchByIdButton.click()
+            submit
         }
 
         nameAge { criteria ->
+            nameAgeSearch.click()
             using(criteria)
-            searchByNameAgeButton.click()
+            submit
+        }
+
+        address { criteria ->
+            otherSearch.click()
+            using(criteria)
+            submit
         }
 
         using { criteria ->
@@ -31,9 +40,10 @@ class SearchFormModule extends Module {
             }
         }
 
-        searchByIdButton(to: [SearchResultsPage, SearchPage]) { $('#submitId') }
-        searchByNameAgeButton(to: [SearchResultsPage, SearchPage]) { $('#submitNonId') }
+        submit {
+            searchButton.click()
+        }
 
-        newSearch { clearSearch.click()  }
+        searchButton(to: [SearchResultsPage, SearchPage]) { $('#submit') }
     }
 }
