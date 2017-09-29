@@ -8,6 +8,8 @@ class SearchFormModule extends Module {
 
     static content = {
 
+        clearSearch { $('#clearSearch') }
+
         idSearch { $('label', for: 'identifier') }
 
         nameAgeSearch{ $('label', for: 'nameAge') }
