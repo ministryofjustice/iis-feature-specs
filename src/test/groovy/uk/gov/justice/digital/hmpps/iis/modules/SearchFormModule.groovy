@@ -8,6 +8,8 @@ class SearchFormModule extends Module {
 
     static content = {
 
+        clearSearch { $('#clearSearch') }
+
         idSearch { $('#idFormLink') }
 
         nameAgeSearch{ $('#otherFormLink') }
@@ -31,5 +33,7 @@ class SearchFormModule extends Module {
 
         searchByIdButton(to: [SearchResultsPage, SearchPage]) { $('#submitId') }
         searchByNameAgeButton(to: [SearchResultsPage, SearchPage]) { $('#submitNonId') }
+
+        newSearch { clearSearch.click()  }
     }
 }
