@@ -109,7 +109,11 @@ class SearchSuggestionsSpec extends SignOnBaseSpec {
         $('a', text: 'Change the date of birth to an age range:').isDisplayed()
 
         and: 'The suggested wildcard is shown'
-        $('#dobAgeRangeSuggestion').text() == '35-39'
+        def currentYear = Calendar.getInstance().get(Calendar.YEAR)
+        def age = currentYear - 1980
+        def rangeText = "${age-2} - ${age+2}"
+
+        $('#dobAgeRangeSuggestion').text() == rangeText
     }
 
     def 'Age search suggests age range'() {
