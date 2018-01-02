@@ -111,7 +111,7 @@ class SearchSuggestionsSpec extends SignOnBaseSpec {
         and: 'The suggested wildcard is shown'
         def currentYear = Calendar.getInstance().get(Calendar.YEAR)
         def age = currentYear - 1980
-        def rangeText = "${age-2} - ${age+2}"
+        def rangeText = "${age-2}-${age+2}"
 
         $('#dobAgeRangeSuggestion').text() == rangeText
     }
